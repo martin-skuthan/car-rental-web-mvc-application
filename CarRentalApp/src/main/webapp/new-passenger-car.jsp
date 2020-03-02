@@ -43,35 +43,40 @@
 <!-- Navbar -->
 
 <!-- Content -->
-<div class="container">
-  <div class="row h-100">
-    <div class="my-auto">
-      <h1 class="display-2">Info</h1>
-      <div class="bs-callout bs-callout-default">
-        <p class="text-justify">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-        Lorem Ipsum has been the industry's standard dummy text ever since the 
-      	1500s, when an unknown printer took a galley of type and scrambled it to 
-      	make a type specimen book. It has survived not only five centuries, but 
-      	also the leap into electronic typesetting, remaining essentially unchanged. 
-      	It was popularised in the 1960s with the release of Letraset sheets 
-      	containing Lorem Ipsum passages, and more recently with desktop publishing 
-      	software like Aldus PageMaker including versions of Lorem Ipsum.
-      	Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-        Lorem Ipsum has been the industry's standard dummy text ever since the 
-      	1500s, when an unknown printer took a galley of type and scrambled it to 
-      	make a type specimen book. It has survived not only five centuries, but 
-      	also the leap into electronic typesetting, remaining essentially unchanged. 
-      	It was popularised in the 1960s with the release of Letraset sheets 
-      	containing Lorem Ipsum passages, and more recently with desktop publishing 
-      	software like Aldus PageMaker including versions of Lorem Ipsum.
-        </p>
-      </div>
-    </div>
-  </div>
+<div class="d-flex justify-content-center align-items-center container h-100">
+<div class="col-sm-6 col-md-6 my-auto">
+<h1 class="display-2">New car</h1>
+<div class="bs-callout bs-callout-default">
+<form class="form-signin" action="j_security_check" method="post">
+<input name="inputRegistrationNumber" type="text" class="form-control" placeholder="Registration number" required autofocus>
+<input name="inputBrand" type="text" class="form-control" placeholder="Brand" required>
+<input name="inputModel" type="text" class="form-control" placeholder="Model" required>
+<input name="inputBrand" type="text" class="form-control" placeholder="Brand" required>
+<input name="inputSeats" type="number" class="form-control" placeholder="Number of seats" required>
+<input name="inputNumberOfDoors" type="number" class="form-control" placeholder="Number of doors" required>
+<input name="inputTrunkCapacity" type="number" class="form-control" placeholder="Trunk capacity(in suticases)"><br>
+<label>Transmission:</label>
+    <select class="form-control" id="inputTransmission">
+      <option>Manual</option>
+      <option>Automatic</option>
+    </select><br>
+<label>Type of drive:</label>
+    <select class="form-control" id="inputTypeOfDrive">
+      <option>Petrol</option>
+      <option>Diesel</option>
+      <option>Hybrid</option>
+    </select><br>
+<label>Air Conditionig:</label>
+    <select class="form-control" id="inputTypeOfDrive">
+      <option>Yes</option>
+      <option>No</option>
+    </select><br>          
+<button class="btn btn-lg btn-primary btn-block" type="submit">Add car</button>
+</form>
 </div>
+</div>
+</div>     
 <!-- Content -->
-
 
 <!-- Footer -->
 <footer class="page-footer font-small pt-4">

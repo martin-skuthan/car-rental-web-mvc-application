@@ -43,35 +43,19 @@
 <!-- Navbar -->
 
 <!-- Content -->
-<div class="container">
-  <div class="row h-100">
-    <div class="my-auto">
-      <h1 class="display-2">Info</h1>
-      <div class="bs-callout bs-callout-default">
-        <p class="text-justify">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-        Lorem Ipsum has been the industry's standard dummy text ever since the 
-      	1500s, when an unknown printer took a galley of type and scrambled it to 
-      	make a type specimen book. It has survived not only five centuries, but 
-      	also the leap into electronic typesetting, remaining essentially unchanged. 
-      	It was popularised in the 1960s with the release of Letraset sheets 
-      	containing Lorem Ipsum passages, and more recently with desktop publishing 
-      	software like Aldus PageMaker including versions of Lorem Ipsum.
-      	Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-        Lorem Ipsum has been the industry's standard dummy text ever since the 
-      	1500s, when an unknown printer took a galley of type and scrambled it to 
-      	make a type specimen book. It has survived not only five centuries, but 
-      	also the leap into electronic typesetting, remaining essentially unchanged. 
-      	It was popularised in the 1960s with the release of Letraset sheets 
-      	containing Lorem Ipsum passages, and more recently with desktop publishing 
-      	software like Aldus PageMaker including versions of Lorem Ipsum.
-        </p>
-      </div>
-    </div>
-  </div>
+<div class="d-flex justify-content-center align-items-center container h-100">
+<div class="col-sm-6 col-md-6 my-auto">
+<h1 class="display-2">Log in</h1>
+<div class="bs-callout bs-callout-default">
+<form class="form-signin" action="j_security_check" method="post">
+<input name="j_username" type="text" class="form-control" placeholder="Username" required autofocus>
+<input name="j_password" type="password" class="form-control" placeholder="Password" required>
+<button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+</form>
 </div>
+</div>
+</div>   
 <!-- Content -->
-
 
 <!-- Footer -->
 <footer class="page-footer font-small pt-4">
