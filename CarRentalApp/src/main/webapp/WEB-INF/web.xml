@@ -4,4 +4,29 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  
+   <listener>
+    <listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
+  </listener>
+  
+  <servlet>
+  	<servlet-name>AddUserController</servlet-name>
+  	<display-name>AddUserController</display-name>
+  	<description></description>
+  	<servlet-class>pl.java.controllers.AddUserController</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>TestServlet</servlet-name>
+  	<display-name>TestServlet</display-name>
+  	<description></description>
+  	<servlet-class>pl.java.test.TestServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>AddUserController</servlet-name>
+  	<url-pattern>/AddUserController</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>TestServlet</servlet-name>
+  	<url-pattern>/TestServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
