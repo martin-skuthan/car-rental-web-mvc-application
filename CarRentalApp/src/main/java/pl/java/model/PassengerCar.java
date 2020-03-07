@@ -2,9 +2,14 @@ package pl.java.model;
 
 import java.io.Serializable;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
 import pl.java.model.enums.Transmission;
 import pl.java.model.enums.TypeOfDrive;
 
+@Entity
+@DiscriminatorValue("Passenger")
 public class PassengerCar extends Car implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

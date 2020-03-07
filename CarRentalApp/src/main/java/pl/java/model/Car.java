@@ -2,11 +2,29 @@ package pl.java.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.Table;
+
 import pl.java.model.enums.Transmission;
 
+@Entity
+@Inheritance
+@DiscriminatorColumn(name = "typeOfCar")
+@Table(name = "Car")
 public abstract class Car implements Serializable {
 	private static final long serialVersionUID = 9171676490784870223L;
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "car_id", nullable = false)
+	private Long id;
+	@Column(nullable = false)
 	private String registrationNumber;
     private String brand;
     private String model;
