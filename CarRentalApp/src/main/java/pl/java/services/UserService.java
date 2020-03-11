@@ -11,7 +11,8 @@ public class UserService {
 	private UserDao userDao;
 	
 	public void createUser(String firstName, String lastName, String pesel) {
-		
+		User user = new User(firstName, lastName, pesel);
+		userDao.createUser(user);
 	}
 	
 	public void readUser(String userId) {

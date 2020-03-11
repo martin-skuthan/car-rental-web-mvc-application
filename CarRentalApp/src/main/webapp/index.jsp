@@ -10,20 +10,20 @@
 
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Car Rental</a>
+  <a class="navbar-brand" href="index.jsp">Car Rental</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="#">Add/Remove car</a>
+        <a class="nav-link" href="select-type-of-car.jsp">Add/Remove car</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Print cars</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Add/Remove user</a>
+        <a class="nav-link" href="new-user.jsp">Add/Remove user</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Print users</a>

@@ -14,7 +14,7 @@ public enum Transmission {
 	
 	public static Transmission getFromDescription(String description) {
 		try {
-			return Transmission.valueOf(description);
+			return Transmission.valueOf(description.toUpperCase());
 		}catch (IllegalArgumentException ex) {
 			throw new NoSuchTypeException("There is no type:" + description);
 		}

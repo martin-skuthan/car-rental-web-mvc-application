@@ -10,7 +10,7 @@
 
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Car Rental</a>
+  <a class="navbar-brand" href="index.jsp">Car Rental</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -47,31 +47,30 @@
 <div class="col-sm-6 col-md-6 my-auto">
 <h1 class="display-2">New car</h1>
 <div class="bs-callout bs-callout-default">
-<form class="form-signin" action="j_security_check" method="post">
+<form class="form-signin" action="addCar" method="post">
 <input name="inputRegistrationNumber" type="text" class="form-control" placeholder="Registration number" required autofocus>
 <input name="inputBrand" type="text" class="form-control" placeholder="Brand" required>
 <input name="inputModel" type="text" class="form-control" placeholder="Model" required>
-<input name="inputBrand" type="text" class="form-control" placeholder="Brand" required>
 <input name="inputSeats" type="number" class="form-control" placeholder="Number of seats" required>
 <input name="inputNumberOfDoors" type="number" class="form-control" placeholder="Number of doors" required>
 <input name="inputTrunkCapacity" type="number" class="form-control" placeholder="Trunk capacity(in suticases)"><br>
 <label>Transmission:</label>
-    <select class="form-control" id="inputTransmission">
-      <option>Manual</option>
-      <option>Automatic</option>
+    <select class="form-control" name="inputTransmission">
+      <option value="Manual">Manual</option>
+      <option value="Automatic">Automatic</option>
     </select><br>
 <label>Type of drive:</label>
-    <select class="form-control" id="inputTypeOfDrive">
-      <option>Petrol</option>
-      <option>Diesel</option>
-      <option>Hybrid</option>
+    <select class="form-control" name="inputTypeOfDrive">
+      <option value="Petrol">Petrol</option>
+      <option value="Diesel">Diesel</option>
+      <option value="Hybrid">Hybrid</option>
     </select><br>
 <label>Air Conditionig:</label>
-    <select class="form-control" id="inputTypeOfDrive">
-      <option>Yes</option>
-      <option>No</option>
+    <select class="form-control" name="inputAirConditioning">
+      <option value="true">Yes</option>
+      <option value="false">No</option>
     </select><br>          
-<button class="btn btn-lg btn-primary btn-block" type="submit">Add car</button>
+<button class="btn btn-lg btn-primary btn-block" type="submit" name="typeOfCar" value="passenger_car">Add car</button>
 </form>
 </div>
 </div>

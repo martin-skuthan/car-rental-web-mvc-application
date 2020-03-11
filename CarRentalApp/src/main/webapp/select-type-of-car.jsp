@@ -44,30 +44,12 @@
 
 <!-- Content -->
 <div class="d-flex justify-content-center align-items-center container h-100">
-<div class="col-sm-6 col-md-6 my-auto">
-<h1 class="display-2">New car</h1>
+<div class="col-sm-8 col-md-8 my-auto">
+<h1 class="display-2">Select type of car</h1>
 <div class="bs-callout bs-callout-default">
-<form class="form-signin" action="addCar" method="post">
-<input name="inputRegistrationNumber" type="text" class="form-control" placeholder="Registration number" required autofocus>
-<input name="inputBrand" type="text" class="form-control" placeholder="Brand" required>
-<input name="inputModel" type="text" class="form-control" placeholder="Model" required>
-<input name="inputSeats" type="number" class="form-control" placeholder="Number of seats" required>
-<input name="inputTrunkPayload" type="number" class="form-control" placeholder="Payload">
-<input name="inputLoadVolume" type="number" class="form-control" placeholder="Load volume">
-<input name="inputLoadHeight" type="number" class="form-control" placeholder="Load height">
-<input name="inputLoadWidth" type="number" class="form-control" placeholder="Load width">
-<input name="inputLoadLength" type="number" class="form-control" placeholder="Load length"><br>
-<label>Transmission:</label>
-    <select class="form-control" name="inputTransmission">
-      <option value="Manual">Manual</option>
-      <option value="Automatic">Automatic</option>
-    </select><br>
-<label>Air Conditionig:</label>
-    <select class="form-control" name="inputTypeOfDrive">
-      <option value="true">Yes</option>
-      <option value="false">No</option>
-    </select><br>          
-<button class="btn btn-lg btn-primary btn-block" type="submit" name="typeOfCar" value="light_commercial_car">Add car</button>
+<form class="form-signin" action="selectTypeOfCar" method="post">        
+<button class="btn btn-lg btn-primary btn-block" name="typeOfCar" value="passenger_Car" type="submit">Passenger Car</button>
+<button class="btn btn-lg btn-primary btn-block" name="typeOfCar" value="light_Commercial_Car" type="submit">Light Commercial Car</button>
 </form>
 </div>
 </div>

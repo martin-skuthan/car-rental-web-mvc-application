@@ -10,7 +10,7 @@
 
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Car Rental</a>
+  <a class="navbar-brand" href="index.jsp">Car Rental</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -47,7 +47,7 @@
 <div class="col-sm-6 col-md-6 my-auto">
 <h1 class="display-2">New user</h1>
 <div class="bs-callout bs-callout-default">
-<form class="form-signin" action="j_security_check" method="post">
+<form class="form-signin" action="addUser" method="post">
 <input name="inputFirstName" type="text" class="form-control" placeholder="First name:" required>
 <input name="inputLastName" type="text" class="form-control" placeholder="Last name:" required>
 <input name="inputPesel" type="text" class="form-control" placeholder="Pesel:" required>     

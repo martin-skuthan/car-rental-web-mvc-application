@@ -15,7 +15,7 @@ public enum TypeOfDrive {
 	
 	public static TypeOfDrive getFromDescription(String description) {
 		try {
-			return TypeOfDrive.valueOf(description);
+			return TypeOfDrive.valueOf(description.toUpperCase());
 		}catch (IllegalArgumentException ex) {
 			throw new NoSuchTypeException("There is no option:" + description);
 		}
