@@ -51,12 +51,12 @@
 <input name="inputRegistrationNumber" type="text" class="form-control" placeholder="Registration number" required autofocus>
 <input name="inputBrand" type="text" class="form-control" placeholder="Brand" required>
 <input name="inputModel" type="text" class="form-control" placeholder="Model" required>
-<input name="inputSeats" type="number" class="form-control" placeholder="Number of seats" required>
-<input name="inputTrunkPayload" type="number" class="form-control" placeholder="Payload">
-<input name="inputLoadVolume" type="number" class="form-control" placeholder="Load volume">
-<input name="inputLoadHeight" type="number" class="form-control" placeholder="Load height">
-<input name="inputLoadWidth" type="number" class="form-control" placeholder="Load width">
-<input name="inputLoadLength" type="number" class="form-control" placeholder="Load length"><br>
+<input name="inputSeats" type="number" min="2" max="4" class="form-control" placeholder="Number of seats" required>
+<input name="inputTrunkPayload" type="number" min="600" max="5000" class="form-control" placeholder="Payload (kg)">
+<input name="inputLoadVolume" type="number" min="2" max="25" class="form-control" placeholder="Load volume (m3)">
+<input name="inputLoadHeight" type="number" min="1000" max="2500" class="form-control" placeholder="Load height (mm)">
+<input name="inputLoadWidth" type="number" min="1500" max="2000" class="form-control" placeholder="Load width (mm)">
+<input name="inputLoadLength" type="number" min="1500" max="5500" class="form-control" placeholder="Load length (mm)"><br>
 <label>Transmission:</label>
     <select class="form-control" name="inputTransmission">
       <option value="Manual">Manual</option>

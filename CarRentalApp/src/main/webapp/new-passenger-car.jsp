@@ -51,9 +51,9 @@
 <input name="inputRegistrationNumber" type="text" class="form-control" placeholder="Registration number" required autofocus>
 <input name="inputBrand" type="text" class="form-control" placeholder="Brand" required>
 <input name="inputModel" type="text" class="form-control" placeholder="Model" required>
-<input name="inputSeats" type="number" class="form-control" placeholder="Number of seats" required>
-<input name="inputNumberOfDoors" type="number" class="form-control" placeholder="Number of doors" required>
-<input name="inputTrunkCapacity" type="number" class="form-control" placeholder="Trunk capacity(in suticases)"><br>
+<input name="inputSeats" type="number" min="2" max="9" class="form-control" placeholder="Number of seats" required>
+<input name="inputNumberOfDoors" type="number" min="3" max="6" class="form-control" placeholder="Number of doors" required>
+<input name="inputTrunkCapacity" type="number" min="1" max="10" class="form-control" placeholder="Luggage Capacity (in suticases)"><br>
 <label>Transmission:</label>
     <select class="form-control" name="inputTransmission">
       <option value="Manual">Manual</option>
