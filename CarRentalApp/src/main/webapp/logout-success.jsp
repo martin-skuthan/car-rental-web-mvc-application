@@ -58,16 +58,8 @@
 
 <!-- Content -->
 <div class="d-flex justify-content-center align-items-center container h-100">
-<div class="col-sm-6 col-md-6 my-auto">
-<h1 class="display-2">New user</h1>
-<div class="bs-callout bs-callout-default">
-<form class="form-signin" action="addUser" method="post">
-<input name="inputUsername" type="text" class="form-control" placeholder="Username:" required>
-<input name="inputMail" type="email" class="form-control" placeholder="Mail:" required>
-<input name="inputPassword" type="password" class="form-control" placeholder="Password:" required>     
-<button class="btn btn-lg btn-primary btn-block" type="submit">Add user</button>
-</form>
-</div>
+<div class="col-sm-8 col-md-8 my-auto">
+<h1 class="display-2">You have been logged out</h1>
 </div>
 </div>     
 <!-- Content -->

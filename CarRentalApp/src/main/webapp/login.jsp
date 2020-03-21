@@ -1,3 +1,5 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page isELIgnored="false"%>
 <html>
 <head>
 <meta charset="utf-8">
@@ -10,20 +12,20 @@
 
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Car Rental</a>
+  <a class="navbar-brand" href="index.jsp">Car Rental</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="#">Add/Remove car</a>
+        <a class="nav-link" href="select-type-of-car.jsp">Add/Remove car</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Print cars</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Add/Remove user</a>
+        <a class="nav-link" href="new-customer.jsp">Add/Remove customer</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Print users</a>
@@ -33,9 +35,21 @@
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">
-	  <li class="nav-item">
-        <a class="nav-link" href="#">Logout</a>
-      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="new-user.jsp">Add admin account</a>
+      </li>	
+	  <c:choose>
+      <c:when test="${not empty sessionScope.user}">
+        <li class="nav-item">
+          <a class="nav-link" href="logOut">Logout</a>
+        </li>
+      </c:when>
+      <c:otherwise>
+        <li class="nav-item">
+          <a class="nav-link" href="login-success.jsp">Login</a>
+        </li>
+      </c:otherwise>
+      </c:choose>	
 	</ul>
   </div>
 </nav>
@@ -52,6 +66,11 @@
 <input name="j_password" type="password" class="form-control" placeholder="Password" required>
 <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
 </form>
+Please find below login credentials:<br>
+<ul>
+  <li>Login : admin</li>
+  <li>Password: admin</li>
+</ul>
 </div>
 </div>
 </div>   

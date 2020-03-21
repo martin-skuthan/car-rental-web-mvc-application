@@ -1,3 +1,5 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page isELIgnored="false"%>
 <html>
 <head>
 <meta charset="utf-8">
@@ -17,13 +19,13 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="#">Add/Remove car</a>
+        <a class="nav-link" href="select-type-of-car.jsp">Add/Remove car</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Print cars</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Add/Remove user</a>
+        <a class="nav-link" href="new-customer.jsp">Add/Remove customer</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Print users</a>
@@ -36,9 +38,18 @@
       <li class="nav-item">
         <a class="nav-link" href="new-user.jsp">Add admin account</a>
       </li>	
-	  <li class="nav-item">
-        <a class="nav-link" href="login-success.jsp">Login</a>
-      </li>
+	  <c:choose>
+      <c:when test="${not empty sessionScope.user}">
+        <li class="nav-item">
+          <a class="nav-link" href="logOut">Logout</a>
+        </li>
+      </c:when>
+      <c:otherwise>
+        <li class="nav-item">
+          <a class="nav-link" href="login-success.jsp">Login</a>
+        </li>
+      </c:otherwise>
+      </c:choose>	
 	</ul>
   </div>
 </nav>
