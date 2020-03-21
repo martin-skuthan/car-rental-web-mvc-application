@@ -4,6 +4,16 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <filter>
+  	<filter-name>LoginFilter</filter-name>
+  	<display-name>LoginFilter</display-name>
+  	<description></description>
+  	<filter-class>pl.java.filters.LoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>LoginFilter</filter-name>
+  	<url-pattern>/LoginFilter</url-pattern>
+  </filter-mapping>
   
    <listener>
     <listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
@@ -33,6 +43,18 @@
   	<description></description>
   	<servlet-class>pl.java.controllers.SelectTypeOfCarController</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>AddUserrController</servlet-name>
+  	<display-name>AddUserrController</display-name>
+  	<description></description>
+  	<servlet-class>pl.java.controllers.AddUserController</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>LogoutController</servlet-name>
+  	<display-name>LogoutController</display-name>
+  	<description></description>
+  	<servlet-class>pl.java.controllers.LogoutController</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>AddUserController</servlet-name>
   	<url-pattern>/AddUserController</url-pattern>
@@ -49,4 +71,40 @@
   	<servlet-name>SelectTypeOfCarController</servlet-name>
   	<url-pattern>/SelectTypeOfCarController</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>AddUserrController</servlet-name>
+  	<url-pattern>/AddUserrController</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>LogoutController</servlet-name>
+  	<url-pattern>/LogoutController</url-pattern>
+  </servlet-mapping>
+  
+   <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Opcjonalna nazwa</web-resource-name>
+            <url-pattern>/select-type-of-car.jsp</url-pattern>
+            <url-pattern>/new-light-commercial-car.jsp</url-pattern>
+            <url-pattern>/new-customer.jsp</url-pattern>
+            <url-pattern>/login-success.jsp</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+        </web-resource-collection>
+
+        <auth-constraint>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <security-role>
+        <role-name>admin</role-name>
+    </security-role>
+  
+   <login-config>
+        <auth-method>FORM</auth-method>
+        <form-login-config>
+            <form-login-page>/login.jsp</form-login-page>
+            <form-error-page>/login.jsp</form-error-page>
+        </form-login-config>
+    </login-config>
 </web-app>
