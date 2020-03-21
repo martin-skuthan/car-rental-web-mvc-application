@@ -1,0 +1,14 @@
+package pl.java.dao;
+
+import pl.java.model.Customer;
+
+public interface CustomerDao {
+	
+	public void createCustomer(Customer user);
+	
+	public Customer readCustomer(String userId);
+	
+	public void updateCustomer(Customer user);
+	
+	public void deleteCustomer(String userId);	
+}

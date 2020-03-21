@@ -11,15 +11,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import pl.java.dao.MySqlUserDao;
-import pl.java.model.User;
-import pl.java.services.UserService;
+import pl.java.dao.MySqlCustomerDao;
+import pl.java.model.Customer;
+import pl.java.services.CustomerService;
 
-@WebServlet("/addUser")
-public class AddUserController extends HttpServlet {
+@WebServlet("/addCustomer")
+public class AddCustomerController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@Inject
-	private UserService userService;
+	private CustomerService userService;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -31,7 +31,7 @@ public class AddUserController extends HttpServlet {
 		String firstName = request.getParameter("inputFirstName");
 		String lastName = request.getParameter("inputLastName");
 		String pesel = request.getParameter("inputPesel");
-		userService.createUser(firstName, lastName, pesel);
+		userService.createCustomer(firstName, lastName, pesel);
 		System.out.println("Dziala");
 	}
 

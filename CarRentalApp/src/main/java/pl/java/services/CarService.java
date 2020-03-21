@@ -11,7 +11,7 @@ import pl.java.exceptions.NoSuchTypeException;
 import pl.java.model.Car;
 import pl.java.model.LightCommercialCar;
 import pl.java.model.PassengerCar;
-import pl.java.model.User;
+import pl.java.model.Customer;
 import pl.java.model.enums.CarFields;
 import pl.java.model.enums.Transmission;
 import pl.java.model.enums.TypeOfCar;
@@ -57,7 +57,7 @@ public class CarService {
 		int seats = Integer.valueOf(carDetails.get(CarFields.SEATS));
 		boolean airConditioning = Boolean.getBoolean(carDetails.get(CarFields.AIR_CONDITIONING)); 
 		Transmission transmission = Transmission.getFromDescription(carDetails.get(CarFields.TRANSMISSION));
-		User user = null;
+		Customer user = null;
 		int numberOfDoors = Integer.valueOf(carDetails.get(CarFields.NUMBER_OF_DOORS));
 		TypeOfDrive typeOfDrive = TypeOfDrive.getFromDescription(carDetails.get(CarFields.TYPE_OF_DRIVE));
 		int trunkCapacity = Integer.valueOf(carDetails.get(CarFields.TRUNK_CAPACITY));
@@ -74,7 +74,7 @@ public class CarService {
 		int seats = Integer.valueOf(carDetails.get(CarFields.SEATS));
 		boolean airConditioning = Boolean.getBoolean(carDetails.get(CarFields.AIR_CONDITIONING)); 
 		Transmission transmission = Transmission.getFromDescription(carDetails.get(CarFields.TRANSMISSION));
-		User user = null;
+		Customer user = null;
 		double payload = Double.valueOf(carDetails.get(CarFields.PAYLOAD));
 		double loadVolume = Double.valueOf(carDetails.get(CarFields.LOAD_VOLUME));
 		double loadHeight = Double.valueOf(carDetails.get(CarFields.LOAD_HEIGHT));

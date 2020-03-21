@@ -21,7 +21,7 @@ public class LightCommercialCar extends Car implements Serializable {
     public LightCommercialCar() {}
     
     public LightCommercialCar(String registrationNumber, String brand, String model,int seats, boolean airConditioning, Transmission transmission,
-				User user, double payload, double loadVolume, double loadHeight, double loadWidth, double loadLength) {
+				Customer user, double payload, double loadVolume, double loadHeight, double loadWidth, double loadLength) {
     	super(registrationNumber, brand, model, seats, airConditioning, transmission, user);
     	this.payload = payload;
     	this.loadVolume = loadVolume;

@@ -31,12 +31,12 @@ public abstract class Car implements Serializable {
     private int seats;
     private boolean airConditioning;
     private Transmission transmission;
-    private User user;
+    private Customer user;
     
     public Car() {}
     
     public Car(String registrationNumber, String brand, String model,int seats, boolean airConditioning, Transmission transmission,
-    		   User user) {
+    		   Customer user) {
     	this.registrationNumber = registrationNumber;
     	this.brand = brand;
     	this.model = model;
@@ -94,11 +94,11 @@ public abstract class Car implements Serializable {
 		this.transmission = transmission;
 	}
 
-	public User getUser() {
+	public Customer getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(Customer user) {
 		this.user = user;
 	}
 }

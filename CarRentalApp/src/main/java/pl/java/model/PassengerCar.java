@@ -20,7 +20,7 @@ public class PassengerCar extends Car implements Serializable {
     public PassengerCar() {}
     
     public PassengerCar(String registrationNumber, String brand, String model,int seats, boolean airConditioning, Transmission transmission,
- 		   				User user, int numberOfDoors, TypeOfDrive typeOfDrive, int trunkCapacity) {
+ 		   				Customer user, int numberOfDoors, TypeOfDrive typeOfDrive, int trunkCapacity) {
     	super(registrationNumber, brand, model, seats, airConditioning, transmission, user);
     	this.numberOfDoors = numberOfDoors;
     	this.typeOfDrive = typeOfDrive; 	

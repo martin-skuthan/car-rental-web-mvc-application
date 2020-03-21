@@ -4,7 +4,7 @@ import pl.java.exceptions.NoSuchDbException;
 
 public abstract class DaoFactory {
 	private static final int MYSQL_DAO_FACTORY = 1;
-	public abstract UserDao getUserDao();
+	public abstract CustomerDao getUserDao();
 	public abstract CarDao getCarDao();
 	
 	public static DaoFactory getFactory() {

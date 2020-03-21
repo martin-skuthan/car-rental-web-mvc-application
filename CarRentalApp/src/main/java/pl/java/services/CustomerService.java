@@ -2,17 +2,17 @@ package pl.java.services;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import pl.java.dao.UserDao;
-import pl.java.model.User;
+import pl.java.dao.CustomerDao;
+import pl.java.model.Customer;
 
 @RequestScoped
-public class UserService {
+public class CustomerService {
 	@Inject
-	private UserDao userDao;
+	private CustomerDao customerDao;
 	
-	public void createUser(String firstName, String lastName, String pesel) {
-		User user = new User(firstName, lastName, pesel);
-		userDao.createUser(user);
+	public void createCustomer(String firstName, String lastName, String pesel) {
+		Customer user = new Customer(firstName, lastName, pesel);
+		customerDao.createCustomer(user);
 	}
 	
 	public void readUser(String userId) {

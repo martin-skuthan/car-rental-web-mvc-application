@@ -2,8 +2,8 @@ package pl.java.dao;
 
 public class MySqlDaoFactory extends DaoFactory {
 	@Override
-	public UserDao getUserDao() {
-		return new MySqlUserDao();
+	public CustomerDao getUserDao() {
+		return new MySqlCustomerDao();
 	}
 
 	@Override

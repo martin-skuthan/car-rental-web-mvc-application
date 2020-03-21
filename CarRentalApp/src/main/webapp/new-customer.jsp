@@ -37,7 +37,7 @@
         <a class="nav-link" href="new-user.jsp">Add admin account</a>
       </li>	
 	  <li class="nav-item">
-        <a class="nav-link" href="#">Logout</a>
+        <a class="nav-link" href="login-success.jsp">Login</a>
       </li>
 	</ul>
   </div>
@@ -47,30 +47,14 @@
 
 <!-- Content -->
 <div class="d-flex justify-content-center align-items-center container h-100">
-<div class="col-sm-6 col-md-6 my-auto">
-<h1 class="display-2">New car</h1>
+<div class="col-sm-8 col-md-8 my-auto">
+<h1 class="display-2">New customer</h1>
 <div class="bs-callout bs-callout-default">
-<form class="form-signin" action="addCar" method="post">
-<input name="inputRegistrationNumber" type="text" class="form-control" placeholder="Registration number" required autofocus>
-<input name="inputBrand" type="text" class="form-control" placeholder="Brand" required>
-<input name="inputModel" type="text" class="form-control" placeholder="Model" required>
-<input name="inputSeats" type="number" min="2" max="4" class="form-control" placeholder="Number of seats" required>
-<input name="inputTrunkPayload" type="number" min="600" max="5000" class="form-control" placeholder="Payload (kg)">
-<input name="inputLoadVolume" type="number" min="2" max="25" class="form-control" placeholder="Load volume (m3)">
-<input name="inputLoadHeight" type="number" min="1000" max="2500" class="form-control" placeholder="Load height (mm)">
-<input name="inputLoadWidth" type="number" min="1500" max="2000" class="form-control" placeholder="Load width (mm)">
-<input name="inputLoadLength" type="number" min="1500" max="5500" class="form-control" placeholder="Load length (mm)"><br>
-<label>Transmission:</label>
-    <select class="form-control" name="inputTransmission">
-      <option value="Manual">Manual</option>
-      <option value="Automatic">Automatic</option>
-    </select><br>
-<label>Air Conditionig:</label>
-    <select class="form-control" name="inputTypeOfDrive">
-      <option value="true">Yes</option>
-      <option value="false">No</option>
-    </select><br>          
-<button class="btn btn-lg btn-primary btn-block" type="submit" name="typeOfCar" value="light_commercial_car">Add car</button>
+<form class="form-signin" action="addCustomer" method="post">
+<input name="inputFirstName" type="text" class="form-control" placeholder="First name:" required>
+<input name="inputLastName" type="text" class="form-control" placeholder="Last name:" required>
+<input name="inputPesel" type="text" class="form-control" placeholder="Pesel:" required>     
+<button class="btn btn-lg btn-primary btn-block" type="submit">Add customer</button>
 </form>
 </div>
 </div>
