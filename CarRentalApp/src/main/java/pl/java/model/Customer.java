@@ -7,8 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 
 @Entity
+@NamedQuery(name = "Customer.readAllCustomers", query = "SELECT c FROM Customer c")
 public class Customer implements Serializable {
 	private static final long serialVersionUID = 3943117829271152503L;
 	
@@ -60,4 +62,9 @@ public class Customer implements Serializable {
 	public void setPesel(String pesel) {
 		this.pesel = pesel;
 	}	
+	
+	@Override
+	public String toString() {
+		return firstName + ";" + lastName + ";" + pesel;
+	}
 }

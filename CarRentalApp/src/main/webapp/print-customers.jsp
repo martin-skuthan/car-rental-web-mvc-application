@@ -59,7 +59,29 @@
 <!-- Content -->
 <div class="d-flex justify-content-center align-items-center container h-100">
 <div class="col-sm-8 col-md-8 my-auto">
-<h1 class="display-2">Login succeeded</h1>
+<h1 class="display-2">Customers</h1>
+<div class="bs-callout bs-callout-default">
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">User ID</th>
+      <th scope="col">First name</th>
+      <th scope="col">Last name</th>
+      <th scope="col">Pesel</th>
+    </tr>
+  </thead>
+  <tbody>
+  	<c:forEach var="customer" items="${requestScope.customers}">
+  	  <tr>	
+  	    <th scope="row"><c:out value="${customer.id}"></c:out></th>
+        <td><c:out value="${customer.firstName}"></c:out></td>
+        <td><c:out value="${customer.lastName}"></c:out></td>
+        <td><c:out value="${customer.pesel}"></c:out></td>
+      </tr>
+  	</c:forEach>
+  </tbody>
+</table>
+</div>
 </div>
 </div>     
 <!-- Content -->

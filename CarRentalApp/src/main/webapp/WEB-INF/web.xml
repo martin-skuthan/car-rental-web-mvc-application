@@ -55,6 +55,12 @@
   	<description></description>
   	<servlet-class>pl.java.controllers.LogoutController</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>PrintCustomersController</servlet-name>
+  	<display-name>PrintCustomersController</display-name>
+  	<description></description>
+  	<servlet-class>pl.java.controllers.PrintCustomersController</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>AddUserController</servlet-name>
   	<url-pattern>/AddUserController</url-pattern>
@@ -79,6 +85,10 @@
   	<servlet-name>LogoutController</servlet-name>
   	<url-pattern>/LogoutController</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>PrintCustomersController</servlet-name>
+  	<url-pattern>/PrintCustomersController</url-pattern>
+  </servlet-mapping>
   
    <security-constraint>
         <web-resource-collection>
@@ -87,6 +97,7 @@
             <url-pattern>/new-light-commercial-car.jsp</url-pattern>
             <url-pattern>/new-customer.jsp</url-pattern>
             <url-pattern>/login-success.jsp</url-pattern>
+            <url-pattern>/print-customers.jsp</url-pattern>
             <http-method>GET</http-method>
             <http-method>POST</http-method>
         </web-resource-collection>

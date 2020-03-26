@@ -1,5 +1,7 @@
 package pl.java.dao;
 
+import java.util.List;
+
 import pl.java.model.Customer;
 
 public interface CustomerDao {
@@ -11,4 +13,6 @@ public interface CustomerDao {
 	public void updateCustomer(Customer user);
 	
 	public void deleteCustomer(String userId);	
+	
+	public List<Customer> readAllCustomers();
 }

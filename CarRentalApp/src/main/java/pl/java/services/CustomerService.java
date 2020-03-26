@@ -1,5 +1,8 @@
 package pl.java.services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import pl.java.dao.CustomerDao;
@@ -15,15 +18,20 @@ public class CustomerService {
 		customerDao.createCustomer(user);
 	}
 	
-	public void readUser(String userId) {
+	public void readCustomer(String userId) {
 		
 	}
 	
-	public void updateUser(String firstName, String lastName, String pesel) {
+	public void updateCustomer(String firstName, String lastName, String pesel) {
 		
 	}
 	
-	public void deleteUser(String userId) {
+	public void deleteCustomer(String userId) {
 		
+	}
+	
+	public List<Customer> readAllCustomers() {
+		List<Customer> customers = customerDao.readAllCustomers();
+		return customers;
 	}
 }

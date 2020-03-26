@@ -1,10 +1,13 @@
 package pl.java.dao;
 
+import java.util.List;
+
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
 
 import pl.java.model.Customer;
 
@@ -35,5 +38,10 @@ public class MySqlCustomerDao implements CustomerDao {
 		
 	}
 	
+	public List<Customer> readAllCustomers() {
+		TypedQuery<Customer> typedQuery = entityManager.createNamedQuery("Customer.readAllCustomers", Customer.class);
+		List<Customer> customers = typedQuery.getResultList();
+		return customers;
+	}
 	
 }

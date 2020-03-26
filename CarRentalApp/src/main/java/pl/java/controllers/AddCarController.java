@@ -22,8 +22,7 @@ public class AddCarController extends HttpServlet {
 	private CarService carService;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.getRequestDispatcher("selectTypeOfCar").forward(request, response);
 	}
 
 

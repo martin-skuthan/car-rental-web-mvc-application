@@ -28,7 +28,7 @@
         <a class="nav-link" href="new-customer.jsp">Add/Remove customer</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Print users</a>
+        <a class="nav-link" href="printCustomers">Print customers</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Rent/Return car</a>
