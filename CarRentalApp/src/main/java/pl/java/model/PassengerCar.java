@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
 
 import pl.java.model.enums.Transmission;
 import pl.java.model.enums.TypeOfDrive;

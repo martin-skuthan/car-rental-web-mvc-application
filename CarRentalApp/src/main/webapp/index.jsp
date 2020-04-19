@@ -21,7 +21,7 @@
         <a class="nav-link" href="select-type-of-car.jsp">Add/Remove car</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Print cars</a>
+        <a class="nav-link" href="printCars">Print cars</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="new-customer.jsp">Add/Remove customer</a>

@@ -1,6 +1,7 @@
 package pl.java.services;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
@@ -48,6 +49,17 @@ public class CarService {
 	
 	public void deleteCar(String carId) {
 		
+	}
+	
+	public List<Car> readAllCars(TypeOfCar typeOfCar) {
+		List<Car> cars = carDao.readAllCars(typeOfCar);
+		return cars;
+	}
+	
+	public List<Car> readRangeOfCars(TypeOfCar typeOfCar, int noOfPage, int noOfRecords) {
+		int firstResult = noOfPage * noOfRecords - noOfRecords;
+		List<Car> cars = carDao.readRangeOfCars(typeOfCar, noOfRecords, firstResult);
+		return cars;
 	}
 	
 	private PassengerCar createPassengerCarFromDetails(HashMap<CarFields, String> carDetails) {

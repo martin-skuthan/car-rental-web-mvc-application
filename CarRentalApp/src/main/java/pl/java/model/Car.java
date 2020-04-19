@@ -4,19 +4,26 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import pl.java.model.enums.Transmission;
 
 @Entity
 @Inheritance
-@DiscriminatorColumn(name = "typeOfCar")
+@DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING,name = "typeOfCar")
 @Table(name = "Car")
+@NamedQueries({
+	@NamedQuery(name = "Car.readAllPassengerCars", query = "SELECT c FROM Car c WHERE TYPE(c) = PassengerCar"),
+	@NamedQuery(name = "Car.readAllLightCommercialCars", query = "SELECT c FROM Car c WHERE TYPE(c) = LightCommercialCar")
+})
 public abstract class Car implements Serializable {
 	private static final long serialVersionUID = 9171676490784870223L;
 	

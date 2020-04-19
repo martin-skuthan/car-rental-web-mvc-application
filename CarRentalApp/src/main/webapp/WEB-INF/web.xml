@@ -61,6 +61,12 @@
   	<description></description>
   	<servlet-class>pl.java.controllers.PrintCustomersController</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>PrinCarsController</servlet-name>
+  	<display-name>PrinCarsController</display-name>
+  	<description></description>
+  	<servlet-class>pl.java.controllers.PrinCarsController</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>AddUserController</servlet-name>
   	<url-pattern>/AddUserController</url-pattern>
@@ -88,6 +94,10 @@
   <servlet-mapping>
   	<servlet-name>PrintCustomersController</servlet-name>
   	<url-pattern>/PrintCustomersController</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>PrinCarsController</servlet-name>
+  	<url-pattern>/PrinCarsController</url-pattern>
   </servlet-mapping>
   
    <security-constraint>

@@ -20,4 +20,9 @@ public enum Transmission {
 		}
 		
 	}
+	
+	@Override
+	public String toString() {
+		return description;
+	}
 }

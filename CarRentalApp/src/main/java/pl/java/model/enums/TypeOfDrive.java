@@ -20,4 +20,9 @@ public enum TypeOfDrive {
 			throw new NoSuchTypeException("There is no option:" + description);
 		}
 	}
+	
+	@Override
+	public String toString() {
+		return description;
+	}
 }
