@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import pl.java.model.Car;
 import pl.java.model.Customer;
 import pl.java.services.CustomerService;
 
@@ -21,9 +22,22 @@ public class PrintCustomersController extends HttpServlet {
 	private CustomerService customerService;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Customer> customers = customerService.readAllCustomers();
-		customers.forEach(System.out::println);
+		final int numberOfRecordsPerPage = 10;
+		int numberOfCustomersRecords = customerService.readAllCustomers().size();
+		request.setAttribute("numberOfCustomersRecords", numberOfCustomersRecords);
+		int noOfPages = numberOfCustomersRecords / numberOfRecordsPerPage;
+		int lastPage = numberOfCustomersRecords % numberOfRecordsPerPage;
+		if (lastPage > 0) {
+			noOfPages++;
+		}
+		request.setAttribute("noOfPages", noOfPages);
+		int noOfPage = 1;
+		if (request.getParameter("page") != null) {
+			noOfPage = Integer.parseInt(request.getParameter("page"));
+		}
+		List<Customer> customers = customerService.readRangeOfCustomers(noOfPage, numberOfRecordsPerPage);
+		request.setAttribute("noOfPage", noOfPage);
 		request.setAttribute("customers", customers);
-		request.getRequestDispatcher("print-customers.jsp").forward(request, response);
+		request.getRequestDispatcher("print-customers.jsp").forward(request, response);		
 	}
 }

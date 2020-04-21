@@ -15,4 +15,6 @@ public interface CustomerDao {
 	public void deleteCustomer(String userId);	
 	
 	public List<Customer> readAllCustomers();
+	
+	public List<Customer> readRangeOfCustomers(int noOfRecords, int firstResults);
 }

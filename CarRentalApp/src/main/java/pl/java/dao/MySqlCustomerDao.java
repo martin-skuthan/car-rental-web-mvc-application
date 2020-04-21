@@ -44,4 +44,10 @@ public class MySqlCustomerDao implements CustomerDao {
 		return customers;
 	}
 	
+	public List<Customer> readRangeOfCustomers(int noOfRecords, int firstResults) {
+		TypedQuery<Customer> typedQuery = entityManager.createNamedQuery("Customer.readAllCustomers", Customer.class).
+				                          setFirstResult(firstResults).setMaxResults(noOfRecords);
+		List<Customer> customers = typedQuery.getResultList();
+		return customers;
+	}	
 }

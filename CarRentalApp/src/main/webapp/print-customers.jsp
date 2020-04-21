@@ -61,10 +61,11 @@
 <div class="col-sm-8 col-md-8 my-auto">
 <h1 class="display-2">Customers</h1>
 <div class="bs-callout bs-callout-default">
-<table class="table">
+<c:choose>
+<c:when test="${requestScope.numberOfCustomersRecords != 0}">
+  <table class="table">
   <thead class="thead-dark">
     <tr>
-      <th scope="col">User ID</th>
       <th scope="col">First name</th>
       <th scope="col">Last name</th>
       <th scope="col">Pesel</th>
@@ -73,7 +74,6 @@
   <tbody>
   	<c:forEach var="customer" items="${requestScope.customers}">
   	  <tr>	
-  	    <th scope="row"><c:out value="${customer.id}"></c:out></th>
         <td><c:out value="${customer.firstName}"></c:out></td>
         <td><c:out value="${customer.lastName}"></c:out></td>
         <td><c:out value="${customer.pesel}"></c:out></td>
@@ -81,6 +81,27 @@
   	</c:forEach>
   </tbody>
 </table>
+</c:when>
+<c:otherwise>
+    <h4 class="display-4">There is no customers</h4>  	
+  </c:otherwise>
+</c:choose>
+<div class="row">
+<nav aria-label="..." class="ml-auto">
+  <ul class="pagination">
+    <c:forEach begin="1" end="${requestScope.noOfPages}" varStatus="loop">
+      <c:choose>
+      <c:when test="${loop.index == requestScope.noOfPage}">
+        <li class="page-item active"><a class="page-link" href="printCustomers?page=${loop.index}"><c:out value="${loop.index}"></c:out></a></li>
+      </c:when>
+      <c:otherwise>
+        <li class="page-item"><a class="page-link" href="printCustomers?page=${loop.index}"><c:out value="${loop.index}"></c:out></a></li>
+      </c:otherwise>
+      </c:choose>
+    </c:forEach>
+  </ul>
+</nav>
+</div>
 </div>
 </div>
 </div>     

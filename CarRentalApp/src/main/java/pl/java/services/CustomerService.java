@@ -34,4 +34,10 @@ public class CustomerService {
 		List<Customer> customers = customerDao.readAllCustomers();
 		return customers;
 	}
+	
+	public List<Customer> readRangeOfCustomers(int noOfPage, int noOfRecords) {
+		int firstResult = noOfPage * noOfRecords - noOfRecords;
+		List<Customer> customers = customerDao.readRangeOfCustomers(noOfRecords, firstResult);
+		return customers;
+	}
 }

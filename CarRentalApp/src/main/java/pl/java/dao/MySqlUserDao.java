@@ -12,7 +12,7 @@ import javax.persistence.EntityTransaction;
 
 import pl.java.model.Role;
 import pl.java.model.User;
-import pl.java.services.RoleService;
+
 
 @ApplicationScoped
 @Default
@@ -57,6 +57,10 @@ public class MySqlUserDao implements UserDao {
 	public List<User> readAllUsers() {
 		List<User> users = entityManager.createQuery("SELECT u FROM User u", User.class).getResultList();
 		return users;
+	}
+	
+	public List<User> readRangeOfUser() {
+		return null;
 	}
 	
 	private void addAdminRoleToUser(User user) {

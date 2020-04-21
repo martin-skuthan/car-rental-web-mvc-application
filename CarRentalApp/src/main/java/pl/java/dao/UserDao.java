@@ -1,5 +1,7 @@
 package pl.java.dao;
 
+import java.util.List;
+
 import pl.java.model.User;
 
 public interface UserDao {
@@ -13,4 +15,8 @@ public interface UserDao {
 	public void delete(String userId);
 	
 	public User readUserByUsername(String username);
+	
+	public List<User> readAllUsers();
+	
+	public List<User> readRangeOfUser();
 }
