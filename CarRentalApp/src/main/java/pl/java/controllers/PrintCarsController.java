@@ -21,37 +21,64 @@ public class PrintCarsController extends HttpServlet {
 	
 	@Inject
 	private CarService carService;
+	private int numberOfRecordsPerPage;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			TypeOfCar typeOfCar = TypeOfCar.PASSENGER_CAR;
-			if(request.getParameter("typeOfCar") != null) {
-				typeOfCar = TypeOfCar.getFromDescription(request.getParameter("typeOfCar"));
-			}
-			final int numberOfRecordsPerPage = 10;
+			TypeOfCar typeOfCar = getTypeOfCar(request);
+			request.setAttribute("typeOfCar", typeOfCar);
+			setNumberOfRecordsPerPage(request);
 			int numberOfCarRecords = carService.readAllCars(typeOfCar).size();
 			request.setAttribute("numberOfCarRecords", numberOfCarRecords);
-			int noOfPages = numberOfCarRecords / numberOfRecordsPerPage;
-			int lastPage = numberOfCarRecords % numberOfRecordsPerPage;
-			if (lastPage > 0) {
-				noOfPages++;
-			}
+			int noOfPages = getNoOfPages(numberOfCarRecords, numberOfRecordsPerPage);
 			request.setAttribute("noOfPages", noOfPages);
-			printCars(request, response, typeOfCar, numberOfRecordsPerPage);
+			int noOfPage = getNoOfPage(request);
+			request.setAttribute("noOfPage", noOfPage);
+			carService.readRangeOfCars(typeOfCar, noOfPage, numberOfRecordsPerPage);
+			List<Car> cars = carService.readRangeOfCars(typeOfCar, noOfPage, numberOfRecordsPerPage);
+			request.setAttribute("cars", cars);			
+			request.getRequestDispatcher("print-cars.jsp").forward(request, response);
 		}catch(NoSuchTypeException ex) {
 			ex.printStackTrace();
 		}
 	}
 	
-	private void printCars(HttpServletRequest request, HttpServletResponse response, TypeOfCar typeOfCar, int noOfRecordsPerPage) throws ServletException, IOException {
+	private void setNumberOfRecordsPerPage(HttpServletRequest request) {
+		final int defaultNumberOfRecordsPerPate = 10;
+		if(numberOfRecordsPerPage == 0) {
+			numberOfRecordsPerPage = defaultNumberOfRecordsPerPate;
+		}
+		
+		if(request.getParameter("count") != null) {
+			numberOfRecordsPerPage = Integer.valueOf(request.getParameter("count"));
+		}	
+	}
+	
+	private TypeOfCar getTypeOfCar(HttpServletRequest request) {
+		TypeOfCar typeOfCar = TypeOfCar.PASSENGER_CAR;
+		if(request.getParameter("typeOfCar") != null) {
+			typeOfCar = TypeOfCar.getFromDescription(request.getParameter("typeOfCar"));
+		}
+		
+		return typeOfCar;
+	}
+	
+	private int getNoOfPages(int numberOfCarRecords, int numberOfRecordsPerPage) {
+		int noOfPages = numberOfCarRecords / numberOfRecordsPerPage;
+		int lastPage = numberOfCarRecords % numberOfRecordsPerPage;
+		if(lastPage > 0) {
+			noOfPages++;
+		}
+		
+		return noOfPages;
+	}
+	
+	private int getNoOfPage(HttpServletRequest request) {
 		int noOfPage = 1;
-		if (request.getParameter("page") != null) {
+		if(request.getParameter("page") != null) {
 			noOfPage = Integer.parseInt(request.getParameter("page"));
 		}
-		List<Car> cars = carService.readRangeOfCars(typeOfCar, noOfPage, noOfRecordsPerPage);
-		request.setAttribute("noOfPage", noOfPage);
-		request.setAttribute("cars", cars);
-		request.setAttribute("typeOfCar", typeOfCar);
-		request.getRequestDispatcher("print-cars.jsp").forward(request, response);
+		
+		return noOfPage;
 	}
 }

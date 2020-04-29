@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link href="css/styles.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
 
@@ -22,7 +23,7 @@
         <a class="nav-link" href="select-type-of-car.jsp">Add/Remove car</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Print cars</a>
+        <a class="nav-link" href="printCars">Print cars</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="new-customer.jsp">Add/Remove customer</a>
@@ -53,7 +54,6 @@
 	</ul>
   </div>
 </nav>
-</div>
 <!-- Navbar -->
 
 <!-- Content -->
@@ -69,6 +69,7 @@
       <th scope="col">First name</th>
       <th scope="col">Last name</th>
       <th scope="col">Pesel</th>
+      <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
@@ -77,6 +78,12 @@
         <td><c:out value="${customer.firstName}"></c:out></td>
         <td><c:out value="${customer.lastName}"></c:out></td>
         <td><c:out value="${customer.pesel}"></c:out></td>
+        <td>   
+        <form action="">
+            <button class="btn btn-success" title="Edit"><i style="font-size: 15px" class="material-icons">&#xE254;</i></button>
+            <button class="btn btn-danger" title="Delete"><i style="font-size: 15px" class="material-icons">&#xE872;</i></button>
+        </form>       
+        </td>
       </tr>
   	</c:forEach>
   </tbody>
@@ -101,19 +108,22 @@
     </c:forEach>
   </ul>
 </nav>
+<div class="btn-group">
+  <button type="button" class="btn btn-primary dropdown-toggle count-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Count
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="printCustomers?count=5">5</a>
+    <a class="dropdown-item" href="printCustomers?count=10">10</a>
+    <a class="dropdown-item" href="printCustomers?count=15">15</a>
 </div>
 </div>
 </div>
-</div>     
+</div>
+</div>  
+</div>   
 <!-- Content -->
 
-<!-- Footer -->
-<footer class="page-footer font-small pt-4">
-  <div class="footer-copyright text-center py-3">Developed by
-    <a href="http://www.linkedin.com/in/martin-skuthan-630553190"> Martin Skuthan</a>
-  </div>
-</footer>
-<!-- Footer -->
 
 <!-- Bootstrap js -->
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

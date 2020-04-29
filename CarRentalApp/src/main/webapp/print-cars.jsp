@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link href="css/styles.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
 
@@ -22,7 +23,7 @@
         <a class="nav-link" href="select-type-of-car.jsp">Add/Remove car</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Print cars</a>
+        <a class="nav-link" href="printCars">Print cars</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="new-customer.jsp">Add/Remove customer</a>
@@ -95,6 +96,7 @@
         <th scope="col">Load width</th>
         <th scope="col">Load length</th>
       </c:if>
+      <th>Action</th>
     </tr>
     </thead>
     <tbody>
@@ -118,11 +120,17 @@
           <td><c:out value="${car.loadVolume}"></c:out></td>
           <td><c:out value="${car.loadHeight}"></c:out></td>
         </c:otherwise>
-      </c:choose>
-      <c:if test="${requestScope.typeOfCar == 'LIGHT_COMMERCIAL_CAR'}">
-        <td><c:out value="${car.loadWidth}"></c:out></td>
-        <td><c:out value="${car.loadLength}"></c:out></td>
-      </c:if>
+        </c:choose>
+        <c:if test="${requestScope.typeOfCar == 'LIGHT_COMMERCIAL_CAR'}">
+          <td><c:out value="${car.loadWidth}"></c:out></td>
+          <td><c:out value="${car.loadLength}"></c:out></td>
+        </c:if>
+        <td>   
+          <form action="">
+            <button class="btn btn-success" title="Edit"><i style="font-size: 15px" class="material-icons">&#xE254;</i></button>
+            <button class="btn btn-danger" title="Delete"><i style="font-size: 15px" class="material-icons">&#xE872;</i></button>
+          </form>       
+        </td>
       </tr>
   	</c:forEach>
     </tbody>
@@ -143,6 +151,7 @@
   </c:otherwise>
 </c:choose>	         
 </form>
+                                             
 <nav aria-label="..." class="ml-auto">
   <ul class="pagination">
     <c:forEach begin="1" end="${requestScope.noOfPages}" varStatus="loop">
@@ -157,10 +166,21 @@
     </c:forEach>
   </ul>
 </nav>
+<div class="btn-group">
+  <button type="button" class="btn btn-primary dropdown-toggle count-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Count
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="printCars?typeOfCar=${requestScope.typeOfCar}&count=5">5</a>
+    <a class="dropdown-item" href="printCars?typeOfCar=${requestScope.typeOfCar}&count=10">10</a>
+    <a class="dropdown-item" href="printCars?typeOfCar=${requestScope.typeOfCar}&count=15">15</a>
 </div>
 </div>
 </div>
-</div>     
+</div>
+</div>    
+</div>
+
 <!-- Content -->
 
 <!-- Footer -->
