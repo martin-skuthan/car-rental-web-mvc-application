@@ -79,6 +79,12 @@
   	<description></description>
   	<servlet-class>pl.java.controllers.LoginController</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>DeleteCustomerController</servlet-name>
+  	<display-name>DeleteCustomerController</display-name>
+  	<description></description>
+  	<servlet-class>pl.java.controllers.DeleteCustomerController</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>AddUserController</servlet-name>
   	<url-pattern>/AddUserController</url-pattern>
@@ -118,6 +124,10 @@
   <servlet-mapping>
   	<servlet-name>LoginController</servlet-name>
   	<url-pattern>/LoginController</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>DeleteCustomerController</servlet-name>
+  	<url-pattern>/DeleteCustomerController</url-pattern>
   </servlet-mapping>
   
    <security-constraint>

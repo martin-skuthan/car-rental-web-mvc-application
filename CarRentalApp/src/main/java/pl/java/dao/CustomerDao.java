@@ -12,7 +12,7 @@ public interface CustomerDao {
 	
 	public void updateCustomer(Customer user);
 	
-	public void deleteCustomer(String userId);	
+	public void deleteCustomerByPesel(String pesel);	
 	
 	public List<Customer> readAllCustomers();
 	

@@ -131,6 +131,7 @@
             <button name="carToEdit" value="${car.registrationNumber}" class="btn btn-success" title="Edit" type="submit"><i style="font-size: 15px" class="material-icons">&#xE254;</i></button>
           </form>     
           <form class="form-signin" action="delete-item.jsp" method="post">
+            <input type="hidden" name="formAction" value="deleteCar">
             <input type="hidden" name="idOfItemToDelete" value="${car.registrationNumber}">
             <input type="hidden" name="itemToDelete" value="${car}">
             <button class="btn btn-danger" title="Delete" type="submit"><i style="font-size: 15px" class="material-icons">&#xE872;</i></button>

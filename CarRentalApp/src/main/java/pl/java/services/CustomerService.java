@@ -1,6 +1,5 @@
 package pl.java.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -26,8 +25,8 @@ public class CustomerService {
 		
 	}
 	
-	public void deleteCustomer(String userId) {
-		
+	public void deleteCustomerByPesel(String pesel) {
+		customerDao.deleteCustomerByPesel(pesel);
 	}
 	
 	public List<Customer> readAllCustomers() {

@@ -9,26 +9,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import pl.java.model.Car;
-import pl.java.services.CarService;
+import pl.java.services.CustomerService;
 
-@WebServlet("/deleteCar")
-public class DeleteCarController extends HttpServlet {
+@WebServlet("/deleteCustomer")
+public class DeleteCustomerController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@Inject
-	private CarService carService;
+	private CustomerService customerService;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String registrationNumber = request.getParameter("itemToDelete");
-		if (registrationNumber.isEmpty()) {
+		String pesel = request.getParameter("itemToDelete");
+		if (pesel.isEmpty()) {
 			response.sendRedirect("printCars");
 		}else {
-			carService.deleteCarByRegistrationNumber(registrationNumber);
-			final String operation = "Deleting car";
+			customerService.deleteCustomerByPesel(pesel);
+			final String operation = "Deleting customer";
 			request.setAttribute("operation", operation);
 			request.getRequestDispatcher("/WEB-INF/hidden-views/operation-success.jsp").forward(request, response);
-		}	
+		}
 	}
 
 }

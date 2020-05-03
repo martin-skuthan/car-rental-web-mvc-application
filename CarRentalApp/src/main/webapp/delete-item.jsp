@@ -65,9 +65,9 @@
         <p class="text-justify">
         <c:out value="${param.itemToDelete}"></c:out> 
         </p>
-          <form class="form-signin" action="deleteCar" method="post">
-		    <button style="width:49%" class="btn btn-lg btn-secondary btn-inline-block" name="carToDelete" type="submit">Cancel</button>
-			<button style="width:49%" class="btn btn-lg btn-primary btn-inline-block" name="carToDelete" value="${param.idOfItemToDelete}" type="submit">Delete</button>
+          <form class="form-signin" action="${param.formAction}" method="post">
+		    <button style="width:49%" class="btn btn-lg btn-secondary btn-inline-block" name="itemToDelete" type="submit">Cancel</button>
+			<button style="width:49%" class="btn btn-lg btn-primary btn-inline-block" name="itemToDelete" value="${param.idOfItemToDelete}" type="submit">Delete</button>
           </form>
       </div>
     </div>

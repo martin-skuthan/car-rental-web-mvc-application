@@ -7,6 +7,7 @@ import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import pl.java.model.Customer;
@@ -33,9 +34,13 @@ public class MySqlCustomerDao implements CustomerDao {
 		// TODO Auto-generated method stub
 	}
 
-	public void deleteCustomer(String userId) {
-		// TODO Auto-generated method stub
-		
+	public void deleteCustomerByPesel(String pesel) {
+		Query query = entityManager.createNamedQuery("Customer.deleteCustomerByPesel");
+		query.setParameter("pesel", pesel);
+		EntityTransaction entityTransaction = entityManager.getTransaction();
+		entityTransaction.begin();
+		query.executeUpdate();
+		entityTransaction.commit();
 	}
 	
 	public List<Customer> readAllCustomers() {

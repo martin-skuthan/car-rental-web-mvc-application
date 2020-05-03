@@ -79,10 +79,17 @@
         <td><c:out value="${customer.lastName}"></c:out></td>
         <td><c:out value="${customer.pesel}"></c:out></td>
         <td>   
-        <form action="delete-item.jsp" method="post">
-            <button class="btn btn-success" title="Edit"><i style="font-size: 15px" class="material-icons">&#xE254;</i></button>
-            <button class="btn btn-danger" title="Delete"><i style="font-size: 15px" class="material-icons">&#xE872;</i></button>
-        </form>       
+        <div class="row">
+          <form style="margin-right: 5px" class="form-signin" action="delete-item.jsp" method="post">
+            <button name="carToEdit" value="${customer.pesel}" class="btn btn-success" title="Edit" type="submit"><i style="font-size: 15px" class="material-icons">&#xE254;</i></button>
+          </form>     
+          <form class="form-signin" action="delete-item.jsp" method="post">
+            <input type="hidden" name="formAction" value="deleteCustomer">
+            <input type="hidden" name="idOfItemToDelete" value="${customer.pesel}">
+            <input type="hidden" name="itemToDelete" value="${customer}">
+            <button class="btn btn-danger" title="Delete" type="submit"><i style="font-size: 15px" class="material-icons">&#xE872;</i></button>
+          </form> 
+          </div>    
         </td>
       </tr>
   	</c:forEach>
