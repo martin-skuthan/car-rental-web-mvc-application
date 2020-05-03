@@ -20,16 +20,16 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="select-type-of-car.jsp">Add/Remove car</a>
+        <a class="nav-link" href="select-type-of-car.jsp">Add car</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="printCars">Print cars</a>
+        <a class="nav-link" href="printCars">Print/Modify cars</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="new-customer.jsp">Add/Remove customer</a>
+        <a class="nav-link" href="new-customer.jsp">Add customer</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="printCustomers">Print customers</a>
+        <a class="nav-link" href="printCustomers">Print/Modify customers</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Rent/Return car</a>
@@ -47,7 +47,7 @@
       </c:when>
       <c:otherwise>
         <li class="nav-item">
-          <a class="nav-link" href="login-success.jsp">Login</a>
+          <a class="nav-link" href="logIn">Login</a>
         </li>
       </c:otherwise>
       </c:choose>	
@@ -125,11 +125,17 @@
           <td><c:out value="${car.loadWidth}"></c:out></td>
           <td><c:out value="${car.loadLength}"></c:out></td>
         </c:if>
-        <td>   
-          <form action="">
-            <button class="btn btn-success" title="Edit"><i style="font-size: 15px" class="material-icons">&#xE254;</i></button>
-            <button class="btn btn-danger" title="Delete"><i style="font-size: 15px" class="material-icons">&#xE872;</i></button>
-          </form>       
+        <td>
+          <div class="row">
+          <form style="margin-right: 5px" class="form-signin" action="delete-item.jsp" method="post">
+            <button name="carToEdit" value="${car.registrationNumber}" class="btn btn-success" title="Edit" type="submit"><i style="font-size: 15px" class="material-icons">&#xE254;</i></button>
+          </form>     
+          <form class="form-signin" action="delete-item.jsp" method="post">
+            <input type="hidden" name="idOfItemToDelete" value="${car.registrationNumber}">
+            <input type="hidden" name="itemToDelete" value="${car}">
+            <button class="btn btn-danger" title="Delete" type="submit"><i style="font-size: 15px" class="material-icons">&#xE872;</i></button>
+          </form> 
+          </div>	   
         </td>
       </tr>
   	</c:forEach>

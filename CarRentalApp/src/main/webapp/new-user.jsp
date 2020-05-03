@@ -19,16 +19,16 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="select-type-of-car.jsp">Add/Remove car</a>
+        <a class="nav-link" href="select-type-of-car.jsp">Add car</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="printCars">Print cars</a>
+        <a class="nav-link" href="printCars">Print/Modify cars</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="new-customer.jsp">Add/Remove customer</a>
+        <a class="nav-link" href="new-customer.jsp">Add customer</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="printCustomers">Print customers</a>
+        <a class="nav-link" href="printCustomers">Print/Modify customers</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Rent/Return car</a>
@@ -46,7 +46,7 @@
       </c:when>
       <c:otherwise>
         <li class="nav-item">
-          <a class="nav-link" href="login-success.jsp">Login</a>
+          <a class="nav-link" href="logIn">Login</a>
         </li>
       </c:otherwise>
       </c:choose>	

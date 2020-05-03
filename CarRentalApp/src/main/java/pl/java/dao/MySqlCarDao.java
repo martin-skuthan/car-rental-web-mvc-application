@@ -3,15 +3,14 @@ package pl.java.dao;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import pl.java.model.Car;
-import pl.java.model.Customer;
 import pl.java.model.enums.TypeOfCar;
 
 @ApplicationScoped
@@ -20,7 +19,7 @@ public class MySqlCarDao implements CarDao {
 	
 	@Inject
 	private EntityManager entityManager;
-
+	
 	public void create(Car car) {
 		EntityTransaction entityTransaction = entityManager.getTransaction();
 		entityTransaction.begin();
@@ -36,8 +35,13 @@ public class MySqlCarDao implements CarDao {
 				
 	}
 
-	public void delete(String carId) {
-				
+	public void deleteByRegistrationNumber(String registrationNumber) {
+		Query query = entityManager.createNamedQuery("Car.deleteCarByRegistrationNumber");	
+		query.setParameter("registrationNumber", registrationNumber);
+		EntityTransaction entityTransaction = entityManager.getTransaction();
+		entityTransaction.begin();
+		query.executeUpdate();
+		entityTransaction.commit();
 	}
 	
 	public List<Car> readAllCars(TypeOfCar typeOfCar) {

@@ -47,8 +47,8 @@ public class CarService {
 		
 	}
 	
-	public void deleteCar(String carId) {
-		
+	public void deleteCarByRegistrationNumber(String registrationNumber) {
+		carDao.deleteByRegistrationNumber(registrationNumber);
 	}
 	
 	public List<Car> readAllCars(TypeOfCar typeOfCar) {

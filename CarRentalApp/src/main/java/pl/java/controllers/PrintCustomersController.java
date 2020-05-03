@@ -31,7 +31,6 @@ public class PrintCustomersController extends HttpServlet {
 		int noOfPage = getNoOfPage(request);
 		request.setAttribute("noOfPage", noOfPage);
 		List<Customer> customers = customerService.readRangeOfCustomers(noOfPage, numberOfRecordsPerPage);
-		customers.forEach(System.out::println);
 		request.setAttribute("customers", customers);
 		request.getRequestDispatcher("print-customers.jsp").forward(request, response);		
 	}

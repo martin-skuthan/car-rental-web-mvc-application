@@ -42,6 +42,10 @@ public class AddCarController extends HttpServlet {
 		default:
 			response.sendError(403);
 		}
+		
+		final String operation = "Adding car";
+		request.setAttribute("operation", operation);
+		request.getRequestDispatcher("/WEB-INF/hidden-views/operation-success.jsp").forward(request, response);
 	}
 	
 	

@@ -57,9 +57,9 @@
 <!-- Navbar -->
 
 <!-- Content -->
-<div class="d-flex justify-content-center align-items-center container h-100">
-<div class="col-sm-8 col-md-8 my-auto">
-<h1 class="display-2">Login succeeded</h1>
+<div class="container-fluid h-100 d-flex">
+<div class="col-sm-12 col-md-12 my-auto container-fluid">
+<h1 class="display-2 text-center"><c:out value="${requestScope.operation} "></c:out>succeeded</h1>
 </div>
 </div>     
 <!-- Content -->

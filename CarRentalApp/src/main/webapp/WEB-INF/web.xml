@@ -67,6 +67,18 @@
   	<description></description>
   	<servlet-class>pl.java.controllers.PrinCarsController</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>DeleteCarController</servlet-name>
+  	<display-name>DeleteCarController</display-name>
+  	<description></description>
+  	<servlet-class>pl.java.controllers.DeleteCarController</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>LoginController</servlet-name>
+  	<display-name>LoginController</display-name>
+  	<description></description>
+  	<servlet-class>pl.java.controllers.LoginController</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>AddUserController</servlet-name>
   	<url-pattern>/AddUserController</url-pattern>
@@ -99,6 +111,14 @@
   	<servlet-name>PrinCarsController</servlet-name>
   	<url-pattern>/PrinCarsController</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>DeleteCarController</servlet-name>
+  	<url-pattern>/DeleteCarController</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>LoginController</servlet-name>
+  	<url-pattern>/LoginController</url-pattern>
+  </servlet-mapping>
   
    <security-constraint>
         <web-resource-collection>
@@ -108,6 +128,8 @@
             <url-pattern>/new-customer.jsp</url-pattern>
             <url-pattern>/login-success.jsp</url-pattern>
             <url-pattern>/print-customers.jsp</url-pattern>
+            <url-pattern>/printCars</url-pattern>
+            <url-pattern>/logIn</url-pattern>
             <http-method>GET</http-method>
             <http-method>POST</http-method>
         </web-resource-collection>

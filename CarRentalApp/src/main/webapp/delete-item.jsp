@@ -9,7 +9,6 @@
     <link href="css/styles.css" rel="stylesheet">
 </head>
 <body>
-
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="index.jsp">Car Rental</a>
@@ -37,8 +36,8 @@
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
         <a class="nav-link" href="new-user.jsp">Add admin account</a>
-      </li>	
-	  <c:choose>
+      </li>
+      <c:choose>
       <c:when test="${not empty sessionScope.user}">
         <li class="nav-item">
           <a class="nav-link" href="logOut">Logout</a>
@@ -58,11 +57,24 @@
 
 <!-- Content -->
 <div class="d-flex justify-content-center align-items-center container h-100">
-<div class="col-sm-8 col-md-8 my-auto">
-<h1 class="display-2">You have been logged out</h1>
+  <div class="col-sm-8 col-md-8 my-auto">
+    <div class="my-auto">
+      <h1 class="display-2">Deleting item</h1>
+      <div class="bs-callout bs-callout-default">
+        <h5 class="display-5">Are you sure to delete:</h5>
+        <p class="text-justify">
+        <c:out value="${param.itemToDelete}"></c:out> 
+        </p>
+          <form class="form-signin" action="deleteCar" method="post">
+		    <button style="width:49%" class="btn btn-lg btn-secondary btn-inline-block" name="carToDelete" type="submit">Cancel</button>
+			<button style="width:49%" class="btn btn-lg btn-primary btn-inline-block" name="carToDelete" value="${param.idOfItemToDelete}" type="submit">Delete</button>
+          </form>
+      </div>
+    </div>
+  </div>
 </div>
-</div>     
 <!-- Content -->
+
 
 <!-- Footer -->
 <footer class="page-footer font-small pt-4">

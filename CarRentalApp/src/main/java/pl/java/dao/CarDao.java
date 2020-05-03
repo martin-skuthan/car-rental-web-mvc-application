@@ -13,7 +13,7 @@ public interface CarDao {
 	
 	public void update(Car car );
 	
-	public void delete(String carId);
+	public void deleteByRegistrationNumber(String registrationNumber);
 	
 	public List<Car> readRangeOfCars(TypeOfCar typeOfCar, int noOfRecords, int firstResult);
 	

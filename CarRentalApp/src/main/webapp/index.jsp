@@ -7,6 +7,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="css/styles.css" rel="stylesheet">
+    <link href="/WEB-INF/hidden-views" rel="stylesheet">
 </head>
 <body>
 <!-- Navbar -->
@@ -18,16 +19,16 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="select-type-of-car.jsp">Add/Remove car</a>
+        <a class="nav-link" href="select-type-of-car.jsp">Add car</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="printCars">Print cars</a>
+        <a class="nav-link" href="printCars">Print/Modify cars</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="new-customer.jsp">Add/Remove customer</a>
+        <a class="nav-link" href="new-customer.jsp">Add customer</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="printCustomers">Print customers</a>
+        <a class="nav-link" href="printCustomers">Print/Modify customers</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Rent/Return car</a>
@@ -45,7 +46,7 @@
       </c:when>
       <c:otherwise>
         <li class="nav-item">
-          <a class="nav-link" href="login-success.jsp">Login</a>
+          <a class="nav-link" href="logIn">Login</a>
         </li>
       </c:otherwise>
       </c:choose>	

@@ -22,7 +22,8 @@ import pl.java.model.enums.Transmission;
 @Table(name = "Car")
 @NamedQueries({
 	@NamedQuery(name = "Car.readAllPassengerCars", query = "SELECT c FROM Car c WHERE TYPE(c) = PassengerCar"),
-	@NamedQuery(name = "Car.readAllLightCommercialCars", query = "SELECT c FROM Car c WHERE TYPE(c) = LightCommercialCar")
+	@NamedQuery(name = "Car.readAllLightCommercialCars", query = "SELECT c FROM Car c WHERE TYPE(c) = LightCommercialCar"),
+	@NamedQuery(name = "Car.deleteCarByRegistrationNumber", query = "DELETE FROM Car c WHERE c.registrationNumber = :registrationNumber")
 })
 public abstract class Car implements Serializable {
 	private static final long serialVersionUID = 9171676490784870223L;
@@ -107,5 +108,10 @@ public abstract class Car implements Serializable {
 
 	public void setUser(Customer user) {
 		this.user = user;
+	}
+	
+	@Override
+	public String toString() {
+		return brand + " " + model + ", with registration number: "  + registrationNumber;
 	}
 }
