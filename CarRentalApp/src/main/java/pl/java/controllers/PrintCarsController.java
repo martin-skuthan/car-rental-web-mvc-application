@@ -57,7 +57,7 @@ public class PrintCarsController extends HttpServlet {
 	private TypeOfCar getTypeOfCar(HttpServletRequest request) {
 		TypeOfCar typeOfCar = TypeOfCar.PASSENGER_CAR;
 		if(request.getParameter("typeOfCar") != null) {
-			typeOfCar = TypeOfCar.getFromDescription(request.getParameter("typeOfCar"));
+			typeOfCar = TypeOfCar.getTypeOfCar(request.getParameter("typeOfCar"));
 		}
 		
 		return typeOfCar;

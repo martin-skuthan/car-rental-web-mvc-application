@@ -59,42 +59,83 @@
 <!-- Content -->
 <div class="d-flex justify-content-center align-items-center container h-100">
 <div class="col-sm-6 col-md-6 my-auto">
-<h1 class="display-2">New car</h1>
+<c:choose>
+<c:when test="${requestScope.controllerAction == 'UPDATE'}">
+  <h1 class="display-2">Update car</h1>
+</c:when>
+<c:otherwise>
+  <h1 class="display-2">New car</h1>
+</c:otherwise>
+</c:choose>
 <div class="bs-callout bs-callout-default">
-<form class="form-signin" action="addCar" method="post">
-<input name="inputRegistrationNumber" type="text" class="form-control" placeholder="Registration number" required autofocus>
-<input name="inputBrand" type="text" class="form-control" placeholder="Brand" required>
-<input name="inputModel" type="text" class="form-control" placeholder="Model" required>
-<input name="inputSeats" type="number" min="2" max="4" class="form-control" placeholder="Number of seats" required>
-<input name="inputTrunkPayload" type="number" min="600" max="5000" class="form-control" placeholder="Payload (kg)">
-<input name="inputLoadVolume" type="number" min="2" max="25" class="form-control" placeholder="Load volume (m3)">
-<input name="inputLoadHeight" type="number" min="1000" max="2500" class="form-control" placeholder="Load height (mm)">
-<input name="inputLoadWidth" type="number" min="1500" max="2000" class="form-control" placeholder="Load width (mm)">
-<input name="inputLoadLength" type="number" min="1500" max="5500" class="form-control" placeholder="Load length (mm)"><br>
+<c:choose>
+<c:when test="${requestScope.controllerAction == 'UPDATE'}">
+  <form class="form-signin" action="updateCar" method="post">
+</c:when>
+<c:otherwise>
+  <form class="form-signin" action="addCar" method="post">
+</c:otherwise>
+</c:choose>
+<label>Registration number:</label>
+<input name="inputRegistrationNumber" value="${requestScope.car.registrationNumber}" type="text" class="form-control" placeholder="Registration number" required autofocus><br>
+<input type="hidden" name="registrationNumber" value="${requestScope.car.registrationNumber}" >
+<label>Brand:</label>
+<input name="inputBrand" value="${requestScope.car.brand}" type="text" class="form-control" placeholder="Brand" required><br>
+<label>Model:</label>
+<input name="inputModel" value="${requestScope.car.model}" type="text" class="form-control" placeholder="Model" required><br>
+<label>Number of seats:</label>
+<input name="inputSeats" value="${requestScope.car.seats}" type="number" min="2" max="4" class="form-control" placeholder="Number of seats" required><br>
+<label>Payload (kg):</label>
+<input name="inputTrunkPayload" value="${requestScope.car.payload}" type="number" min="600" max="5000" class="form-control" placeholder="Payload (kg)"><br>
+<label>Load volume (m3):</label>
+<input name="inputLoadVolume" value="${requestScope.car.loadVolume}" type="number" min="2" max="25" class="form-control" placeholder="Load volume (m3)"><br>
+<label>Load height (mm):</label>
+<input name="inputLoadHeight" value="${requestScope.car.loadHeight}" type="number" min="1000" max="2500" class="form-control" placeholder="Load height (mm)"><br>
+<label>Load width (mm):</label>
+<input name="inputLoadWidth" value="${requestScope.car.loadWidth}" type="number" min="1500" max="2000" class="form-control" placeholder="Load width (mm)"><br>
+<label>Load length (mm):</label>
+<input name="inputLoadLength" value="${requestScope.car.loadLength}" type="number" min="1500" max="5500" class="form-control" placeholder="Load length (mm)"><br>
 <label>Transmission:</label>
-    <select class="form-control" name="inputTransmission">
-      <option value="Manual">Manual</option>
-      <option value="Automatic">Automatic</option>
-    </select><br>
+<select class="form-control" name="inputTransmission">
+<c:choose>
+<c:when test="${requestScope.car.transmission  == 'MANUAL'}">
+  <option selected="selected" value="Manual">Manual</option>
+  <option value="Automatic">Automatic</option>
+</c:when>
+<c:otherwise>
+  <option value="Manual">Manual</option>
+  <option selected="selected" value="Automatic">Automatic</option>
+</c:otherwise>
+</c:choose>
+</select><br>
 <label>Air Conditionig:</label>
-    <select class="form-control" name="inputTypeOfDrive">
-      <option value="true">Yes</option>
-      <option value="false">No</option>
-    </select><br>          
-<button class="btn btn-lg btn-primary btn-block" type="submit" name="typeOfCar" value="light_commercial_car">Add car</button>
+<select class="form-control" name="inputAirConditioning">
+<c:choose>
+<c:when test="${requestScope.car.airConditioning == 'true'}">
+  <option selected="selected" value="true">Yes</option>
+  <option value="false">No</option>
+</c:when>
+<c:otherwise>
+  <option value="true">Yes</option>
+  <option selected="selected" value="false">No</option>
+</c:otherwise>
+</c:choose>
+</select><br>          
+<input type="hidden" name="typeOfCar" value="LightCommercial">      
+<c:choose>
+<c:when test="${requestScope.controllerAction == 'UPDATE'}">
+  <button class="btn btn-lg btn-primary btn-block" type="submit" name="controllerAction" value="update">Update car</button>
+</c:when>
+<c:otherwise>
+  <button class="btn btn-lg btn-primary btn-block" type="submit" name="controllerAction" value="create">Add car</button>
+</c:otherwise>
+</c:choose>
 </form>
 </div>
 </div>
 </div>     
 <!-- Content -->
 
-<!-- Footer -->
-<footer class="page-footer font-small pt-4">
-  <div class="footer-copyright text-center py-3">Developed by
-    <a href="http://www.linkedin.com/in/martin-skuthan-630553190"> Martin Skuthan</a>
-  </div>
-</footer>
-<!-- Footer -->
 
 <!-- Bootstrap js -->
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

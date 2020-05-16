@@ -85,6 +85,12 @@
   	<description></description>
   	<servlet-class>pl.java.controllers.DeleteCustomerController</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>ModifyCarController</servlet-name>
+  	<display-name>ModifyCarController</display-name>
+  	<description></description>
+  	<servlet-class>pl.java.controllers.ModifyCarController</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>AddUserController</servlet-name>
   	<url-pattern>/AddUserController</url-pattern>
@@ -128,6 +134,10 @@
   <servlet-mapping>
   	<servlet-name>DeleteCustomerController</servlet-name>
   	<url-pattern>/DeleteCustomerController</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>ModifyCarController</servlet-name>
+  	<url-pattern>/ModifyCarController</url-pattern>
   </servlet-mapping>
   
    <security-constraint>

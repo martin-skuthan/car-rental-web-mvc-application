@@ -47,8 +47,7 @@ public class AddCarController extends HttpServlet {
 		request.setAttribute("operation", operation);
 		request.getRequestDispatcher("/WEB-INF/hidden-views/operation-success.jsp").forward(request, response);
 	}
-	
-	
+		
 	private HashMap<CarFields, String> getPassengerCarDetails(HttpServletRequest request) {
 		HashMap<CarFields, String> passengerCarDetails = new HashMap<CarFields, String>();
 		passengerCarDetails.put(CarFields.REGISTRATION_NUMBER, request.getParameter("inputRegistrationNumber"));

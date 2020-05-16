@@ -5,13 +5,20 @@ import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
+import javax.persistence.Transient;
 import javax.persistence.TypedQuery;
 
+import pl.java.exceptions.NoSuchTypeException;
 import pl.java.model.Car;
+import pl.java.model.Customer;
+import pl.java.model.PassengerCar;
+import pl.java.model.enums.Transmission;
 import pl.java.model.enums.TypeOfCar;
+import pl.java.model.enums.TypeOfDrive;
 
 @ApplicationScoped
 @Default
@@ -27,12 +34,11 @@ public class MySqlCarDao implements CarDao {
 		entityTransaction.commit();
 	}
 
-	public Car read(String carId) {
-		return null;
-	}
-
 	public void update(Car car) {
-				
+		EntityTransaction entityTransaction = entityManager.getTransaction();
+		entityTransaction.begin();
+		entityManager.merge(car);
+		entityTransaction.commit();
 	}
 
 	public void deleteByRegistrationNumber(String registrationNumber) {
@@ -42,6 +48,13 @@ public class MySqlCarDao implements CarDao {
 		entityTransaction.begin();
 		query.executeUpdate();
 		entityTransaction.commit();
+	}
+	
+	public Car readCarByRegistrationNumber(String registrationNumber) {
+		TypedQuery<Car> typedQuery = entityManager.createNamedQuery("Car.readCarByRegistrationNumber", Car.class);
+		typedQuery.setParameter("registrationNumber", registrationNumber);
+		Car car = typedQuery.getSingleResult();
+		return car;
 	}
 	
 	public List<Car> readAllCars(TypeOfCar typeOfCar) {
@@ -55,7 +68,7 @@ public class MySqlCarDao implements CarDao {
 		List<Car> cars = typedQuery.getResultList();
 		return cars;
 	}	
-	
+		
 	private TypedQuery<Car> createReadAllCarsQuery(TypeOfCar typeOfCar) {
 		TypedQuery<Car> typedQuery = null;
 		switch (typeOfCar) {
@@ -67,5 +80,5 @@ public class MySqlCarDao implements CarDao {
         	break;
 		}
 		return typedQuery;
-	}
+	}	
 }

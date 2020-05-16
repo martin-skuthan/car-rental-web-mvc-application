@@ -4,8 +4,11 @@ import java.io.Serializable;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.Transient;
 
+import pl.java.exceptions.NoSuchTypeException;
 import pl.java.model.enums.Transmission;
+import pl.java.model.enums.TypeOfCar;
 
 @Entity
 @DiscriminatorValue("LightCommercial")
@@ -68,5 +71,18 @@ public class LightCommercialCar extends Car implements Serializable {
 
 	public void setLoadLength(double loadLength) {
 		this.loadLength = loadLength;
+	}
+	
+	@Transient
+	public TypeOfCar getTypeOfCar() {
+		String typeOfCarDescription = this.getClass().getAnnotation(DiscriminatorValue.class).value();
+		TypeOfCar typeOfCar = null;
+		try {
+			typeOfCar = TypeOfCar.getFromDescription(typeOfCarDescription);
+		} catch (NoSuchTypeException e) {
+			e.printStackTrace();
+		}
+		
+		return typeOfCar;
 	}
 }

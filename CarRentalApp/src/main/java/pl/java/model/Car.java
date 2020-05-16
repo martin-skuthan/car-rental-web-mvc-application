@@ -13,8 +13,10 @@ import javax.persistence.Inheritance;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import pl.java.model.enums.Transmission;
+import pl.java.model.enums.TypeOfCar;
 
 @Entity
 @Inheritance
@@ -23,7 +25,8 @@ import pl.java.model.enums.Transmission;
 @NamedQueries({
 	@NamedQuery(name = "Car.readAllPassengerCars", query = "SELECT c FROM Car c WHERE TYPE(c) = PassengerCar"),
 	@NamedQuery(name = "Car.readAllLightCommercialCars", query = "SELECT c FROM Car c WHERE TYPE(c) = LightCommercialCar"),
-	@NamedQuery(name = "Car.deleteCarByRegistrationNumber", query = "DELETE FROM Car c WHERE c.registrationNumber = :registrationNumber")
+	@NamedQuery(name = "Car.deleteCarByRegistrationNumber", query = "DELETE FROM Car c WHERE c.registrationNumber = :registrationNumber"),
+	@NamedQuery(name = "Car.readCarByRegistrationNumber", query = "SELECT c FROM Car c WHERE c.registrationNumber = :registrationNumber")
 })
 public abstract class Car implements Serializable {
 	private static final long serialVersionUID = 9171676490784870223L;
@@ -40,6 +43,7 @@ public abstract class Car implements Serializable {
     private boolean airConditioning;
     private Transmission transmission;
     private Customer user;
+    
     
     public Car() {}
     
@@ -109,6 +113,9 @@ public abstract class Car implements Serializable {
 	public void setUser(Customer user) {
 		this.user = user;
 	}
+	
+	@Transient
+	public abstract TypeOfCar getTypeOfCar();
 	
 	@Override
 	public String toString() {

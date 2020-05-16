@@ -4,7 +4,7 @@ import pl.java.exceptions.NoSuchTypeException;
 
 public enum TypeOfDrive {
 	PETROL("petrol"),
-	DEISEL("diesel"),
+	DIESEL("diesel"),
 	HYBRID("hybrid");
 	
 	String description; 

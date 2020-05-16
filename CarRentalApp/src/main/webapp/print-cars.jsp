@@ -127,8 +127,9 @@
         </c:if>
         <td>
           <div class="row">
-          <form style="margin-right: 5px" class="form-signin" action="delete-item.jsp" method="post">
-            <button name="carToEdit" value="${car.registrationNumber}" class="btn btn-success" title="Edit" type="submit"><i style="font-size: 15px" class="material-icons">&#xE254;</i></button>
+          <form style="margin-right: 5px" class="form-signin" action="updateCar" method="post">
+          	<input type="hidden" name="idOfItemToUpdate" value="${car.registrationNumber}">
+            <button name="controllerAction" value="forward" class="btn btn-success" title="Edit" type="submit"><i style="font-size: 15px" class="material-icons">&#xE254;</i></button>
           </form>     
           <form class="form-signin" action="delete-item.jsp" method="post">
             <input type="hidden" name="formAction" value="deleteCar">
@@ -151,10 +152,10 @@
 <form class="form-signin col-sm-2 col-md-2" action="printCars?page=1" method="get">
   <c:choose>
   <c:when test="${requestScope.typeOfCar == 'PASSENGER_CAR'}">
-    <button class="btn btn-lg btn-primary btn-block" name="typeOfCar" value="light_commercial_car" type="submit" >Light Commercial Cars</button>
+    <button class="btn btn-lg btn-primary btn-block" name="typeOfCar" value="LIGHT_COMMERCIAL_CAR" type="submit" >Light Commercial Cars</button>
   </c:when>
   <c:otherwise>
-    <button class="btn btn-lg btn-primary btn-block" name="typeOfCar" value="passenger_car" type="submit" >Passenger Cars</button>
+    <button class="btn btn-lg btn-primary btn-block" name="typeOfCar" value="PASSENGER_CAR" type="submit" >Passenger Cars</button>
   </c:otherwise>
 </c:choose>	         
 </form>

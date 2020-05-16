@@ -62,8 +62,8 @@
 <h1 class="display-2">Select type of car</h1>
 <div class="bs-callout bs-callout-default">
 <form class="form-signin" action="selectTypeOfCar" method="post">        
-<button class="btn btn-lg btn-primary btn-block" name="typeOfCar" value="passenger_Car" type="submit">Passenger Car</button>
-<button class="btn btn-lg btn-primary btn-block" name="typeOfCar" value="light_Commercial_Car" type="submit">Light Commercial Car</button>
+<button class="btn btn-lg btn-primary btn-block" name="typeOfCar" value="Passenger" type="submit">Passenger Car</button>
+<button class="btn btn-lg btn-primary btn-block" name="typeOfCar" value="LightCommercial" type="submit">Light Commercial Car</button>
 </form>
 </div>
 </div>

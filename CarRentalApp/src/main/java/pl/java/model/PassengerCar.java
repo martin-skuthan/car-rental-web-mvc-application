@@ -4,9 +4,11 @@ import java.io.Serializable;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.NamedQuery;
+import javax.persistence.Transient;
 
+import pl.java.exceptions.NoSuchTypeException;
 import pl.java.model.enums.Transmission;
+import pl.java.model.enums.TypeOfCar;
 import pl.java.model.enums.TypeOfDrive;
 
 @Entity
@@ -25,6 +27,7 @@ public class PassengerCar extends Car implements Serializable {
     	super(registrationNumber, brand, model, seats, airConditioning, transmission, user);
     	this.numberOfDoors = numberOfDoors;
     	this.typeOfDrive = typeOfDrive; 	
+    	this.trunkCapacity = trunkCapacity;
     }
 
 	public int getNumberOfDoors() {
@@ -49,5 +52,18 @@ public class PassengerCar extends Car implements Serializable {
 
 	public void setTrunkCapacity(int trunkCapacity) {
 		this.trunkCapacity = trunkCapacity;
+	}
+	
+	@Transient
+	public TypeOfCar getTypeOfCar() {
+		String typeOfCarDescription = this.getClass().getAnnotation(DiscriminatorValue.class).value();
+		TypeOfCar typeOfCar = null;
+		try {
+			typeOfCar = TypeOfCar.getFromDescription(typeOfCarDescription);
+		} catch (NoSuchTypeException e) {
+			e.printStackTrace();
+		}
+		
+		return typeOfCar;
 	}
 }

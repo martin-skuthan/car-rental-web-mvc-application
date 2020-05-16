@@ -9,13 +9,15 @@ public interface CarDao {
 	
 	public void create(Car car);
 	
-	public Car read(String carId);
-	
 	public void update(Car car );
 	
 	public void deleteByRegistrationNumber(String registrationNumber);
 	
+	public Car readCarByRegistrationNumber(String registrationNumber);
+	
 	public List<Car> readRangeOfCars(TypeOfCar typeOfCar, int noOfRecords, int firstResult);
 	
 	public List<Car> readAllCars(TypeOfCar typeOfCar);
+	
+	//public TypeOfCar readTypeOfCarByRegistrationNumber(String registrationNumber);
 }

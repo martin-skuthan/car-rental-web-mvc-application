@@ -6,6 +6,7 @@ import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.sound.midi.Soundbank;
 
 import pl.java.dao.CarDao;
 import pl.java.exceptions.NoSuchTypeException;
@@ -43,12 +44,17 @@ public class CarService {
 		
 	}
 	
-	public void updateCar(String firstName, String lastName, String pesel) {
-		
+	public void updateCar(Car car) {
+		carDao.update(car);
 	}
 	
 	public void deleteCarByRegistrationNumber(String registrationNumber) {
 		carDao.deleteByRegistrationNumber(registrationNumber);
+	}
+	
+	public Car readCarByRegistrationNumber(String registrationNumber) {
+		Car car = carDao.readCarByRegistrationNumber(registrationNumber);
+		return car;
 	}
 	
 	public List<Car> readAllCars(TypeOfCar typeOfCar) {
@@ -67,7 +73,8 @@ public class CarService {
 		String brand = carDetails.get(CarFields.BRAND);
 		String model = carDetails.get(CarFields.MODEL);
 		int seats = Integer.valueOf(carDetails.get(CarFields.SEATS));
-		boolean airConditioning = Boolean.getBoolean(carDetails.get(CarFields.AIR_CONDITIONING)); 
+		boolean airConditioning = Boolean.parseBoolean(carDetails.get(CarFields.AIR_CONDITIONING)); 
+		System.out.println(airConditioning);
 		Transmission transmission = Transmission.getFromDescription(carDetails.get(CarFields.TRANSMISSION));
 		Customer user = null;
 		int numberOfDoors = Integer.valueOf(carDetails.get(CarFields.NUMBER_OF_DOORS));

@@ -59,32 +59,91 @@
 <!-- Content -->
 <div class="d-flex justify-content-center align-items-center container h-100">
 <div class="col-sm-6 col-md-6 my-auto">
-<h1 class="display-2">New car</h1>
+<c:choose>
+<c:when test="${requestScope.controllerAction == 'UPDATE'}">
+  <h1 class="display-2">Update car</h1>
+</c:when>
+<c:otherwise>
+  <h1 class="display-2">New car</h1>
+</c:otherwise>
+</c:choose>
 <div class="bs-callout bs-callout-default">
-<form class="form-signin" action="addCar" method="post">
-<input name="inputRegistrationNumber" type="text" class="form-control" placeholder="Registration number" required autofocus>
-<input name="inputBrand" type="text" class="form-control" placeholder="Brand" required>
-<input name="inputModel" type="text" class="form-control" placeholder="Model" required>
-<input name="inputSeats" type="number" min="2" max="9" class="form-control" placeholder="Number of seats" required>
-<input name="inputNumberOfDoors" type="number" min="3" max="6" class="form-control" placeholder="Number of doors" required>
-<input name="inputTrunkCapacity" type="number" min="1" max="10" class="form-control" placeholder="Luggage Capacity (in suticases)"><br>
+<c:choose>
+<c:when test="${requestScope.controllerAction == 'UPDATE'}">
+  <form class="form-signin" action="updateCar" method="post">
+</c:when>
+<c:otherwise>
+  <form class="form-signin" action="addCar" method="post">
+</c:otherwise>
+</c:choose>
+<label>Registration number:</label>
+<input name="inputRegistrationNumber" value="${requestScope.car.registrationNumber}" type="text" class="form-control" placeholder="Registration number" required autofocus><br>
+<input type="hidden" name="registrationNumber" value="${requestScope.car.registrationNumber}" >
+<label>Brand:</label>
+<input name="inputBrand" value="${requestScope.car.brand}" type="text" class="form-control" placeholder="Brand" required><br>
+<label>Model:</label>
+<input name="inputModel" value="${requestScope.car.model}" type="text" class="form-control" placeholder="Model" required><br>
+<label>Number of seats:</label>
+<input name="inputSeats" value="${requestScope.car.seats}" type="number" min="2" max="9" class="form-control" placeholder="Number of seats" required><br>
+<label>Number of doors:</label>
+<input name="inputNumberOfDoors" value="${requestScope.car.numberOfDoors}" type="number" min="3" max="6" class="form-control" placeholder="Number of doors" required><br>
+<label>Luggage Capacity (in suitcases):</label>
+<input name="inputTrunkCapacity" value="${requestScope.car.trunkCapacity}" type="number" min="1" max="10" class="form-control" placeholder="Luggage Capacity (in suticases)"><br>
 <label>Transmission:</label>
-    <select class="form-control" name="inputTransmission">
-      <option value="Manual">Manual</option>
-      <option value="Automatic">Automatic</option>
-    </select><br>
+<select class="form-control" name="inputTransmission">
+<c:choose>
+<c:when test="${requestScope.car.transmission  == 'MANUAL'}">
+  <option selected="selected" value="Manual">Manual</option>
+  <option value="Automatic">Automatic</option>
+</c:when>
+<c:otherwise>
+  <option value="Manual">Manual</option>
+  <option selected="selected" value="Automatic">Automatic</option>
+</c:otherwise>
+</c:choose>
+</select><br>
 <label>Type of drive:</label>
-    <select class="form-control" name="inputTypeOfDrive">
-      <option value="Petrol">Petrol</option>
-      <option value="Diesel">Diesel</option>
-      <option value="Hybrid">Hybrid</option>
-    </select><br>
+<select class="form-control" name="inputTypeOfDrive">
+<c:choose>
+<c:when test="${requestScope.car.typeOfDrive  == 'PETROL'}">
+  <option selected="selected" value="Petrol">Petrol</option>
+  <option value="Diesel">Diesel</option>
+  <option value="Hybrid">Hybrid</option>
+</c:when>
+<c:when test="${requestScope.car.typeOfDrive  == 'DIESEL'}">
+  <option value="Petrol">Petrol</option>
+  <option selected="selected" value="Diesel">Diesel</option>
+  <option value="Hybrid">Hybrid</option>
+</c:when>
+<c:otherwise>
+  <option value="Petrol">Petrol</option>
+  <option value="Diesel">Diesel</option>
+  <option selected="selected" value="Hybrid">Hybrid</option>
+</c:otherwise>
+</c:choose>
+</select><br>
 <label>Air Conditionig:</label>
-    <select class="form-control" name="inputAirConditioning">
-      <option value="true">Yes</option>
-      <option value="false">No</option>
-    </select><br>          
-<button class="btn btn-lg btn-primary btn-block" type="submit" name="typeOfCar" value="passenger_car">Add car</button>
+<select class="form-control" name="inputAirConditioning">
+<c:choose>
+<c:when test="${requestScope.car.airConditioning == 'true'}">
+  <option selected="selected" value="true">Yes</option>
+  <option value="false">No</option>
+</c:when>
+<c:otherwise>
+  <option value="true">Yes</option>
+  <option selected="selected" value="false">No</option>
+</c:otherwise>
+</c:choose>
+</select><br>   
+<input type="hidden" name="typeOfCar" value="Passenger">      
+<c:choose>
+<c:when test="${requestScope.controllerAction == 'UPDATE'}">
+  <button class="btn btn-lg btn-primary btn-block" type="submit" name="controllerAction" value="update">Update car</button>
+</c:when>
+<c:otherwise>
+  <button class="btn btn-lg btn-primary btn-block" type="submit" name="controllerAction" value="create">Add car</button>
+</c:otherwise>
+</c:choose>
 </form>
 </div>
 </div>
