@@ -2,6 +2,7 @@ package pl.java.dao;
 
 import java.util.List;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
@@ -12,7 +13,7 @@ import javax.persistence.TypedQuery;
 
 import pl.java.model.Customer;
 
-@RequestScoped
+@ApplicationScoped
 @Default
 public class MySqlCustomerDao implements CustomerDao {
 	@Inject
@@ -30,8 +31,11 @@ public class MySqlCustomerDao implements CustomerDao {
 		return null;
 	}
 
-	public void updateCustomer(Customer user) {
-		// TODO Auto-generated method stub
+	public void updateCustomer(Customer customer) {
+		EntityTransaction entityTransaction = entityManager.getTransaction();
+		entityTransaction.begin();
+		entityManager.merge(customer);
+		entityTransaction.commit();
 	}
 
 	public void deleteCustomerByPesel(String pesel) {
@@ -42,6 +46,13 @@ public class MySqlCustomerDao implements CustomerDao {
 		query.executeUpdate();
 		entityTransaction.commit();
 	}
+	
+	public Customer readCustomerByPesel(String pesel) {
+		TypedQuery<Customer> typedQuery = entityManager.createNamedQuery("Customer.readCustomerByPesel", Customer.class);
+		typedQuery.setParameter("pesel", pesel);
+		Customer customer = typedQuery.getSingleResult();
+		return customer;
+	}	
 	
 	public List<Customer> readAllCustomers() {
 		TypedQuery<Customer> typedQuery = entityManager.createNamedQuery("Customer.readAllCustomers", Customer.class);
@@ -54,5 +65,5 @@ public class MySqlCustomerDao implements CustomerDao {
 				                          setFirstResult(firstResults).setMaxResults(noOfRecords);
 		List<Customer> customers = typedQuery.getResultList();
 		return customers;
-	}	
+	}
 }

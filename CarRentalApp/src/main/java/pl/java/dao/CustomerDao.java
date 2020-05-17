@@ -17,4 +17,6 @@ public interface CustomerDao {
 	public List<Customer> readAllCustomers();
 	
 	public List<Customer> readRangeOfCustomers(int noOfRecords, int firstResults);
+	
+	public Customer readCustomerByPesel(String pesel);
 }

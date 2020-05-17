@@ -21,7 +21,7 @@ public class DeleteCustomerController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String pesel = request.getParameter("itemToDelete");
 		if (pesel.isEmpty()) {
-			response.sendRedirect("printCars");
+			response.sendRedirect("printCustomers");
 		}else {
 			customerService.deleteCustomerByPesel(pesel);
 			final String operation = "Deleting customer";

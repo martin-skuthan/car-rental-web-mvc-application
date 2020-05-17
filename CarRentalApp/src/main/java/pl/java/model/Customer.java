@@ -13,7 +13,8 @@ import javax.persistence.NamedQuery;
 @Entity
 @NamedQueries({
 	@NamedQuery(name = "Customer.readAllCustomers", query = "SELECT c FROM Customer c"),
-	@NamedQuery(name = "Customer.deleteCustomerByPesel", query = "DELETE FROM Customer c WHERE c.pesel = :pesel")
+	@NamedQuery(name = "Customer.deleteCustomerByPesel", query = "DELETE FROM Customer c WHERE c.pesel = :pesel"),
+	@NamedQuery(name = "Customer.readCustomerByPesel", query = "SELECT c FROM Customer c WHERE c.pesel = :pesel")
 })
 public class Customer implements Serializable {
 	private static final long serialVersionUID = 3943117829271152503L;

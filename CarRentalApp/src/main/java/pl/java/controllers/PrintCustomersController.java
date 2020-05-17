@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import pl.java.model.Car;
 import pl.java.model.Customer;
 import pl.java.services.CustomerService;
 

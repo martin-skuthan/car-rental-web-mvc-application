@@ -59,13 +59,35 @@
 <!-- Content -->
 <div class="d-flex justify-content-center align-items-center container h-100">
 <div class="col-sm-8 col-md-8 my-auto">
+<c:choose>
+<c:when test="${requestScope.controllerAction == 'UPDATE'}">
+<h1 class="display-2">Update customer</h1>
+</c:when>
+<c:otherwise>
 <h1 class="display-2">New customer</h1>
+</c:otherwise>
+</c:choose>
 <div class="bs-callout bs-callout-default">
+<c:choose>
+<c:when test="${requestScope.controllerAction == 'UPDATE'}">
+<form class="form-signin" action="updateCustomer" method="post">
+</c:when>
+<c:otherwise>
 <form class="form-signin" action="addCustomer" method="post">
-<input name="inputFirstName" type="text" class="form-control" placeholder="First name:" required>
-<input name="inputLastName" type="text" class="form-control" placeholder="Last name:" required>
-<input name="inputPesel" type="text" class="form-control" placeholder="Pesel:" required>     
-<button class="btn btn-lg btn-primary btn-block" type="submit">Add customer</button>
+</c:otherwise>
+</c:choose>
+<input value="${requestScope.customer.firstName}" name="inputFirstName" type="text" class="form-control" placeholder="First name:" required>
+<input value="${requestScope.customer.lastName}" name="inputLastName" type="text" class="form-control" placeholder="Last name:" required>
+<input value="${requestScope.customer.pesel}" name="inputPesel" type="text" class="form-control" placeholder="Pesel:" required>  
+<input type="hidden" name="pesel" value="${requestScope.customer.pesel}"> 
+<c:choose>
+<c:when test="${requestScope.controllerAction == 'UPDATE'}">
+<button name="controllerAction" value = "update" class="btn btn-lg btn-primary btn-block" type="submit">Update customer</button>
+</c:when>
+<c:otherwise>
+<button name="controllerAction" value = "add" class="btn btn-lg btn-primary btn-block" type="submit">Add customer</button>
+</c:otherwise>
+</c:choose>  
 </form>
 </div>
 </div>

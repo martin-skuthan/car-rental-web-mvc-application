@@ -80,8 +80,9 @@
         <td><c:out value="${customer.pesel}"></c:out></td>
         <td>   
         <div class="row">
-          <form style="margin-right: 5px" class="form-signin" action="delete-item.jsp" method="post">
-            <button name="carToEdit" value="${customer.pesel}" class="btn btn-success" title="Edit" type="submit"><i style="font-size: 15px" class="material-icons">&#xE254;</i></button>
+          <form style="margin-right: 5px" class="form-signin" action="updateCustomer" method="post">
+          	<input type="hidden" name="idOfItemToUpdate" value="${customer.pesel}">
+            <button name="controllerAction" value="forward" class="btn btn-success" title="Edit" type="submit"><i style="font-size: 15px" class="material-icons">&#xE254;</i></button>
           </form>     
           <form class="form-signin" action="delete-item.jsp" method="post">
             <input type="hidden" name="formAction" value="deleteCustomer">

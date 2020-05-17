@@ -21,12 +21,8 @@ public class AddCustomerController extends HttpServlet {
 	@Inject
 	private CustomerService userService;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("Warszawa wschodnia");
 		request.setCharacterEncoding("UTF-8");
 		String firstName = request.getParameter("inputFirstName");
 		String lastName = request.getParameter("inputLastName");

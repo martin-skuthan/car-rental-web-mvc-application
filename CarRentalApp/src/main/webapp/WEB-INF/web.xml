@@ -91,6 +91,12 @@
   	<description></description>
   	<servlet-class>pl.java.controllers.ModifyCarController</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>UpdateCustomerController</servlet-name>
+  	<display-name>UpdateCustomerController</display-name>
+  	<description></description>
+  	<servlet-class>pl.java.controllers.UpdateCustomerController</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>AddUserController</servlet-name>
   	<url-pattern>/AddUserController</url-pattern>
@@ -139,16 +145,21 @@
   	<servlet-name>ModifyCarController</servlet-name>
   	<url-pattern>/ModifyCarController</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>UpdateCustomerController</servlet-name>
+  	<url-pattern>/UpdateCustomerController</url-pattern>
+  </servlet-mapping>
   
    <security-constraint>
         <web-resource-collection>
-            <web-resource-name>Opcjonalna nazwa</web-resource-name>
+            <web-resource-name>Login constraint</web-resource-name>
             <url-pattern>/select-type-of-car.jsp</url-pattern>
             <url-pattern>/new-light-commercial-car.jsp</url-pattern>
             <url-pattern>/new-customer.jsp</url-pattern>
             <url-pattern>/login-success.jsp</url-pattern>
             <url-pattern>/print-customers.jsp</url-pattern>
             <url-pattern>/printCars</url-pattern>
+            <url-pattern>/printCustomers</url-pattern>
             <url-pattern>/logIn</url-pattern>
             <http-method>GET</http-method>
             <http-method>POST</http-method>

@@ -21,12 +21,17 @@ public class CustomerService {
 		
 	}
 	
-	public void updateCustomer(String firstName, String lastName, String pesel) {
-		
+	public void updateCustomer(Customer customer) {
+		customerDao.updateCustomer(customer);
 	}
 	
 	public void deleteCustomerByPesel(String pesel) {
 		customerDao.deleteCustomerByPesel(pesel);
+	}
+	
+	public Customer readCustomerByPesel(String pesel) {
+		Customer customer = customerDao.readCustomerByPesel(pesel);
+		return customer;
 	}
 	
 	public List<Customer> readAllCustomers() {
