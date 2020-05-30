@@ -19,4 +19,6 @@ public interface CustomerDao {
 	public List<Customer> readRangeOfCustomers(int noOfRecords, int firstResults);
 	
 	public Customer readCustomerByPesel(String pesel);
+	
+	public boolean checkIfUserExists(String pesel);
 }

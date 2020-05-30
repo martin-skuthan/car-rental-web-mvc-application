@@ -8,9 +8,11 @@ import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import pl.java.exceptions.ItemWithThisIdAlreadyExistsExcpetion;
 import pl.java.model.Customer;
 
 @ApplicationScoped
@@ -19,11 +21,15 @@ public class MySqlCustomerDao implements CustomerDao {
 	@Inject
 	private EntityManager entityManager;
 	
-	public void createCustomer(Customer user) {
-		EntityTransaction entityTransaction = entityManager.getTransaction();
-		entityTransaction.begin();
-		entityManager.persist(user);
-		entityTransaction.commit();
+	public void createCustomer(Customer customer) {
+		if (checkIfUserExists(customer.getPesel()) == true) {
+			throw new ItemWithThisIdAlreadyExistsExcpetion("Customer with pesel:" + customer.getPesel() + " alredy exists");
+		}else {
+			EntityTransaction entityTransaction = entityManager.getTransaction();
+			entityTransaction.begin();
+			entityManager.persist(customer);
+			entityTransaction.commit();
+		}	
 	}
 
 	public Customer readCustomer(String userId) {
@@ -50,9 +56,19 @@ public class MySqlCustomerDao implements CustomerDao {
 	public Customer readCustomerByPesel(String pesel) {
 		TypedQuery<Customer> typedQuery = entityManager.createNamedQuery("Customer.readCustomerByPesel", Customer.class);
 		typedQuery.setParameter("pesel", pesel);
-		Customer customer = typedQuery.getSingleResult();
-		return customer;
+		return typedQuery.getSingleResult();
 	}	
+	
+	public boolean checkIfUserExists(String pesel) {
+		TypedQuery<Customer> typedQuery = entityManager.createNamedQuery("Customer.readCustomerByPesel", Customer.class);
+		typedQuery.setParameter("pesel", pesel);
+		List<Customer> customers = typedQuery.getResultList();
+		if (customers == null || customers.isEmpty()) {
+			return false;
+		}else {
+			return true;
+		}
+	}
 	
 	public List<Customer> readAllCustomers() {
 		TypedQuery<Customer> typedQuery = entityManager.createNamedQuery("Customer.readAllCustomers", Customer.class);
@@ -66,4 +82,6 @@ public class MySqlCustomerDao implements CustomerDao {
 		List<Customer> customers = typedQuery.getResultList();
 		return customers;
 	}
+	
+
 }

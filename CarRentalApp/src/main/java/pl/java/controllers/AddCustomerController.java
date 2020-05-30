@@ -3,15 +3,14 @@ package pl.java.controllers;
 import java.io.IOException;
 
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import pl.java.dao.MySqlCustomerDao;
+import pl.java.controllers.enums.ControllerAction;
+import pl.java.exceptions.ItemWithThisIdAlreadyExistsExcpetion;
 import pl.java.model.Customer;
 import pl.java.services.CustomerService;
 
@@ -22,13 +21,23 @@ public class AddCustomerController extends HttpServlet {
 	private CustomerService userService;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Warszawa wschodnia");
-		request.setCharacterEncoding("UTF-8");
-		String firstName = request.getParameter("inputFirstName");
-		String lastName = request.getParameter("inputLastName");
-		String pesel = request.getParameter("inputPesel");
-		userService.createCustomer(firstName, lastName, pesel);
-		System.out.println("Dziala");
+		String firstName = null;
+		String lastName = null;
+		String pesel = null;
+		try {
+			request.setCharacterEncoding("UTF-8");
+			firstName = request.getParameter("inputFirstName");
+			lastName = request.getParameter("inputLastName");
+			pesel = request.getParameter("inputPesel");
+			userService.createCustomer(firstName, lastName, pesel);
+			final String operation = "Adding customer";
+			request.setAttribute("operation", operation);
+			request.getRequestDispatcher("/WEB-INF/hidden-views/operation-success.jsp").forward(request, response);
+		}catch (ItemWithThisIdAlreadyExistsExcpetion e) {
+			request.setAttribute("controllerAction", ControllerAction.CORRECT);
+			request.setAttribute("customer", new Customer(firstName, lastName, pesel));
+			request.getRequestDispatcher("new-customer.jsp").forward(request, response);
+		}		
 	}
 
 }

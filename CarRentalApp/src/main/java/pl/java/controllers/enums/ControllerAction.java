@@ -6,7 +6,8 @@ public enum ControllerAction {
 	CREATE("create"),
 	UPDATE("update"),
 	DELETE("delete"),
-	FORWARD("forward");
+	FORWARD("forward"),
+	CORRECT("correct");
 	
 	String descritpion;
 	

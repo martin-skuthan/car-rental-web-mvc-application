@@ -78,7 +78,16 @@
 </c:choose>
 <input value="${requestScope.customer.firstName}" name="inputFirstName" type="text" class="form-control" placeholder="First name:" required>
 <input value="${requestScope.customer.lastName}" name="inputLastName" type="text" class="form-control" placeholder="Last name:" required>
-<input value="${requestScope.customer.pesel}" name="inputPesel" type="text" class="form-control" placeholder="Pesel:" required>  
+<c:choose>
+<c:when test="${requestScope.controllerAction == 'CORRECT'}">
+<input value="${requestScope.customer.pesel}" pattern=".{11,11}" name="inputPesel" type="text" class="form-control is-invalid" placeholder="Pesel:" required>
+<small id="passwordHelp" class="text-danger">User with provided pesel already exists</small>  
+</c:when>
+<c:otherwise>
+<input value="${requestScope.customer.pesel}" pattern=".{11,11}" name="inputPesel" type="text" class="form-control" placeholder="Pesel:" required>
+<small id="passwordHelp">Pesel should consists of 11 characters</small> 
+</c:otherwise>
+</c:choose> 
 <input type="hidden" name="pesel" value="${requestScope.customer.pesel}"> 
 <c:choose>
 <c:when test="${requestScope.controllerAction == 'UPDATE'}">
