@@ -12,6 +12,7 @@ import javax.persistence.Query;
 import javax.persistence.Transient;
 import javax.persistence.TypedQuery;
 
+import pl.java.exceptions.ItemWithThisIdAlreadyExistsExcpetion;
 import pl.java.exceptions.NoSuchTypeException;
 import pl.java.model.Car;
 import pl.java.model.Customer;
@@ -28,10 +29,14 @@ public class MySqlCarDao implements CarDao {
 	private EntityManager entityManager;
 	
 	public void create(Car car) {
-		EntityTransaction entityTransaction = entityManager.getTransaction();
-		entityTransaction.begin();
-		entityManager.persist(car);
-		entityTransaction.commit();
+		if (checkIfCarExists(car.getRegistrationNumber()) == true) {
+			throw new ItemWithThisIdAlreadyExistsExcpetion("Car with registration number:" + car.getRegistrationNumber() + " already exists");
+		}else {
+			EntityTransaction entityTransaction = entityManager.getTransaction();
+			entityTransaction.begin();
+			entityManager.persist(car);
+			entityTransaction.commit();
+		}
 	}
 
 	public void update(Car car) {
@@ -55,6 +60,17 @@ public class MySqlCarDao implements CarDao {
 		typedQuery.setParameter("registrationNumber", registrationNumber);
 		Car car = typedQuery.getSingleResult();
 		return car;
+	}
+	
+	public boolean checkIfCarExists(String registrationNumber) {
+		TypedQuery<Car> typedQuery = entityManager.createNamedQuery("Car.readCarByRegistrationNumber", Car.class);
+		typedQuery.setParameter("registrationNumber", registrationNumber);
+		List<Car> cars = typedQuery.getResultList();
+		if(cars == null || cars.isEmpty()) {
+			return false;
+		}else {
+			return true;
+		}
 	}
 	
 	public List<Car> readAllCars(TypeOfCar typeOfCar) {

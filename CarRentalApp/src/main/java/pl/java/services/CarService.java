@@ -68,7 +68,7 @@ public class CarService {
 		return cars;
 	}
 	
-	private PassengerCar createPassengerCarFromDetails(HashMap<CarFields, String> carDetails) {
+	public PassengerCar createPassengerCarFromDetails(HashMap<CarFields, String> carDetails) {
 		String registrationNumber = carDetails.get(CarFields.REGISTRATION_NUMBER);
 		String brand = carDetails.get(CarFields.BRAND);
 		String model = carDetails.get(CarFields.MODEL);
@@ -86,7 +86,7 @@ public class CarService {
 	}
 	
 	
-	private LightCommercialCar createLightCommercialCarFromDetails(HashMap<CarFields, String> carDetails) {
+	public LightCommercialCar createLightCommercialCarFromDetails(HashMap<CarFields, String> carDetails) {
 		String registrationNumber = carDetails.get(CarFields.REGISTRATION_NUMBER);
 		String brand = carDetails.get(CarFields.BRAND);
 		String model = carDetails.get(CarFields.MODEL);

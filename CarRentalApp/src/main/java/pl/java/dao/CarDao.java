@@ -19,5 +19,7 @@ public interface CarDao {
 	
 	public List<Car> readAllCars(TypeOfCar typeOfCar);
 	
+	public boolean checkIfCarExists(String registrationNumber);
+	
 	//public TypeOfCar readTypeOfCarByRegistrationNumber(String registrationNumber);
 }

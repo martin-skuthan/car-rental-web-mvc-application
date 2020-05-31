@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import pl.java.controllers.enums.ControllerAction;
+import pl.java.exceptions.ItemWithThisIdAlreadyExistsExcpetion;
+import pl.java.exceptions.NoSuchTypeException;
+import pl.java.model.Car;
 import pl.java.model.enums.CarFields;
 import pl.java.model.enums.TypeOfCar;
 import pl.java.services.CarService;
@@ -31,10 +35,29 @@ public class AddCarController extends HttpServlet {
 		TypeOfCar typeOfCar = TypeOfCar.getFromDescription(typeOfCarFromRequest);
 		HashMap<CarFields, String> carDetailsFromRequest = null;
 		carDetailsFromRequest = getCarDetails(request, typeOfCar);
-		carService.createCar(carDetailsFromRequest, typeOfCar);
-		final String operation = "Adding car";
-		request.setAttribute("operation", operation);
-		request.getRequestDispatcher("/WEB-INF/hidden-views/operation-success.jsp").forward(request, response);
+		try {
+			carService.createCar(carDetailsFromRequest, typeOfCar);
+			final String operation = "Adding car";
+			request.setAttribute("operation", operation);
+			request.getRequestDispatcher("/WEB-INF/hidden-views/operation-success.jsp").forward(request, response);
+		}catch (ItemWithThisIdAlreadyExistsExcpetion e) {
+			request.setAttribute("controllerAction", ControllerAction.CORRECT);
+			Car car = null;
+			switch (typeOfCar) {
+			case PASSENGER_CAR:
+				car = carService.createPassengerCarFromDetails(carDetailsFromRequest);
+				request.setAttribute("car", car);
+				request.getRequestDispatcher("new-passenger-car.jsp").forward(request, response);
+				break;
+			case LIGHT_COMMERCIAL_CAR:
+				car = carService.createLightCommercialCarFromDetails(carDetailsFromRequest);
+				request.setAttribute("car", car);
+				request.getRequestDispatcher("new-light-commercial-car.jsp").forward(request, response);
+				break;
+			default:
+				throw new NoSuchTypeException("There is no typeOfCar:" + typeOfCar.toString());
+			}
+		}
 	}
 	
 	private HashMap<CarFields, String> getCarDetails(HttpServletRequest request, TypeOfCar typeOfCar) {

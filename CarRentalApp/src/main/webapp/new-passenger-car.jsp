@@ -77,7 +77,14 @@
 </c:otherwise>
 </c:choose>
 <label>Registration number:</label>
-<input name="inputRegistrationNumber" value="${requestScope.car.registrationNumber}" type="text" class="form-control" placeholder="Registration number" required autofocus><br>
+<c:choose>
+<c:when test="${requestScope.controllerAction == 'CORRECT'}">
+<input name="inputRegistrationNumber" value="${requestScope.car.registrationNumber}" type="text" class="form-control is-invalid" placeholder="Registration number" required autofocus>
+<small id="passwordHelp" class="text-danger">Car with provided registration number already exists</small><br> 
+</c:when>
+<c:otherwise><input name="inputRegistrationNumber" value="${requestScope.car.registrationNumber}" type="text" class="form-control" placeholder="Registration number" required autofocus><br>
+</c:otherwise>
+</c:choose>
 <input type="hidden" name="registrationNumber" value="${requestScope.car.registrationNumber}" >
 <label>Brand:</label>
 <input name="inputBrand" value="${requestScope.car.brand}" type="text" class="form-control" placeholder="Brand" required><br>
