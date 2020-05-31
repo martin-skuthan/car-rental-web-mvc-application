@@ -96,6 +96,7 @@
         <th scope="col">Load width</th>
         <th scope="col">Load length</th>
       </c:if>
+      <th>State</th>
       <th>Action</th>
     </tr>
     </thead>
@@ -125,6 +126,14 @@
           <td><c:out value="${car.loadWidth}"></c:out></td>
           <td><c:out value="${car.loadLength}"></c:out></td>
         </c:if>
+        <c:choose>
+        <c:when test="${empty car.user}">
+          <td class="text-success">Available</td>
+        </c:when>
+        <c:otherwise>
+          <td class="text-danger">Rented</td>
+        </c:otherwise>
+        </c:choose>
         <td>
           <div class="row">
           <form style="margin-right: 5px" class="form-signin" action="updateCar" method="post">
