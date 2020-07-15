@@ -23,7 +23,7 @@ Car rental application is a web project which has been created for education pur
 * JSTL
 
 ## Features
-* **Loging in system** - Application allows registred users to log into the application. Log in system has been created based on Tomcat Authentication Mechanism. 
+* **Loging in system** - Access to application resources is allowed to only to logged users. Application permits registered users to log into the application using system created based on Tomcat Authentication Mechanism.
 * **Adding new users** - Application allows to create new system users based on details provided in the form.
 * **Adding cars/customers** - Application allows users to add two types of car(Passenger and Light commercial cars) and customers of car rental. New resources are created based on details provided by the users in the form. 
 * **Removing/Modyfing car/customers** - Application allows user to remove/modify selected car/customer. Updating of data is carrying out by new details provided in the form.
