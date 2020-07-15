@@ -26,7 +26,10 @@ Car rental application is a web project which has been created for education pur
 * **Loging in system** - Access to application resources is allowed to only to logged users. Application permits registered users to log into the application using system created based on Tomcat Authentication Mechanism.
 * **Adding new users** - Application allows to create new system users based on details provided in the form.
 * **Adding cars/customers** - Application allows users to add two types of car(Passenger and Light commercial cars) and customers of car rental. New resources are created based on details provided by the users in the form. 
+
 ![Algorithm schema](./images/AddingCar.gif)
+                                                            
+                                                             
 * **Removing/Modyfing car/customers** - Application allows user to remove/modify selected car/customer. Updating of data is carrying out by new details provided in the form.
 * **Printing cars and users** - Application allows users to print collection of cars and customers existed in system. To make viewing data comfortable, it has been implemented pagination system.
 * **Renting/Returning Cars** - Application allows to rent a car for period selected by the user. Once car is rented it cannot be rented by other customer, until the car has been returned. After returning state of car changes to available.
