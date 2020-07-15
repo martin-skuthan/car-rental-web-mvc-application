@@ -8,10 +8,7 @@ Car rental management system written using Java/Jave EE technolgies.
 * [Contact](#contact)
 
 ## General info
-Project has been created using Java 8 language in order to develop my skills related to this technology and relational databases. Application is a car rental managament system allowing users to add/remove/rent/return cars(app handles two types of cars : Passangers and Light commercial cars) and add/remove clients of car rental. Application allows choose three types of read/write data method: 
-* to CSV file
-* to Serializable file
-* to MySQL database
+Car rental application is a web project which has been created for education purpose, to develop my skills in Java object oriented programming and upskill myself in technologies like Java EE, Tomcat, JPA, MySQL, Bootstrap. This is a car rental  management system, cooperating with MySQL relational database. Application permit users to add/remove/modify/rent/return cars(app handles two types of cars : Passenger and Light commercial cars) and add/remove/modify customers. The system contains also log in and registration feature based on Tomact Authentication Mechanism. 
 
 ## Technologies
 * Java
@@ -19,17 +16,19 @@ Project has been created using Java 8 language in order to develop my skills rel
 * Tomcat as a servlet container
 * MySQL as a data source
 * CDI - Weld implementation
-* JPA - Hibernate implemantation
+* JPA - Hibernate implementation
 * Bootstrap
 * JSP
 * Expression language 
 * JSTL
 
 ## Features
-* **Adding/Removing Cars** - Application allows users add/remove passangers and ligth commercial cars to the system. When adding user provides car's details like brand, model, registration number, transmission, type of drive etc. Removing is carried out by providing registration number of car that user want to remove.
-* **Adding/Removing Users** - Application allows add/remove car rental's customers to the system. When adding new custeomer user proovides details like first name, last name and pesel. Removing is carried out by providinig pesel of customer that user want to remove.
-* **Printing Cars and Users** - Application allows print cusomers and cars added to the system. When printing cars user can choose "Print filter" and print available cars, rented cars or all cars. 
-* **Renting/Returning Cars** - Application allows rent and return car available in system by customers added to the system.
+* **Loging in system** - Application allows registred users to log into the application. Log in system has been created based on Tomcat Authentication Mechanism. 
+* **Adding new users** - Application allows to create new system users based on details provided in the form.
+* **Adding cars/customers** - Application allows users to add two types of car(Passenger and Light commercial cars) and customers of car rental. New resources are created based on details provided by the users in the form. 
+* **Removing/Modyfing car/customers** - Application allows user to remove/modify selected car/customer. Updating of data is carrying out by new details provided in the form.
+* **Printing cars and users** - Application allows users to print collection of cars and customers existed in system. To make viewing data comfortable, it has been implemented pagination system.
+* **Renting/Returning Cars** - Application allows to rent a car for period selected by the user. Once car is rented it cannot be rented by other customer, until the car has been returned. After returning state of car changes to available.
 
 ## Contact
 Created by : Martin Skuthan. Please feel free to contact me :
