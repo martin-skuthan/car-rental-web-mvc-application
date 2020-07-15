@@ -29,6 +29,8 @@ Car rental application is a web project which has been created for education pur
 
 ![Algorithm schema](./images/AddingCar.gif)
 <div align="center">Adding car</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
                                                             
   
   
