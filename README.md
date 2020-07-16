@@ -30,6 +30,11 @@ Car rental application is a web project which has been created for education pur
 <p>&nbsp;</p>
 
 * **Adding new users** - Application allows to create new system users based on details provided in the form.
+
+![Algorithm schema](./images/addingUser.gif)
+<div align="center">Adding car</div>
+<p>&nbsp;</p>
+
 * **Adding cars/customers** - Application allows users to add two types of car(Passenger and Light commercial cars) and customers of car rental. New resources are created based on details provided by the users in the form. 
 
 ![Algorithm schema](./images/AddingCar.gif)
