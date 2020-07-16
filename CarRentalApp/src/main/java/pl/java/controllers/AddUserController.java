@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import pl.java.controllers.enums.ControllerAction;
+import pl.java.exceptions.ItemWithThisIdAlreadyExistsExcpetion;
+import pl.java.model.User;
 import pl.java.services.UserService;
 
 @WebServlet("/addUser")
@@ -18,17 +21,25 @@ public class AddUserController extends HttpServlet {
 	@Inject
 	private UserService userService;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		String username = request.getParameter("inputUsername");
-		String mail = request.getParameter("inputMail");
-		String password = request.getParameter("inputPassword");
-		userService.createUser(username, mail, password);
+		String username = null;
+		String mail = null;
+		String password = null;
+		try {
+			request.setCharacterEncoding("UTF-8");
+			username = request.getParameter("inputUsername");
+			mail = request.getParameter("inputMail");
+			password = request.getParameter("inputPassword");
+			userService.createUser(username, mail, password);
+			final String operation = "Adding user";
+			request.setAttribute("operation", operation);
+			request.getRequestDispatcher("/WEB-INF/hidden-views/operation-success.jsp").forward(request, response);
+		}catch (ItemWithThisIdAlreadyExistsExcpetion e) {
+			request.setAttribute("controllerAction", ControllerAction.CORRECT);
+			request.setAttribute("user", new User(username, mail, password));
+			request.getRequestDispatcher("new-user.jsp").forward(request, response);
+		}	
 	}
 
 }

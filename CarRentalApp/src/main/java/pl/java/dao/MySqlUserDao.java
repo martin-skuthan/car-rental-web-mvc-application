@@ -9,7 +9,10 @@ import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
 
+import pl.java.exceptions.ItemWithThisIdAlreadyExistsExcpetion;
+import pl.java.model.Customer;
 import pl.java.model.Role;
 import pl.java.model.User;
 
@@ -23,11 +26,15 @@ public class MySqlUserDao implements UserDao {
 	private RoleDao roleDao;
 
 	public void create(User user) {
-		addAdminRoleToUser(user);
-		EntityTransaction entityTransaction = entityManager.getTransaction();
-		entityTransaction.begin();
-		entityManager.persist(user);
-		entityTransaction.commit();
+		if (checkIfUserExists(user.getUsername())) {
+			throw new ItemWithThisIdAlreadyExistsExcpetion("User with username:" + user.getUsername() + " already exists");
+		}else { 
+			addAdminRoleToUser(user);
+			EntityTransaction entityTransaction = entityManager.getTransaction();
+			entityTransaction.begin();
+			entityManager.persist(user);
+			entityTransaction.commit();
+		}
 	}
 
 	public User read(String userId) {
@@ -61,6 +68,17 @@ public class MySqlUserDao implements UserDao {
 	
 	public List<User> readRangeOfUser() {
 		return null;
+	}
+	
+	public boolean checkIfUserExists(String username) {
+		TypedQuery<User> typedQuery = entityManager.createNamedQuery("User.readUserByUsername", User.class);
+		typedQuery.setParameter("username", username);
+		List<User> users = typedQuery.getResultList();
+		if (!users.isEmpty()) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 	
 	private void addAdminRoleToUser(User user) {

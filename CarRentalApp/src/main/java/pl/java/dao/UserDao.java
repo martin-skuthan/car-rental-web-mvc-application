@@ -19,4 +19,6 @@ public interface UserDao {
 	public List<User> readAllUsers();
 	
 	public List<User> readRangeOfUser();
+	
+	public boolean checkIfUserExists(String username);
 }

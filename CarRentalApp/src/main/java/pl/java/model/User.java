@@ -9,9 +9,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name = "User.readUserByUsername", query = "SELECT u FROM User u WHERE u.username = :username")
+})
 public class User implements Serializable {
 	private static final long serialVersionUID = 7798620270054984221L;
 	
