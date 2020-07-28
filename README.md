@@ -59,6 +59,14 @@ Car rental application is a web project which has been created for educational p
 
 * **Renting/Returning Cars** - Application allows to rent a car for period selected by the user. Once car has been rented, it cannot be rented by other customer, until the car has been returned. After returning, state of car changes to available.
 
+![Algorithm schema](./images/RentingCar.gif)
+<div align="center">Renting car</div>
+<p>&nbsp;</p>
+
+![Algorithm schema](./images/ReturningCar.gif)
+<div align="center">Returning car</div>
+<p>&nbsp;</p>
+
 ## Contact
 Created by : Martin Skuthan. Please feel free to contact me :
 * By mail: martin.skuthan95@gmail.com
