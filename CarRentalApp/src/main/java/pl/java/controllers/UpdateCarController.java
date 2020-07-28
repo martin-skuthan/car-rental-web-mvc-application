@@ -46,7 +46,7 @@ public class UpdateCarController extends HttpServlet {
 			default:
 				throw new NoSuchActionException("There is no action:" + controllerAction);		
 			}
-		}catch(NoSuchTypeException | NullPointerException ex) {
+		}catch(NoSuchTypeException | NullPointerException | NoSuchActionException ex) {
 			ex.printStackTrace();
 		}
 		

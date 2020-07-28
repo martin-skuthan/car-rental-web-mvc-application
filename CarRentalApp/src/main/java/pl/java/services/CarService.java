@@ -1,13 +1,13 @@
 package pl.java.services;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.sound.midi.Soundbank;
 
+import pl.java.converters.DateConverter;
 import pl.java.dao.CarDao;
 import pl.java.exceptions.NoSuchTypeException;
 import pl.java.model.Car;
@@ -23,6 +23,8 @@ import pl.java.model.enums.TypeOfDrive;
 public class CarService {
 	@Inject
 	private CarDao carDao;
+	@Inject
+	CustomerService customerService;
 	
 	public void createCar(HashMap<CarFields, String> carDetails, TypeOfCar typeOfCar) {
 		Car car = null;
@@ -42,6 +44,25 @@ public class CarService {
 	
 	public void readCar(String carId) {
 		
+	}
+	
+	public void rentCar(String registrationNumber, String startDateString, String endDateString, String customerPesel ) {
+		LocalDate startDate = DateConverter.convertDayMonthYearStringToLocalDate(startDateString);
+		LocalDate endDate = DateConverter.convertDayMonthYearStringToLocalDate(endDateString);
+		Car carFromDb = readCarByRegistrationNumber(registrationNumber);
+		Customer customer = customerService.readCustomerByPesel(customerPesel);
+		carFromDb.setStartDate(startDate);
+		carFromDb.setEndDate(endDate);
+		carFromDb.setUser(customer);
+		carDao.update(carFromDb);
+	}
+	
+	public void returnCar(String registrationNumber) {
+		Car carFromDb = readCarByRegistrationNumber(registrationNumber);
+		carFromDb.setStartDate(null);
+		carFromDb.setEndDate(null);
+		carFromDb.setUser(null);
+		carDao.update(carFromDb);
 	}
 	
 	public void updateCar(Car car) {

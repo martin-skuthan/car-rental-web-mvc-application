@@ -1,7 +1,9 @@
 package pl.java.controllers;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.List;import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -10,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import pl.java.controllers.enums.ControllerAction;
+import pl.java.exceptions.NoSuchActionException;
 import pl.java.exceptions.NoSuchTypeException;
 import pl.java.model.Car;
 import pl.java.model.enums.TypeOfCar;
@@ -28,19 +32,44 @@ public class PrintCarsController extends HttpServlet {
 			TypeOfCar typeOfCar = getTypeOfCar(request);
 			request.setAttribute("typeOfCar", typeOfCar);
 			setNumberOfRecordsPerPage(request);
-			int numberOfCarRecords = carService.readAllCars(typeOfCar).size();
+			ControllerAction controllerAction = getControllerAction(request);
+			request.setAttribute("controllerAction", controllerAction);
+			int numberOfCarRecords = getNumberOfRecords(typeOfCar, controllerAction);
 			request.setAttribute("numberOfCarRecords", numberOfCarRecords);
 			int noOfPages = getNoOfPages(numberOfCarRecords, numberOfRecordsPerPage);
 			request.setAttribute("noOfPages", noOfPages);
 			int noOfPage = getNoOfPage(request);
 			request.setAttribute("noOfPage", noOfPage);
-			carService.readRangeOfCars(typeOfCar, noOfPage, numberOfRecordsPerPage);
-			List<Car> cars = carService.readRangeOfCars(typeOfCar, noOfPage, numberOfRecordsPerPage);
+			List<Car> cars = getRangeOfCars(typeOfCar, noOfPage, numberOfRecordsPerPage, controllerAction);
 			request.setAttribute("cars", cars);			
 			request.getRequestDispatcher("print-cars.jsp").forward(request, response);
-		}catch(NoSuchTypeException ex) {
+		}catch(NoSuchTypeException | NoSuchActionException ex) {
+			//something went wrong
 			ex.printStackTrace();
 		}
+	}
+	
+	private int getNumberOfRecords(TypeOfCar typeOfCar, ControllerAction controllerAction) {
+		Stream<Car> stream = carService.readAllCars(typeOfCar).stream();
+		switch (controllerAction) {
+		case PRINT:
+			return (int)stream.count();
+		case RENT:
+			return (int)stream.filter(car -> car.getUser() == null).count();
+		case RETURN:
+			return (int)stream.filter(car -> car.getUser() != null).count();
+		default:
+			throw new NoSuchActionException("There is no action:" + controllerAction);
+		}	
+	}
+	
+	private ControllerAction getControllerAction(HttpServletRequest request) {
+		ControllerAction controllerAction = ControllerAction.PRINT;
+		if (request.getParameter("controllerAction") != null) {
+			controllerAction = ControllerAction.getFromDescription(request.getParameter("controllerAction"));
+		}
+		
+		return controllerAction;
 	}
 	
 	private void setNumberOfRecordsPerPage(HttpServletRequest request) {
@@ -80,5 +109,20 @@ public class PrintCarsController extends HttpServlet {
 		}
 		
 		return noOfPage;
+	}
+	
+	private List<Car> getRangeOfCars(TypeOfCar typeOfCar, int noOfPage, int numberOfRecordsPerPage, ControllerAction controllerAction) {
+		Stream<Car> stream = carService.readRangeOfCars(typeOfCar, noOfPage, numberOfRecordsPerPage).stream();
+		switch (controllerAction) {
+		case PRINT:
+			return stream.collect(Collectors.toList());
+		case RENT:
+			return stream.filter(car -> car.getUser() == null).collect(Collectors.toList());
+		case RETURN:
+			return stream.filter(car -> car.getUser() != null).collect(Collectors.toList());
+		default:
+			System.out.println("trololo");
+			throw new NoSuchActionException("There is no action:" + controllerAction);
+		}
 	}
 }

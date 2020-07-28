@@ -97,6 +97,12 @@
   	<description></description>
   	<servlet-class>pl.java.controllers.UpdateCustomerController</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>RentReturnController</servlet-name>
+  	<display-name>RentReturnController</display-name>
+  	<description></description>
+  	<servlet-class>pl.java.controllers.RentReturnController</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>AddUserController</servlet-name>
   	<url-pattern>/AddUserController</url-pattern>
@@ -149,11 +155,17 @@
   	<servlet-name>UpdateCustomerController</servlet-name>
   	<url-pattern>/UpdateCustomerController</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>RentReturnController</servlet-name>
+  	<url-pattern>/RentReturnController</url-pattern>
+  </servlet-mapping>
   
    <security-constraint>
         <web-resource-collection>
             <web-resource-name>Login constraint</web-resource-name>
             <url-pattern>/select-type-of-car.jsp</url-pattern>
+            <url-pattern>/rent-return-car.jsp</url-pattern>
+            <url-pattern>/new-user.jsp</url-pattern>
             <url-pattern>/new-light-commercial-car.jsp</url-pattern>
             <url-pattern>/new-customer.jsp</url-pattern>
             <url-pattern>/login-success.jsp</url-pattern>

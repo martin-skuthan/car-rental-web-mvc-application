@@ -59,11 +59,11 @@
 <!-- Content -->
 <div class="d-flex justify-content-center align-items-center container h-100">
 <div class="col-sm-8 col-md-8 my-auto">
-<h1 class="display-2">Select type of car</h1>
+<h1 class="display-2">Select action</h1>
 <div class="bs-callout bs-callout-default">
-<form class="form-signin" action="selectTypeOfCar" method="post">        
-<button class="btn btn-lg btn-primary btn-block" name="typeOfCar" value="Passenger" type="submit">Passenger Car</button>
-<button class="btn btn-lg btn-primary btn-block" name="typeOfCar" value="LightCommercial" type="submit">Light Commercial Car</button>
+<form class="form-signin" action="printCars" method="get">        
+<button class="btn btn-lg btn-primary btn-block" name="controllerAction" value="rent" type="submit">Rent car</button>
+<button class="btn btn-lg btn-primary btn-block" name="controllerAction" value="return" type="submit">Return car</button>
 </form>
 </div>
 </div>

@@ -31,7 +31,7 @@
         <a class="nav-link" href="printCustomers">Print customers</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Rent/Return car</a>
+        <a class="nav-link" href="rent-return-car.jsp">Rent/Return car</a>
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">

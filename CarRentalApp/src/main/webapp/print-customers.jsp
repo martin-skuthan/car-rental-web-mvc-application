@@ -32,7 +32,7 @@
         <a class="nav-link" href="printCustomers">Print/Modify customers</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Rent/Return car</a>
+        <a class="nav-link" href="rent-return-car.jsp">Rent/Return car</a>
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">
@@ -59,7 +59,14 @@
 <!-- Content -->
 <div class="d-flex justify-content-center align-items-center container h-100">
 <div class="col-sm-8 col-md-8 my-auto">
-<h1 class="display-2">Customers</h1>
+<c:choose>
+<c:when test="${requestScope.controllerAction == 'SELECT_CUSTOMER'}">
+  <h1 class="display-2">Select customer</h1>
+</c:when>
+<c:otherwise>
+  <h1 class="display-2">Customers</h1>
+</c:otherwise>
+</c:choose>
 <div class="bs-callout bs-callout-default">
 <c:choose>
 <c:when test="${requestScope.numberOfCustomersRecords != 0}">
@@ -80,7 +87,15 @@
         <td><c:out value="${customer.pesel}"></c:out></td>
         <td>   
         <div class="row">
-          <form style="margin-right: 5px" class="form-signin" action="updateCustomer" method="post">
+        <c:choose>
+		<c:when test="${requestScope.controllerAction == 'SELECT_CUSTOMER'}">
+  		  <form class="form-signin" action="rentReturnCar" method="post">
+            <input type="hidden" name="customerPesel" value="${customer.pesel}">
+            <button class="btn btn-success btn-block count-button" name="controllerAction" value="rent" type="submit">Select</button>
+          </form>   
+		</c:when>
+		<c:otherwise>
+  		  <form style="margin-right: 5px" class="form-signin" action="updateCustomer" method="post">
           	<input type="hidden" name="idOfItemToUpdate" value="${customer.pesel}">
             <button name="controllerAction" value="forward" class="btn btn-success" title="Edit" type="submit"><i style="font-size: 15px" class="material-icons">&#xE254;</i></button>
           </form>     
@@ -89,8 +104,10 @@
             <input type="hidden" name="idOfItemToDelete" value="${customer.pesel}">
             <input type="hidden" name="itemToDelete" value="${customer}">
             <button class="btn btn-danger" title="Delete" type="submit"><i style="font-size: 15px" class="material-icons">&#xE872;</i></button>
-          </form> 
-          </div>    
+          </form>
+		</c:otherwise>
+		</c:choose> 
+        </div>    
         </td>
       </tr>
   	</c:forEach>

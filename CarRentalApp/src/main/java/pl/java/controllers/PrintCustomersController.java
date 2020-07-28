@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import pl.java.controllers.enums.ControllerAction;
 import pl.java.model.Customer;
 import pl.java.services.CustomerService;
 
@@ -20,10 +21,17 @@ public class PrintCustomersController extends HttpServlet {
 	@Inject
 	private CustomerService customerService;
 	private int numberOfRecordsPerPage;
+	
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int numberOfCustomersRecords = customerService.readAllCustomers().size();
 		setNumberOfRecordsPerPage(request);
+		ControllerAction controllerAction = getControllerAction(request);
+		request.setAttribute("controllerAction", controllerAction);
 		request.setAttribute("numberOfCustomersRecords", numberOfCustomersRecords);
 		int noOfPages = getNoOfPages(numberOfCustomersRecords, numberOfRecordsPerPage);
 		request.setAttribute("noOfPages", noOfPages);
@@ -32,6 +40,15 @@ public class PrintCustomersController extends HttpServlet {
 		List<Customer> customers = customerService.readRangeOfCustomers(noOfPage, numberOfRecordsPerPage);
 		request.setAttribute("customers", customers);
 		request.getRequestDispatcher("print-customers.jsp").forward(request, response);		
+	}
+	
+	private ControllerAction getControllerAction(HttpServletRequest request) {
+		ControllerAction controllerAction = ControllerAction.PRINT;
+		if (request.getParameter("controllerAction") != null) {
+			controllerAction = ControllerAction.getFromDescription(request.getParameter("controllerAction"));
+		}
+		
+		return controllerAction;
 	}
 	
 	private void setNumberOfRecordsPerPage(HttpServletRequest request) {

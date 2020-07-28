@@ -1,6 +1,7 @@
 package pl.java.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -43,9 +44,10 @@ public abstract class Car implements Serializable {
     private boolean airConditioning;
     private Transmission transmission;
     private Customer user;
+    private LocalDate startDate;
+    private LocalDate endDate;
     
-    
-    public Car() {}
+	public Car() {}
     
     public Car(String registrationNumber, String brand, String model,int seats, boolean airConditioning, Transmission transmission,
     		   Customer user) {
@@ -56,6 +58,8 @@ public abstract class Car implements Serializable {
     	this.airConditioning = airConditioning;
     	this.transmission = transmission;
     	this.user = user;
+    	this.startDate = null;
+    	this.endDate = null;
     }
 
 	public String getRegistrationNumber() {
@@ -112,6 +116,22 @@ public abstract class Car implements Serializable {
 
 	public void setUser(Customer user) {
 		this.user = user;
+	}
+	
+	public LocalDate getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(LocalDate startDate) {
+		this.startDate = startDate;
+	}
+
+	public LocalDate getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(LocalDate endDate) {
+		this.endDate = endDate;
 	}
 	
 	@Transient

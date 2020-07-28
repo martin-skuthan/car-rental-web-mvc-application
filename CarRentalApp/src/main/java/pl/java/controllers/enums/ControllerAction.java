@@ -7,7 +7,12 @@ public enum ControllerAction {
 	UPDATE("update"),
 	DELETE("delete"),
 	FORWARD("forward"),
-	CORRECT("correct");
+	CORRECT("correct"),
+	PRINT("print"),
+	RENT("rent"),
+	SELECT_DATE("date"),
+	SELECT_CUSTOMER("customer"),
+	RETURN("return");
 	
 	String descritpion;
 	

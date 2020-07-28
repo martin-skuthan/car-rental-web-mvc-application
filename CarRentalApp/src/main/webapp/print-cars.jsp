@@ -32,7 +32,7 @@
         <a class="nav-link" href="printCustomers">Print/Modify customers</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Rent/Return car</a>
+        <a class="nav-link" href="rent-return-car.jsp">Rent/Return car</a>
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">
@@ -130,23 +130,41 @@
         <c:when test="${empty car.user}">
           <td class="text-success">Available</td>
         </c:when>
-        <c:otherwise>
-          <td class="text-danger">Rented</td>
-        </c:otherwise>
+        <c:when test="${not empty car.user}">
+          <td class="text-danger">Rented by <c:out value="${car.user.firstName} ${car.user.lastName}"></c:out><br>
+          <div class="text-danger"><c:out value="${car.startDate} - ${car.endDate}"></c:out></div>
+          </td>	
+        </c:when>
         </c:choose>
         <td>
           <div class="row">
-          <form style="margin-right: 5px" class="form-signin" action="updateCar" method="post">
-          	<input type="hidden" name="idOfItemToUpdate" value="${car.registrationNumber}">
-            <button name="controllerAction" value="forward" class="btn btn-success" title="Edit" type="submit"><i style="font-size: 15px" class="material-icons">&#xE254;</i></button>
-          </form>     
-          <form class="form-signin" action="delete-item.jsp" method="post">
-            <input type="hidden" name="formAction" value="deleteCar">
-            <input type="hidden" name="idOfItemToDelete" value="${car.registrationNumber}">
-            <input type="hidden" name="itemToDelete" value="${car}">
-            <button class="btn btn-danger" title="Delete" type="submit"><i style="font-size: 15px" class="material-icons">&#xE872;</i></button>
-          </form> 
-          </div>	   
+          <c:choose>
+            <c:when test="${requestScope.controllerAction == 'RENT'}">
+              <form class="form-signin" action="rentReturnCar" method="post">
+                <input type="hidden" name="registrationNumber" value="${car.registrationNumber}">
+                <button class="btn btn-success btn-block count-button" name="controllerAction" value="select_date" type="submit">Rent</button>
+              </form>
+            </c:when>
+            <c:when test="${requestScope.controllerAction == 'RETURN'}">
+              <form class="form-signin" action="rentReturnCar" method="post">
+                <input type="hidden" name="registrationNumber" value="${car.registrationNumber}">
+                <button class="btn btn-success btn-block count-button" name="controllerAction" value="return" type="submit">Return</button>
+              </form>
+            </c:when>
+            <c:otherwise>
+              <form style="margin-right: 5px" class="form-signin" action="updateCar" method="post">
+          	    <input type="hidden" name="idOfItemToUpdate" value="${car.registrationNumber}">
+                <button name="controllerAction" value="forward" class="btn btn-success" title="Edit" type="submit"><i style="font-size: 15px" class="material-icons">&#xE254;</i></button>
+              </form>     
+              <form class="form-signin" action="delete-item.jsp" method="post">
+                <input type="hidden" name="formAction" value="deleteCar">
+                <input type="hidden" name="idOfItemToDelete" value="${car.registrationNumber}">
+                <input type="hidden" name="itemToDelete" value="${car}">
+                <button class="btn btn-danger" title="Delete" type="submit"><i style="font-size: 15px" class="material-icons">&#xE872;</i></button>
+              </form>
+            </c:otherwise>
+          </c:choose>
+          </div>    
         </td>
       </tr>
   	</c:forEach>
@@ -159,6 +177,7 @@
 </c:choose>
 <div class="row">
 <form class="form-signin col-sm-2 col-md-2" action="printCars?page=1" method="get">
+  <input type="hidden" name="controllerAction" value="${requestScope.controllerAction}">
   <c:choose>
   <c:when test="${requestScope.typeOfCar == 'PASSENGER_CAR'}">
     <button class="btn btn-lg btn-primary btn-block" name="typeOfCar" value="LIGHT_COMMERCIAL_CAR" type="submit" >Light Commercial Cars</button>
@@ -174,10 +193,10 @@
     <c:forEach begin="1" end="${requestScope.noOfPages}" varStatus="loop">
       <c:choose>
       <c:when test="${loop.index == requestScope.noOfPage}">
-        <li class="page-item active"><a class="page-link" href="printCars?page=${loop.index}&typeOfCar=${requestScope.typeOfCar}"><c:out value="${loop.index}"></c:out></a></li>
+        <li class="page-item active"><a class="page-link" href="printCars?page=${loop.index}&typeOfCar=${requestScope.typeOfCar}&controllerAction=${requestScope.controllerAction}"><c:out value="${loop.index}"></c:out></a></li>
       </c:when>
       <c:otherwise>
-        <li class="page-item"><a class="page-link" href="printCars?page=${loop.index}&typeOfCar=${requestScope.typeOfCar}"><c:out value="${loop.index}"></c:out></a></li>
+        <li class="page-item"><a class="page-link" href="printCars?page=${loop.index}&typeOfCar=${requestScope.typeOfCar}&controllerAction=${requestScope.controllerAction}"><c:out value="${loop.index}"></c:out></a></li>
       </c:otherwise>
       </c:choose>
     </c:forEach>
