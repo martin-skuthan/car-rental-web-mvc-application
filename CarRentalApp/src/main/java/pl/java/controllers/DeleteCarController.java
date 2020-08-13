@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import pl.java.model.Car;
 import pl.java.services.CarService;
 
 @WebServlet("/deleteCar")
@@ -18,17 +17,18 @@ public class DeleteCarController extends HttpServlet {
 	
 	@Inject
 	private CarService carService;
+	
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getRequestDispatcher("/WEB-INF/hidden-views/delete-item.jsp").forward(request, response);
+	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String registrationNumber = request.getParameter("itemToDelete");
-		if (registrationNumber.isEmpty()) {
-			response.sendRedirect("printCars");
-		}else {
-			carService.deleteCarByRegistrationNumber(registrationNumber);
-			final String operation = "Deleting car";
-			request.setAttribute("operation", operation);
-			request.getRequestDispatcher("/WEB-INF/hidden-views/operation-success.jsp").forward(request, response);
-		}	
+		carService.deleteCarByRegistrationNumber(registrationNumber);
+		final String operation = "Deleting car";
+		request.setAttribute("operation", operation);
+		request.getRequestDispatcher("/WEB-INF/hidden-views/operation-success.jsp").forward(request, response);	
 	}
 
 }

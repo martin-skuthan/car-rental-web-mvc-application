@@ -12,48 +12,7 @@
 <body>
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="index.jsp">Car Rental</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="select-type-of-car.jsp">Add car</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="printCars">Print/Modify cars</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="new-customer.jsp">Add customer</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="printCustomers">Print/Modify customers</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="rent-return-car.jsp">Rent/Return car</a>
-      </li>
-    </ul>
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="new-user.jsp">Add admin account</a>
-      </li>	
-	  <c:choose>
-      <c:when test="${not empty sessionScope.user}">
-        <li class="nav-item">
-          <a class="nav-link" href="logOut">Logout</a>
-        </li>
-      </c:when>
-      <c:otherwise>
-        <li class="nav-item">
-          <a class="nav-link" href="logIn">Login</a>
-        </li>
-      </c:otherwise>
-      </c:choose>	
-	</ul>
-  </div>
-</nav>
+<jsp:include page="/WEB-INF/fragments/navbar.jsp" />
 <!-- Navbar -->
 
 <!-- Content -->
@@ -99,7 +58,7 @@
           	<input type="hidden" name="idOfItemToUpdate" value="${customer.pesel}">
             <button name="controllerAction" value="forward" class="btn btn-success" title="Edit" type="submit"><i style="font-size: 15px" class="material-icons">&#xE254;</i></button>
           </form>     
-          <form class="form-signin" action="delete-item.jsp" method="post">
+          <form class="form-signin" action="deleteCustomer" method="get">
             <input type="hidden" name="formAction" value="deleteCustomer">
             <input type="hidden" name="idOfItemToDelete" value="${customer.pesel}">
             <input type="hidden" name="itemToDelete" value="${customer}">
@@ -149,6 +108,9 @@
 </div>   
 <!-- Content -->
 
+<!-- Footer -->
+<jsp:include page="/WEB-INF/fragments/footer.jsp" />
+<!-- Footer -->
 
 <!-- Bootstrap js -->
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

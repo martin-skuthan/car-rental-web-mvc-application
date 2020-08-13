@@ -19,6 +19,11 @@ public class AddCustomerController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@Inject
 	private CustomerService userService;
+	
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getRequestDispatcher("/WEB-INF/hidden-views/new-customer.jsp").forward(request, response);
+	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String firstName = null;
@@ -36,7 +41,7 @@ public class AddCustomerController extends HttpServlet {
 		}catch (ItemWithThisIdAlreadyExistsExcpetion e) {
 			request.setAttribute("controllerAction", ControllerAction.CORRECT);
 			request.setAttribute("customer", new Customer(firstName, lastName, pesel));
-			request.getRequestDispatcher("new-customer.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/hidden-views/new-customer.jsp").forward(request, response);
 		}		
 	}
 

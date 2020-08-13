@@ -18,10 +18,10 @@ public class SelectTypeOfCarController extends HttpServlet {
 		TypeOfCar typeOfCar = TypeOfCar.getFromDescription(typeOfCarFromRequest);
 		switch (typeOfCar) {
 		case PASSENGER_CAR:
-			response.sendRedirect("new-passenger-car.jsp");
+			request.getRequestDispatcher("/WEB-INF/hidden-views/new-passenger-car.jsp").forward(request, response);
 			break;
 		case LIGHT_COMMERCIAL_CAR:
-			response.sendRedirect("new-light-commercial-car.jsp");
+			request.getRequestDispatcher("/WEB-INF/hidden-views/new-light-commercial-car.jsp").forward(request, response);
 			break;
 		default:
 			response.sendError(403);

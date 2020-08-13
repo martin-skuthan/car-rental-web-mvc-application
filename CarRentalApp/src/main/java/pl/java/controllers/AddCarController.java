@@ -26,7 +26,7 @@ public class AddCarController extends HttpServlet {
 	private CarService carService;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("selectTypeOfCar").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/hidden-views/select-type-of-car.jsp").forward(request, response);
 	}
 
 
@@ -42,17 +42,14 @@ public class AddCarController extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/hidden-views/operation-success.jsp").forward(request, response);
 		}catch (ItemWithThisIdAlreadyExistsExcpetion e) {
 			request.setAttribute("controllerAction", ControllerAction.CORRECT);
-			Car car = null;
+			Car car = carService.createCarFromDetails(carDetailsFromRequest, typeOfCar);
+			request.setAttribute("car", car);
 			switch (typeOfCar) {
 			case PASSENGER_CAR:
-				car = carService.createPassengerCarFromDetails(carDetailsFromRequest);
-				request.setAttribute("car", car);
-				request.getRequestDispatcher("new-passenger-car.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/hidden-views/new-passenger-car.jsp").forward(request, response);
 				break;
 			case LIGHT_COMMERCIAL_CAR:
-				car = carService.createLightCommercialCarFromDetails(carDetailsFromRequest);
-				request.setAttribute("car", car);
-				request.getRequestDispatcher("new-light-commercial-car.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/hidden-views/new-light-commercial-car.jsp").forward(request, response);
 				break;
 			default:
 				throw new NoSuchTypeException("There is no typeOfCar:" + typeOfCar.toString());

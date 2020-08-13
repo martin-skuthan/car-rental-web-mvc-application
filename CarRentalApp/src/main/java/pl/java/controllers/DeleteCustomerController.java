@@ -17,6 +17,11 @@ public class DeleteCustomerController extends HttpServlet {
 	
 	@Inject
 	private CustomerService customerService;
+	
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getRequestDispatcher("/WEB-INF/hidden-views/delete-item.jsp").forward(request, response);
+	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String pesel = request.getParameter("itemToDelete");

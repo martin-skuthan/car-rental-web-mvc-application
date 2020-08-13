@@ -21,11 +21,6 @@ public class PrintCustomersController extends HttpServlet {
 	@Inject
 	private CustomerService customerService;
 	private int numberOfRecordsPerPage;
-	
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int numberOfCustomersRecords = customerService.readAllCustomers().size();
@@ -39,7 +34,7 @@ public class PrintCustomersController extends HttpServlet {
 		request.setAttribute("noOfPage", noOfPage);
 		List<Customer> customers = customerService.readRangeOfCustomers(noOfPage, numberOfRecordsPerPage);
 		request.setAttribute("customers", customers);
-		request.getRequestDispatcher("print-customers.jsp").forward(request, response);		
+		request.getRequestDispatcher("/WEB-INF/hidden-views/print-customers.jsp").forward(request, response);		
 	}
 	
 	private ControllerAction getControllerAction(HttpServletRequest request) {

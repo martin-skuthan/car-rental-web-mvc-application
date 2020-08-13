@@ -20,7 +20,11 @@ public class AddUserController extends HttpServlet {
 	
 	@Inject
 	private UserService userService;
-
+	
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getRequestDispatcher("/WEB-INF/hidden-views/new-user.jsp").forward(request, response);
+	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username = null;
@@ -38,7 +42,7 @@ public class AddUserController extends HttpServlet {
 		}catch (ItemWithThisIdAlreadyExistsExcpetion e) {
 			request.setAttribute("controllerAction", ControllerAction.CORRECT);
 			request.setAttribute("user", new User(username, mail, password));
-			request.getRequestDispatcher("new-user.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/hidden-views/new-user.jsp").forward(request, response);
 		}	
 	}
 

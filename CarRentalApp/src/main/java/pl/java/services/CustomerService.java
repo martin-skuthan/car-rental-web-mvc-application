@@ -21,7 +21,11 @@ public class CustomerService {
 		
 	}
 	
-	public void updateCustomer(Customer customer) {
+	public void updateCustomer(String pesel, String firstName, String lastName) {
+		Customer customer = readCustomerByPesel(pesel);
+		customer.setPesel(pesel);
+		customer.setFirstName(firstName);
+		customer.setLastName(lastName);
 		customerDao.updateCustomer(customer);
 	}
 	

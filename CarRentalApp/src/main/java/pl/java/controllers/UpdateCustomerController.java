@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import pl.java.controllers.enums.ControllerAction;
 import pl.java.exceptions.NoSuchActionException;
-import pl.java.model.Car;
 import pl.java.model.Customer;
 import pl.java.services.CustomerService;
 
@@ -28,12 +27,10 @@ public class UpdateCustomerController extends HttpServlet {
 			ControllerAction controllerAction = ControllerAction.getFromDescription(controllerActiondescription);
 			switch (controllerAction) {
 			case UPDATE:
-				Customer customerFromDb = customerService.readCustomerByPesel(request.getParameter("pesel"));;
-				customerFromDb.setFirstName(request.getParameter("inputFirstName"));
-				customerFromDb.setLastName(request.getParameter("inputLastName"));
-				customerFromDb.setPesel(request.getParameter("inputPesel"));
-				customerService.updateCustomer(customerFromDb);
-				
+				String pesel = request.getParameter("pesel");
+				String firstName = request.getParameter("inputFirstName");
+				String lastName = request.getParameter("inputLastName");
+				customerService.updateCustomer(pesel, firstName, lastName);
 				final String operation = "Updating customer";
 				request.setAttribute("operation", operation);
 				request.getRequestDispatcher("/WEB-INF/hidden-views/operation-success.jsp").forward(request, response);
@@ -54,6 +51,6 @@ public class UpdateCustomerController extends HttpServlet {
 		Customer customer = customerService.readCustomerByPesel(pesel);
 		request.setAttribute("customer", customer);
 		request.setAttribute("controllerAction", ControllerAction.UPDATE);
-		request.getRequestDispatcher("new-customer.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/hidden-views/new-customer.jsp").forward(request, response);
 	}
 }

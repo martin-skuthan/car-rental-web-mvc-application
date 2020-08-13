@@ -6,26 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link href="styles.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
 </head>
 <body>
-
 <!-- Navbar -->
 <jsp:include page="/WEB-INF/fragments/navbar.jsp" />
 <!-- Navbar -->
 
 <!-- Content -->
-<div class="container-fluid h-100 d-flex">
-<div class="col-sm-12 col-md-12 my-auto container-fluid">
-<h1 class="display-2 text-center"><c:out value="${requestScope.operation} "></c:out>succeeded</h1>
-<div class="text-center">
-<br>
-<button style="width: 250px;" class="btn btn-lg btn-secondary center-block" name="typeOfCar" value="PASSENGER_CAR" type="submit" >Return</button>
+<div class="d-flex justify-content-center align-items-center container h-100">
+  <div class="col-sm-8 col-md-8 my-auto">
+    <div class="my-auto">
+      <h1 class="display-2">Deleting item</h1>
+      <div class="bs-callout bs-callout-default">
+        <h5 class="display-5">Are you sure to delete:</h5>
+        <p class="text-justify">
+        <c:out value="${param.itemToDelete}"></c:out> 
+        </p>
+          <form class="form-signin" action="${param.formAction}" method="post">
+		    <button formaction="printCars" formmethod="get" style="width:49%" class="btn btn-lg btn-secondary btn-inline-block" type="submit">Cancel</button>
+			<button formaction="${param.formAction}" formmethod="post" style="width:49%" class="btn btn-lg btn-primary btn-inline-block" name="itemToDelete" value="${param.idOfItemToDelete}" type="submit">Delete</button>
+          </form>
+      </div>
+    </div>
+  </div>
 </div>
-</div>
-</div>     
 <!-- Content -->
+
 
 <!-- Footer -->
 <jsp:include page="/WEB-INF/fragments/footer.jsp" />

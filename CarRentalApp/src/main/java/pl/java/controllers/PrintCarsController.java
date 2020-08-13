@@ -42,7 +42,7 @@ public class PrintCarsController extends HttpServlet {
 			request.setAttribute("noOfPage", noOfPage);
 			List<Car> cars = getRangeOfCars(typeOfCar, noOfPage, numberOfRecordsPerPage, controllerAction);
 			request.setAttribute("cars", cars);			
-			request.getRequestDispatcher("print-cars.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/hidden-views/print-cars.jsp").forward(request, response);
 		}catch(NoSuchTypeException | NoSuchActionException ex) {
 			//something went wrong
 			ex.printStackTrace();
@@ -121,7 +121,6 @@ public class PrintCarsController extends HttpServlet {
 		case RETURN:
 			return stream.filter(car -> car.getUser() != null).collect(Collectors.toList());
 		default:
-			System.out.println("trololo");
 			throw new NoSuchActionException("There is no action:" + controllerAction);
 		}
 	}

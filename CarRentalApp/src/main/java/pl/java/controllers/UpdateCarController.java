@@ -1,6 +1,7 @@
 package pl.java.controllers;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -13,11 +14,8 @@ import pl.java.controllers.enums.ControllerAction;
 import pl.java.exceptions.NoSuchActionException;
 import pl.java.exceptions.NoSuchTypeException;
 import pl.java.model.Car;
-import pl.java.model.LightCommercialCar;
-import pl.java.model.PassengerCar;
-import pl.java.model.enums.Transmission;
+import pl.java.model.enums.CarFields;
 import pl.java.model.enums.TypeOfCar;
-import pl.java.model.enums.TypeOfDrive;
 import pl.java.services.CarService;
 
 @WebServlet("/updateCar")
@@ -33,9 +31,9 @@ public class UpdateCarController extends HttpServlet {
 			ControllerAction controllerAction = ControllerAction.getFromDescription(controllerActionDescription);		
 			switch (controllerAction) {
 			case UPDATE:
-				Car carFromDb = carService.readCarByRegistrationNumber(request.getParameter("registrationNumber"));
-				updateCar(carFromDb, request);
-				carService.updateCar(carFromDb);
+				HashMap<CarFields, String> carDetails = getCarDetails(request);
+				String idOfCar = request.getParameter("registrationNumber");
+				carService.updateCar(carDetails, idOfCar);
 				final String operation = "Updating car";
 				request.setAttribute("operation", operation);
 				request.getRequestDispatcher("/WEB-INF/hidden-views/operation-success.jsp").forward(request, response);
@@ -60,7 +58,7 @@ public class UpdateCarController extends HttpServlet {
 		TypeOfCar typeOfCar = car.getTypeOfCar();	
 		switch (typeOfCar) {
 		case PASSENGER_CAR:
-			request.getRequestDispatcher("new-passenger-car.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/hidden-views/new-passenger-car.jsp").forward(request, response);
 			break;
 		case LIGHT_COMMERCIAL_CAR:
 			request.getRequestDispatcher("new-light-commercial-car.jsp").forward(request, response);
@@ -68,30 +66,39 @@ public class UpdateCarController extends HttpServlet {
 		}
 	}
 	
-	private void updateCar(Car carFromDb, HttpServletRequest request) {
-		carFromDb.setRegistrationNumber(request.getParameter("inputRegistrationNumber"));
-		carFromDb.setBrand(request.getParameter("inputBrand"));
-		carFromDb.setModel(request.getParameter("inputModel"));
-		carFromDb.setSeats(Integer.valueOf(request.getParameter("inputSeats")));
-		carFromDb.setAirConditioning(Boolean.parseBoolean(request.getParameter("inputAirConditioning")));
-		carFromDb.setTransmission(Transmission.getFromDescription(request.getParameter("inputTransmission")));
-		carFromDb.setUser(null);
-		
-		switch (carFromDb.getTypeOfCar()) {
+	private HashMap<CarFields, String> getCarDetails(HttpServletRequest request) {
+		String typeOfCarFromRequest = request.getParameter("typeOfCar");
+		TypeOfCar typeOfCar = TypeOfCar.getFromDescription(typeOfCarFromRequest);
+		HashMap<CarFields, String> carDetails = new HashMap<CarFields, String>();
+		carDetails.put(CarFields.REGISTRATION_NUMBER, request.getParameter("inputRegistrationNumber"));
+		carDetails.put(CarFields.BRAND, request.getParameter("inputBrand"));
+		carDetails.put(CarFields.MODEL, request.getParameter("inputModel"));
+		carDetails.put(CarFields.SEATS, request.getParameter("inputSeats"));
+		carDetails.put(CarFields.AIR_CONDITIONING, request.getParameter("inputAirConditioning"));
+		carDetails.put(CarFields.TRANSMISSION, request.getParameter("inputTransmission"));
+		carDetails.put(CarFields.NUMBER_OF_DOORS, request.getParameter("inputNumberOfDoors"));
+		carDetails.put(CarFields.TYPE_OF_DRIVE, request.getParameter("inputTypeOfDrive"));
+		carDetails.put(CarFields.TRUNK_CAPACITY, request.getParameter("inputTrunkCapacity"));
+		carDetails.put(CarFields.PAYLOAD, request.getParameter("inputTrunkPayload"));
+		carDetails.put(CarFields.LOAD_VOLUME, request.getParameter("inputLoadVolume"));
+		carDetails.put(CarFields.LOAD_HEIGHT, request.getParameter("inputLoadHeight"));
+		carDetails.put(CarFields.LOAD_WIDTH, request.getParameter("inputLoadWidth"));
+		carDetails.put(CarFields.LOAD_LENGTH, request.getParameter("inputLoadLength"));
+		switch (typeOfCar) {
 		case PASSENGER_CAR:
-			PassengerCar passengerCarFromDb = (PassengerCar)carFromDb;
-			passengerCarFromDb.setNumberOfDoors(Integer.valueOf(request.getParameter("inputNumberOfDoors")));
-			passengerCarFromDb.setTypeOfDrive(TypeOfDrive.getFromDescription(request.getParameter("inputTypeOfDrive")));
-			passengerCarFromDb.setTrunkCapacity(Integer.valueOf(request.getParameter("inputTrunkCapacity")));
+			carDetails.put(CarFields.NUMBER_OF_DOORS, request.getParameter("inputNumberOfDoors"));
+			carDetails.put(CarFields.TYPE_OF_DRIVE, request.getParameter("inputTypeOfDrive"));
+			carDetails.put(CarFields.TRUNK_CAPACITY, request.getParameter("inputTrunkCapacity"));
 			break;
 		case LIGHT_COMMERCIAL_CAR:
-			LightCommercialCar lightCommercialCar = (LightCommercialCar)carFromDb;
-			lightCommercialCar.setPayload(Double.valueOf(request.getParameter("inputTrunkPayload")));
-			lightCommercialCar.setLoadVolume(Double.valueOf(request.getParameter("inputLoadVolume")));
-			lightCommercialCar.setLoadHeight(Double.valueOf(request.getParameter("inputLoadHeight")));
-			lightCommercialCar.setLoadWidth(Double.valueOf(request.getParameter("inputLoadWidth")));
-			lightCommercialCar.setLoadLength(Double.valueOf(request.getParameter("inputLoadLength")));
+			carDetails.put(CarFields.PAYLOAD, request.getParameter("inputTrunkPayload"));
+			carDetails.put(CarFields.LOAD_VOLUME, request.getParameter("inputLoadVolume"));
+			carDetails.put(CarFields.LOAD_HEIGHT, request.getParameter("inputLoadHeight"));
+			carDetails.put(CarFields.LOAD_WIDTH, request.getParameter("inputLoadWidth"));
+			carDetails.put(CarFields.LOAD_LENGTH, request.getParameter("inputLoadLength"));
 			break;
 		}
+		
+		return carDetails;
 	}
 }
