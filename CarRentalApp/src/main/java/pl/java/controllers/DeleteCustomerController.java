@@ -31,6 +31,8 @@ public class DeleteCustomerController extends HttpServlet {
 			customerService.deleteCustomerByPesel(pesel);
 			final String operation = "Deleting customer";
 			request.setAttribute("operation", operation);
+			final String formAction = "printCustomers";
+			request.setAttribute("formAction", formAction);
 			request.getRequestDispatcher("/WEB-INF/hidden-views/operation-success.jsp").forward(request, response);
 		}
 	}

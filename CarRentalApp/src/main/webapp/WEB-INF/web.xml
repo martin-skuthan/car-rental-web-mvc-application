@@ -176,7 +176,7 @@
             <url-pattern>/select-type-of-car.jsp</url-pattern>
             <url-pattern>/addCar</url-pattern>
             <url-pattern>/addCustomer</url-pattern>
-            <url-pattern>/rent-return-car.jsp</url-pattern>
+            <url-pattern>/rentReturnCar</url-pattern>
             <url-pattern>/new-user.jsp</url-pattern>
             <url-pattern>/new-light-commercial-car.jsp</url-pattern>
             <url-pattern>/new-customer.jsp</url-pattern>

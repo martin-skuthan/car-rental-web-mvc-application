@@ -37,6 +37,8 @@ public class AddCustomerController extends HttpServlet {
 			userService.createCustomer(firstName, lastName, pesel);
 			final String operation = "Adding customer";
 			request.setAttribute("operation", operation);
+			final String formAction = "addCustomer";
+			request.setAttribute("formAction", formAction);
 			request.getRequestDispatcher("/WEB-INF/hidden-views/operation-success.jsp").forward(request, response);
 		}catch (ItemWithThisIdAlreadyExistsExcpetion e) {
 			request.setAttribute("controllerAction", ControllerAction.CORRECT);

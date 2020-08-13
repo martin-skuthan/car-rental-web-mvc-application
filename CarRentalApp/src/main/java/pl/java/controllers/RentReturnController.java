@@ -33,7 +33,7 @@ public class RentReturnController extends HttpServlet {
 			HttpSession session = request.getSession(true);
 			String operation = null;
 			switch (controllerAction) {
-			case SELECT_CUSTOMER:			
+			case SELECT_CUSTOMER:
 				selectCustomer(request, response, session);
 				return;
 			case SELECT_DATE:
@@ -51,6 +51,8 @@ public class RentReturnController extends HttpServlet {
 				throw new NoSuchActionException("There is no action:" + controllerAction);
 			}
 			request.setAttribute("operation", operation);
+			final String formAction = "rentReturnCar";
+			request.setAttribute("formAction", formAction);
 			request.getRequestDispatcher("/WEB-INF/hidden-views/operation-success.jsp").forward(request, response);
 		}catch(NoSuchActionException | NullPointerException ex) {
 			ex.printStackTrace();

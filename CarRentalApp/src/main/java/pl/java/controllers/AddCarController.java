@@ -39,6 +39,8 @@ public class AddCarController extends HttpServlet {
 			carService.createCar(carDetailsFromRequest, typeOfCar);
 			final String operation = "Adding car";
 			request.setAttribute("operation", operation);
+			final String formAction = "addCar";
+			request.setAttribute("formAction", formAction);
 			request.getRequestDispatcher("/WEB-INF/hidden-views/operation-success.jsp").forward(request, response);
 		}catch (ItemWithThisIdAlreadyExistsExcpetion e) {
 			request.setAttribute("controllerAction", ControllerAction.CORRECT);

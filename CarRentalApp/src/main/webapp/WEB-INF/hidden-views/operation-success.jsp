@@ -21,7 +21,13 @@
 <h1 class="display-2 text-center"><c:out value="${requestScope.operation} "></c:out>succeeded</h1>
 <div class="text-center">
 <br>
+<c:choose>
+<c:when test="${not empty requestScope.formAction}">
+<form class="form-signin" action="${requestScope.formAction}" method="get">
 <button style="width: 250px;" class="btn btn-lg btn-secondary center-block" name="typeOfCar" value="PASSENGER_CAR" type="submit" >Return</button>
+</form>
+</c:when>
+</c:choose>
 </div>
 </div>
 </div>     

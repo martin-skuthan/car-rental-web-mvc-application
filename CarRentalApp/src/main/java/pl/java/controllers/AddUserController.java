@@ -38,6 +38,8 @@ public class AddUserController extends HttpServlet {
 			userService.createUser(username, mail, password);
 			final String operation = "Adding user";
 			request.setAttribute("operation", operation);
+			final String formAction = "addUser";
+			request.setAttribute("formAction", formAction);
 			request.getRequestDispatcher("/WEB-INF/hidden-views/operation-success.jsp").forward(request, response);
 		}catch (ItemWithThisIdAlreadyExistsExcpetion e) {
 			request.setAttribute("controllerAction", ControllerAction.CORRECT);

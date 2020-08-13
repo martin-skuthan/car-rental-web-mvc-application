@@ -36,6 +36,8 @@ public class UpdateCarController extends HttpServlet {
 				carService.updateCar(carDetails, idOfCar);
 				final String operation = "Updating car";
 				request.setAttribute("operation", operation);
+				final String formAction = "printCars";
+				request.setAttribute("formAction", formAction);
 				request.getRequestDispatcher("/WEB-INF/hidden-views/operation-success.jsp").forward(request, response);
 				break;
 			case FORWARD:

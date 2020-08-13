@@ -21,6 +21,11 @@ public class PrintCustomersController extends HttpServlet {
 	@Inject
 	private CustomerService customerService;
 	private int numberOfRecordsPerPage;
+	
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int numberOfCustomersRecords = customerService.readAllCustomers().size();

@@ -33,6 +33,8 @@ public class UpdateCustomerController extends HttpServlet {
 				customerService.updateCustomer(pesel, firstName, lastName);
 				final String operation = "Updating customer";
 				request.setAttribute("operation", operation);
+				final String formAction = "printCustomers";
+				request.setAttribute("formAction", formAction);
 				request.getRequestDispatcher("/WEB-INF/hidden-views/operation-success.jsp").forward(request, response);
 				break;
 			case FORWARD:

@@ -28,6 +28,8 @@ public class DeleteCarController extends HttpServlet {
 		carService.deleteCarByRegistrationNumber(registrationNumber);
 		final String operation = "Deleting car";
 		request.setAttribute("operation", operation);
+		final String formAction = "printCars";
+		request.setAttribute("formAction", formAction);
 		request.getRequestDispatcher("/WEB-INF/hidden-views/operation-success.jsp").forward(request, response);	
 	}
 
