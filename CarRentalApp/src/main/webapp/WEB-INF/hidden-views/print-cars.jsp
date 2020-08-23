@@ -130,7 +130,17 @@
   </table>
   </c:when>
   <c:otherwise>
-    <h4 class="display-4">There is no <c:out value="${requestScope.typeOfCar}"></c:out></h4>  	
+  	<c:choose>
+      <c:when test="${requestScope.controllerAction == 'RENT'}">
+        <h4 class="display-4">There is no <c:out value="${requestScope.typeOfCar}"></c:out> cars to rent</h4>       
+      </c:when>
+      <c:when test="${requestScope.controllerAction == 'RETURN'}">
+        <h4 class="display-4">There is no rented <c:out value="${requestScope.typeOfCar}"></c:out> cars</h4>     
+      </c:when>
+      <c:otherwise>
+        <h4 class="display-4">There is no <c:out value="${requestScope.typeOfCar}"></c:out> cars</h4>
+      </c:otherwise>  
+    </c:choose>	
   </c:otherwise>
 </c:choose>
 <div class="row">

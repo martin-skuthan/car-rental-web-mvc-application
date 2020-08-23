@@ -7,6 +7,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="css/styles.css" rel="stylesheet">
+    <link href="css/ihover.css" rel="stylesheet">
 </head>
 <body>
 
@@ -15,6 +16,40 @@
 <!-- Navbar -->
 
 <!-- Content -->
+<div class="d-flex justify-content-center align-items-center container h-100">
+<div class="col-sm-10 col-md-10 my-auto">
+<h1 class="display-2 text-center">Select action</h1>
+<br>
+<div class="row">
+<div class="ih-item circle effect1" style="margin-left: 150px">
+  <a href="printCars?controllerAction=rent">
+  <div class="spinner"></div>
+    <div class="img">
+      <img src="buttons/RentCar.png" alt="img" width="520" height="520">
+    </div>
+    <div class="info">
+      <h3>Rent car</h3>
+      <p>Rent passenger/light commercial car</p>
+    </div>
+  </a>
+</div>
+<div class="ih-item circle effect1" style="margin-left: 190px">
+  <a href="printCars?controllerAction=return">
+  <div class="spinner"></div>
+    <div class="img d-flex">
+      <img src="buttons/ReturnCar.png" alt="img">
+    </div>
+    <div class="info">
+      <h3>Return car</h3>
+      <p>Return passenger/light commercial car</p>
+    </div>
+  </a>
+</div>
+</form>
+</div>
+</div>
+</div>  
+<!-- 
 <div class="d-flex justify-content-center align-items-center container h-100">
 <div class="col-sm-8 col-md-8 my-auto">
 <h1 class="display-2">Select action</h1>
@@ -25,7 +60,8 @@
 </form>
 </div>
 </div>
-</div>     
+</div>  
+-->   
 <!-- Content -->
 
 <!-- Footer -->
