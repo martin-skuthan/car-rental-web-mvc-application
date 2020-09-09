@@ -6,9 +6,9 @@
 	<persistence-unit name="myPersistenceUnit"
 		transaction-type="RESOURCE_LOCAL">
 		<properties>
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/libraree?useSSL=false&amp;serverTimezone=Europe/Warsaw"/>
-			<property name="javax.persistence.jdbc.user" value="root" />
-			<property name="javax.persistence.jdbc.password" value="admin" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://libraree.cnn0owmudcjs.eu-central-1.rds.amazonaws.com/libraree"/>
+			<property name="javax.persistence.jdbc.user" value="admin" />
+			<property name="javax.persistence.jdbc.password" value="65003000" />
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 			<property name="javax.persistence.schema-generation.database.action"
                   value="none"/> 

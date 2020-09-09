@@ -12,16 +12,17 @@
 		type="javax.sql.DataSource" 
 		initialSize="5" 
 		maxTotal="20"
-		username="root" 
-		password="admin" 
-		driverClassName="com.mysql.cj.jdbc.Driver" 
-		url="jdbc:mysql://localhost:3306/libraree?useSSL=false&amp;serverTimezone=UTC" />
+		username="admin" 
+		password="65003000" 
+		driverClassName="com.mysql.cj.jdbc.Driver"
+		factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory"
+		url="jdbc:mysql://libraree.cnn0owmudcjs.eu-central-1.rds.amazonaws.com/libraree" />
 	<Realm className="org.apache.catalina.realm.DataSourceRealm" 
 		dataSourceName="jdbc/user_auth"
-		userTable="user" 
+		userTable="User" 
 		userNameCol="username" 
 		userCredCol="password"
-		userRoleTable="user_role"
+		userRoleTable="User_Role"
 		roleNameCol="role_name"
 		localDataSource="true" />
 </Context>

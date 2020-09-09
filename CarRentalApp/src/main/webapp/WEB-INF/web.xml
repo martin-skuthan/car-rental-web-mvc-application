@@ -182,7 +182,6 @@
             <url-pattern>/new-customer.jsp</url-pattern>
             <url-pattern>/login-success.jsp</url-pattern>
             <url-pattern>/print-customers.jsp</url-pattern>
-            <url-pattern>/printCars</url-pattern>
             <url-pattern>/printCustomers</url-pattern>
             <url-pattern>/logIn</url-pattern>
             <http-method>GET</http-method>
