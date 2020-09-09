@@ -1,7 +1,7 @@
 # Car rental web application 
 Car rental management system written using Java/Jave EE technolgies.
 You can test my application under following link:
-[Car rental app](CarRentalApplication-env-2.eba-h3uprfbz.eu-central-1.elasticbeanstalk.com)
+<http://carrentalapplication-env-2.eba-h3uprfbz.eu-central-1.elasticbeanstalk.com/>
 
 ## Table of contents
 * [General info](#general-info)
