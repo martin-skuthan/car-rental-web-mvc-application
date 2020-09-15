@@ -19,10 +19,10 @@
 <div class="col-sm-8 col-md-8 my-auto">
 <c:choose>
 <c:when test="${requestScope.controllerAction == 'UPDATE'}">
-<h1 class="display-2">Updatefddsdd customer</h1>
+<h1 class="display-2">Updateee customer</h1>
 </c:when>
 <c:otherwise>
-<h1 class="display-2">Nedadsadaddasdsw customer</h1>
+<h1 class="display-2">Newww customer</h1>
 </c:otherwise>
 </c:choose>
 <div class="bs-callout bs-callout-default">
