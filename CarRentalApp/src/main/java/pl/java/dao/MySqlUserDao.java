@@ -36,7 +36,7 @@ public class MySqlUserDao implements UserDao {
 			entityTransaction.commit();
 		}
 	}
-
+	
 	public User read(String userId) {
 		// TODO Auto-generated method stub
 		return null;

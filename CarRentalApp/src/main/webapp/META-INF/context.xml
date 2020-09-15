@@ -24,5 +24,13 @@
 		userCredCol="password"
 		userRoleTable="User_Role"
 		roleNameCol="role_name"
-		localDataSource="true" />
+		localDataSource="true"
+		digest="MD5"
+		>
+		<CredentialHandler className="org.apache.catalina.realm.MessageDigestCredentialHandler"
+          algorithm="MD5"
+          iterations="1"
+          saltlenght="0"
+        />
+		</Realm>
 </Context>
