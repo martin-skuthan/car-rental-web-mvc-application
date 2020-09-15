@@ -1,5 +1,9 @@
 package pl.java.services;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
@@ -12,11 +16,27 @@ public class UserService {
 	private UserDao userDao;
 	
 	public void createUser(String username, String mail, String password) {
-		User user = new User(username, mail, password);
+		User user = new User();
+		user.setUsername(username);
+		user.setMail(mail);
+		String encyptedPassword = encryptPassword(password);
+		user.setPassword(encyptedPassword);
 		user.setActive(true);
 		userDao.create(user);
 	}
 	
+	private String encryptPassword(String password) {
+		MessageDigest digest = null;
+		try {
+			digest = MessageDigest.getInstance("MD5");
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		digest.update(password.getBytes());
+		String md5Password = new BigInteger(1, digest.digest()).toString(16);
+		return md5Password;
+	}
+		
 	public User readUser(String userId) {
 		return null;
 	}

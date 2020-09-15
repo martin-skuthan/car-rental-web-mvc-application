@@ -29,7 +29,7 @@ public class User implements Serializable {
 	private String password;
 	private boolean isActive;
 	@ManyToMany
-	@JoinTable(name = "user_role",
+	@JoinTable(name = "User_Role",
     joinColumns = {@JoinColumn(name="username", referencedColumnName="username")},
     inverseJoinColumns = {@JoinColumn(name="role_name", referencedColumnName="role_name")})
 	private List<Role> roles;
