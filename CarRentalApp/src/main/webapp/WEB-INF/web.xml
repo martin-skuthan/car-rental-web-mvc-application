@@ -109,6 +109,12 @@
   	<description></description>
   	<servlet-class>pl.java.controllers.HomeController</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>InfoController</servlet-name>
+  	<display-name>InfoController</display-name>
+  	<description></description>
+  	<servlet-class>pl.java.controllers.InfoController</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>AddUserController</servlet-name>
   	<url-pattern>/AddUserController</url-pattern>
@@ -169,12 +175,18 @@
   	<servlet-name>HomeController</servlet-name>
   	<url-pattern>/HomeController</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>InfoController</servlet-name>
+  	<url-pattern>/InfoController</url-pattern>
+  </servlet-mapping>
   
    <security-constraint>
         <web-resource-collection>
             <web-resource-name>Login constraint</web-resource-name>
             <url-pattern>/select-type-of-car.jsp</url-pattern>
             <url-pattern>/addCar</url-pattern>
+            <url-pattern>/printCars</url-pattern>
+            <url-pattern>/addUser</url-pattern>
             <url-pattern>/addCustomer</url-pattern>
             <url-pattern>/rentReturnCar</url-pattern>
             <url-pattern>/new-user.jsp</url-pattern>
