@@ -49,7 +49,7 @@
             <b>Loging in system</b>
              - Access to application resources is allowed only to logged users. 
              Application permits registered users to log into the application, using system 
-             created based on Tomcat Authentication Mechanism.
+             created based on Tomcat Authentication Mechanism and MD5 encryption.
             </p>
           </li>
           <li>
