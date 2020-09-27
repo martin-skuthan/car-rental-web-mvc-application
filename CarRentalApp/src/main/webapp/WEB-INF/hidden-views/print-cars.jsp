@@ -18,6 +18,7 @@
 <!-- Content -->
 <div class="container-fluid h-100 d-flex">
 <div class="col-sm-12 col-md-12 my-auto container-fluid">
+<div class="row">
 <c:choose>
   <c:when test="${requestScope.typeOfCar == 'PASSENGER_CAR'}">
     <h1 class="display-2">Passenger cars</h1>
@@ -26,6 +27,19 @@
     <h1 class="display-2">Light commercial cars</h1>
   </c:otherwise>
 </c:choose>
+<div class="btn-group ml-auto mt-5 mr-3">
+  <button type="button" class="btn btn-secondary dropdown-toggle count-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Sort by
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="">Brand</a>
+    <a class="dropdown-item" href="">Model</a>
+    <a class="dropdown-item" href="">Transmission</a>
+    <a class="dropdown-item" href="">Drive</a>
+    <a class="dropdown-item" href="">State</a>
+</div>
+</div>
+</div>
 <div class="bs-callout bs-callout-default">
 <c:choose>
   <c:when test="${requestScope.numberOfCarRecords != 0}">
@@ -170,7 +184,7 @@
     </c:forEach>
   </ul>
 </nav>
-<div class="btn-group">
+<div class="btn-group mr-3">
   <button type="button" class="btn btn-primary dropdown-toggle count-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Count
   </button>
