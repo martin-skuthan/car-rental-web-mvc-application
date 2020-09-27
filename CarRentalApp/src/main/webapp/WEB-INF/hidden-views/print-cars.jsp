@@ -26,6 +26,21 @@
     <h1 class="display-2">Light commercial cars</h1>
   </c:otherwise>
 </c:choose>
+<<<<<<< Updated upstream
+=======
+<div class="btn-group ml-auto mt-5 mr-3">
+  <button type="button" class="btn btn-secondary dropdown-toggle count-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Sort by
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="printCars?sortDescription=brand">Brand</a>
+    <a class="dropdown-item" href="printCars?sortDescription=model">Model</a>
+    <a class="dropdown-item" href="printCars?sortDescription=transmission">Transmission</a>
+    <a class="dropdown-item" href="printCars?sortDescription=state">State</a>
+</div>
+</div>
+</div>
+>>>>>>> Stashed changes
 <div class="bs-callout bs-callout-default">
 <c:choose>
   <c:when test="${requestScope.numberOfCarRecords != 0}">

@@ -1,7 +1,7 @@
 package pl.java.controllers;
 
 import java.io.IOException;
-import java.util.List;import java.util.stream.Collector;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -40,7 +40,9 @@ public class PrintCarsController extends HttpServlet {
 			request.setAttribute("noOfPages", noOfPages);
 			int noOfPage = getNoOfPage(request);
 			request.setAttribute("noOfPage", noOfPage);
-			List<Car> cars = getRangeOfCars(typeOfCar, noOfPage, numberOfRecordsPerPage, controllerAction);
+			String sortDescription = request.getParameter("sortDescription");
+			request.setAttribute("sortDescription", sortDescription);
+			List<Car> cars = getRangeOfCars(typeOfCar, noOfPage, numberOfRecordsPerPage, controllerAction, sortDescription);
 			request.setAttribute("cars", cars);			
 			request.getRequestDispatcher("/WEB-INF/hidden-views/print-cars.jsp").forward(request, response);
 		}catch(NoSuchTypeException | NoSuchActionException ex) {
@@ -111,8 +113,8 @@ public class PrintCarsController extends HttpServlet {
 		return noOfPage;
 	}
 	
-	private List<Car> getRangeOfCars(TypeOfCar typeOfCar, int noOfPage, int numberOfRecordsPerPage, ControllerAction controllerAction) {
-		Stream<Car> stream = carService.readRangeOfCars(typeOfCar, noOfPage, numberOfRecordsPerPage).stream();
+	private List<Car> getRangeOfCars(TypeOfCar typeOfCar, int noOfPage, int numberOfRecordsPerPage, ControllerAction controllerAction, String sortDescription) {
+		Stream<Car> stream = carService.readRangeOfCars(typeOfCar, noOfPage, numberOfRecordsPerPage, sortDescription).stream();
 		switch (controllerAction) {
 		case PRINT:
 			return stream.collect(Collectors.toList());
