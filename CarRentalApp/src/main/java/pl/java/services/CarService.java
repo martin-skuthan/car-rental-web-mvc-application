@@ -1,12 +1,18 @@
 package pl.java.services;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
+import pl.java.comparators.CarBrandComparator;
+import pl.java.comparators.CarModelComparator;
+import pl.java.comparators.CarStateComparator;
+import pl.java.comparators.CarTransmissionComparator;
+import pl.java.comparators.enums.CarComparatorType;
 import pl.java.converters.DateConverter;
 import pl.java.dao.CarDao;
 import pl.java.exceptions.NoSuchTypeException;
@@ -79,10 +85,21 @@ public class CarService {
 		return cars;
 	}
 	
-	public List<Car> readRangeOfCars(TypeOfCar typeOfCar, int noOfPage, int noOfRecords) {
+	public List<Car> readRangeOfCars(TypeOfCar typeOfCar, int noOfPage, int noOfRecords, CarComparatorType carComparatorType) {
+		List<Car> cars = readAllCars(typeOfCar);
+		if (carComparatorType != null) {
+			Comparator<Car> comparator = getComparatorFromDescription(carComparatorType);
+			cars.sort(comparator);
+		}
+		
 		int firstResult = noOfPage * noOfRecords - noOfRecords;
-		List<Car> cars = carDao.readRangeOfCars(typeOfCar, noOfRecords, firstResult);
-		return cars;
+		int lastResult = firstResult + noOfRecords;
+		if (lastResult > cars.size()) {
+			lastResult = cars.size();
+		}
+		
+		List<Car> rangeCar = cars.subList(firstResult, lastResult);
+		return rangeCar;
 	}
 	
 	public Car createCarFromDetails(HashMap<CarFields, String> carDetails, TypeOfCar typeOfCar) {
@@ -143,5 +160,21 @@ public class CarService {
 			throw new NoSuchTypeException("There is no typeOfCar");
 		}
 	}
+	
+	private Comparator<Car> getComparatorFromDescription(CarComparatorType carComparatorType) {
 		
+		switch (carComparatorType) {
+		case BRAND:
+			return new CarBrandComparator();
+		case MODEL:
+			return new CarModelComparator();
+		case STATE:
+			return new CarStateComparator();
+		case TRANSMISSION:	
+			return new CarTransmissionComparator();
+		default:
+			throw new NoSuchTypeException("");
+		}
+	}
+			
 }

@@ -32,11 +32,10 @@
     Sort by
   </button>
   <div class="dropdown-menu">
-    <a class="dropdown-item" href="">Brand</a>
-    <a class="dropdown-item" href="">Model</a>
-    <a class="dropdown-item" href="">Transmission</a>
-    <a class="dropdown-item" href="">Drive</a>
-    <a class="dropdown-item" href="">State</a>
+    <a class="dropdown-item" href="printCars?sortDescription=brand">Brand</a>
+    <a class="dropdown-item" href="printCars?sortDescription=model">Model</a>
+    <a class="dropdown-item" href="printCars?sortDescription=transmission">Transmission</a>
+    <a class="dropdown-item" href="printCars?sortDescription=state">State</a>
 </div>
 </div>
 </div>
@@ -175,10 +174,10 @@
     <c:forEach begin="1" end="${requestScope.noOfPages}" varStatus="loop">
       <c:choose>
       <c:when test="${loop.index == requestScope.noOfPage}">
-        <li class="page-item active"><a class="page-link" href="printCars?page=${loop.index}&typeOfCar=${requestScope.typeOfCar}&controllerAction=${requestScope.controllerAction}"><c:out value="${loop.index}"></c:out></a></li>
+        <li class="page-item active"><a class="page-link" href="printCars?page=${loop.index}"><c:out value="${loop.index}"></c:out></a></li>
       </c:when>
       <c:otherwise>
-        <li class="page-item"><a class="page-link" href="printCars?page=${loop.index}&typeOfCar=${requestScope.typeOfCar}&controllerAction=${requestScope.controllerAction}"><c:out value="${loop.index}"></c:out></a></li>
+        <li class="page-item"><a class="page-link" href="printCars?page=${loop.index}"><c:out value="${loop.index}"></c:out></a></li>
       </c:otherwise>
       </c:choose>
     </c:forEach>
@@ -189,9 +188,9 @@
     Count
   </button>
   <div class="dropdown-menu">
-    <a class="dropdown-item" href="printCars?typeOfCar=${requestScope.typeOfCar}&count=5">5</a>
-    <a class="dropdown-item" href="printCars?typeOfCar=${requestScope.typeOfCar}&count=10">10</a>
-    <a class="dropdown-item" href="printCars?typeOfCar=${requestScope.typeOfCar}&count=15">15</a>
+    <a class="dropdown-item" href="printCars?count=5">5</a>
+    <a class="dropdown-item" href="printCars?count=10">10</a>
+    <a class="dropdown-item" href="printCars?count=15">15</a>
 </div>
 </div>
 </div>

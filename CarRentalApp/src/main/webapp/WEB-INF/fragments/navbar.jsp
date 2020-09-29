@@ -11,7 +11,7 @@
         <a class="nav-link" href="addCar">Add car</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="printCars">Print/Modify cars</a>
+        <a class="nav-link" href="printCars?controllerAction=print">Print/Modify cars</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="addCustomer">Add customer</a>
