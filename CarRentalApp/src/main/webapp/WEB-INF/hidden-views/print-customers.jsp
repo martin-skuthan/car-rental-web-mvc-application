@@ -32,8 +32,8 @@
     Sort by
   </button>
   <div class="dropdown-menu">
-    <a class="dropdown-item" href="">First name</a>
-    <a class="dropdown-item" href="">Last name</a>
+    <a class="dropdown-item" href="printCustomers?sortDescription=first_name">First name</a>
+    <a class="dropdown-item" href="printCustomers?sortDescription=last_name">Last name</a>
 </div>
 </div>
 </div>

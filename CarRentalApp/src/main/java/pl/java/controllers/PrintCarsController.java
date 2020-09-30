@@ -31,10 +31,11 @@ public class PrintCarsController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			TypeOfCar typeOfCar = getTypeOfCarAndSaveInSession(request);
+			HttpSession session = request.getSession(true);
+			TypeOfCar typeOfCar = getTypeOfCarAndSaveInSession(request, session);
 			request.setAttribute("typeOfCar", typeOfCar);
 			setNumberOfRecordsPerPage(request);
-			ControllerAction controllerAction = getControllerActionAndSaveInSession(request);
+			ControllerAction controllerAction = getControllerActionAndSaveInSession(request, session);
 			request.setAttribute("controllerAction", controllerAction);
 			int numberOfCarRecords = getNumberOfRecords(typeOfCar, controllerAction);
 			request.setAttribute("numberOfCarRecords", numberOfCarRecords);
@@ -42,7 +43,7 @@ public class PrintCarsController extends HttpServlet {
 			request.setAttribute("noOfPages", noOfPages);
 			int noOfPage = getNoOfPage(request);
 			request.setAttribute("noOfPage", noOfPage);
-			CarComparatorType carComparatorType = getSortDescriptionAndSaveInSession(request);
+			CarComparatorType carComparatorType = getCarComparatorTypeAndSaveInSession(request, session);
 			List<Car> cars = getRangeOfCars(typeOfCar, noOfPage, numberOfRecordsPerPage, controllerAction, carComparatorType);
 			request.setAttribute("cars", cars);			
 			request.getRequestDispatcher("/WEB-INF/hidden-views/print-cars.jsp").forward(request, response);
@@ -96,8 +97,7 @@ public class PrintCarsController extends HttpServlet {
 		return noOfPage;
 	}
 	
-	private ControllerAction getControllerActionAndSaveInSession(HttpServletRequest request) {
-		HttpSession session = request.getSession(true);
+	private ControllerAction getControllerActionAndSaveInSession(HttpServletRequest request, HttpSession session) {
 		String controllerActionFromSession = (String)session.getAttribute("controllerAction");
 		String controllerActionFromRequest = request.getParameter("controllerAction");
 		if (controllerActionFromSession == null || (controllerActionFromRequest != null && controllerActionFromSession != controllerActionFromRequest)) {
@@ -107,7 +107,7 @@ public class PrintCarsController extends HttpServlet {
 		ControllerAction controllerAction = null;
 		try {
 			controllerAction = ControllerAction.getFromDescription((String)session.getAttribute("controllerAction"));
-		}catch (Exception e) {
+		}catch (Exception ex) {
 			controllerAction = ControllerAction.PRINT;
 		}
 
@@ -115,8 +115,7 @@ public class PrintCarsController extends HttpServlet {
 		return controllerAction;
 	}
 	
-	private TypeOfCar getTypeOfCarAndSaveInSession(HttpServletRequest request) {
-		HttpSession session = request.getSession(true);
+	private TypeOfCar getTypeOfCarAndSaveInSession(HttpServletRequest request, HttpSession session) {
 		String typeOfCarDescriptionFromSession = (String)session.getAttribute("typeOfCar");
 		String typeOfCarDescriptionFromRequest = request.getParameter("typeOfCar");
 		if(typeOfCarDescriptionFromSession == null || (typeOfCarDescriptionFromRequest != null && typeOfCarDescriptionFromSession != typeOfCarDescriptionFromRequest)) {
@@ -126,7 +125,7 @@ public class PrintCarsController extends HttpServlet {
 		TypeOfCar typeOfCar = null;
 		try {
 			typeOfCar = TypeOfCar.getTypeOfCar((String)session.getAttribute("typeOfCar"));		
-		}catch (NoSuchTypeException ex) {
+		}catch (Exception ex) {
 			typeOfCar = TypeOfCar.PASSENGER_CAR;
 		}
 		
@@ -134,8 +133,7 @@ public class PrintCarsController extends HttpServlet {
 		return typeOfCar;
 	}
 	
-	private CarComparatorType getSortDescriptionAndSaveInSession(HttpServletRequest request) {
-		HttpSession session = request.getSession(true);
+	private CarComparatorType getCarComparatorTypeAndSaveInSession(HttpServletRequest request, HttpSession session) {
 		String sortDescriptionFromSession = (String)session.getAttribute("sortDescription");
 		String sortDescriptionFromRequest = request.getParameter("sortDescription");
 		if (sortDescriptionFromSession == null || (sortDescriptionFromRequest != null && sortDescriptionFromSession != sortDescriptionFromRequest)) {
@@ -145,8 +143,8 @@ public class PrintCarsController extends HttpServlet {
 		CarComparatorType carComparatorType = null;
 		try {
 			carComparatorType = CarComparatorType.getFromDescription((String)session.getAttribute("sortDescription"));
-		}catch (NoSuchTypeException e) {
-			e.getMessage();
+		}catch (Exception ex) {
+			ex.getMessage();
 		}
 		
 		return carComparatorType;		
