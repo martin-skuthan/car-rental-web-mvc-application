@@ -1,10 +1,17 @@
 package pl.java.services;
 
+import java.util.Comparator;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+
+import pl.java.comparators.CustomerFirstNameComparator;
+import pl.java.comparators.CustomerLastNameComparator;
+import pl.java.comparators.enums.CustomerComparatorType;
 import pl.java.dao.CustomerDao;
+import pl.java.exceptions.NoSuchActionException;
+import pl.java.model.Car;
 import pl.java.model.Customer;
 
 @RequestScoped
@@ -43,9 +50,32 @@ public class CustomerService {
 		return customers;
 	}
 	
-	public List<Customer> readRangeOfCustomers(int noOfPage, int noOfRecords) {
+	public List<Customer> readRangeOfCustomers(int noOfPage, int noOfRecords, CustomerComparatorType customerComparatorType) {
+		List<Customer> customers = readAllCustomers();
+		if (customerComparatorType != null) {
+			Comparator<Customer> comparator = getComparatorFromDescription(customerComparatorType);
+			customers.sort(comparator);
+		}
+		
 		int firstResult = noOfPage * noOfRecords - noOfRecords;
-		List<Customer> customers = customerDao.readRangeOfCustomers(noOfRecords, firstResult);
-		return customers;
+		int lastResult = firstResult + noOfRecords;
+		if (lastResult > customers.size()) {
+			lastResult = customers.size();
+		}
+		
+		List<Customer> rangeCustomers = customers.subList(firstResult, lastResult);
+		return rangeCustomers;
+	}
+	
+	private Comparator<Customer> getComparatorFromDescription(CustomerComparatorType customerComparatorType) {
+		switch (customerComparatorType) {
+		case FIRST_NAME:
+			return new CustomerFirstNameComparator();
+		case LAST_NAME:
+			return new CustomerLastNameComparator();
+		default:
+			throw new NoSuchActionException("");
+		}
+
 	}
 }

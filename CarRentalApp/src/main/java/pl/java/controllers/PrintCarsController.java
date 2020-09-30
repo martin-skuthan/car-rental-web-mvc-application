@@ -11,7 +11,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import pl.java.comparators.enums.CarComparatorType;
 import pl.java.controllers.enums.ControllerAction;
 import pl.java.exceptions.NoSuchActionException;
 import pl.java.exceptions.NoSuchTypeException;
@@ -29,10 +31,11 @@ public class PrintCarsController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			TypeOfCar typeOfCar = getTypeOfCar(request);
+			HttpSession session = request.getSession(true);
+			TypeOfCar typeOfCar = getTypeOfCarAndSaveInSession(request, session);
 			request.setAttribute("typeOfCar", typeOfCar);
 			setNumberOfRecordsPerPage(request);
-			ControllerAction controllerAction = getControllerAction(request);
+			ControllerAction controllerAction = getControllerActionAndSaveInSession(request, session);
 			request.setAttribute("controllerAction", controllerAction);
 			int numberOfCarRecords = getNumberOfRecords(typeOfCar, controllerAction);
 			request.setAttribute("numberOfCarRecords", numberOfCarRecords);
@@ -40,9 +43,8 @@ public class PrintCarsController extends HttpServlet {
 			request.setAttribute("noOfPages", noOfPages);
 			int noOfPage = getNoOfPage(request);
 			request.setAttribute("noOfPage", noOfPage);
-			String sortDescription = request.getParameter("sortDescription");
-			request.setAttribute("sortDescription", sortDescription);
-			List<Car> cars = getRangeOfCars(typeOfCar, noOfPage, numberOfRecordsPerPage, controllerAction, sortDescription);
+			CarComparatorType carComparatorType = getCarComparatorTypeAndSaveInSession(request, session);
+			List<Car> cars = getRangeOfCars(typeOfCar, noOfPage, numberOfRecordsPerPage, controllerAction, carComparatorType);
 			request.setAttribute("cars", cars);			
 			request.getRequestDispatcher("/WEB-INF/hidden-views/print-cars.jsp").forward(request, response);
 		}catch(NoSuchTypeException | NoSuchActionException ex) {
@@ -65,15 +67,6 @@ public class PrintCarsController extends HttpServlet {
 		}	
 	}
 	
-	private ControllerAction getControllerAction(HttpServletRequest request) {
-		ControllerAction controllerAction = ControllerAction.PRINT;
-		if (request.getParameter("controllerAction") != null) {
-			controllerAction = ControllerAction.getFromDescription(request.getParameter("controllerAction"));
-		}
-		
-		return controllerAction;
-	}
-	
 	private void setNumberOfRecordsPerPage(HttpServletRequest request) {
 		final int defaultNumberOfRecordsPerPate = 10;
 		if(numberOfRecordsPerPage == 0) {
@@ -83,15 +76,6 @@ public class PrintCarsController extends HttpServlet {
 		if(request.getParameter("count") != null) {
 			numberOfRecordsPerPage = Integer.valueOf(request.getParameter("count"));
 		}	
-	}
-	
-	private TypeOfCar getTypeOfCar(HttpServletRequest request) {
-		TypeOfCar typeOfCar = TypeOfCar.PASSENGER_CAR;
-		if(request.getParameter("typeOfCar") != null) {
-			typeOfCar = TypeOfCar.getTypeOfCar(request.getParameter("typeOfCar"));
-		}
-		
-		return typeOfCar;
 	}
 	
 	private int getNoOfPages(int numberOfCarRecords, int numberOfRecordsPerPage) {
@@ -113,8 +97,62 @@ public class PrintCarsController extends HttpServlet {
 		return noOfPage;
 	}
 	
-	private List<Car> getRangeOfCars(TypeOfCar typeOfCar, int noOfPage, int numberOfRecordsPerPage, ControllerAction controllerAction, String sortDescription) {
-		Stream<Car> stream = carService.readRangeOfCars(typeOfCar, noOfPage, numberOfRecordsPerPage, sortDescription).stream();
+	private ControllerAction getControllerActionAndSaveInSession(HttpServletRequest request, HttpSession session) {
+		String controllerActionFromSession = (String)session.getAttribute("controllerAction");
+		String controllerActionFromRequest = request.getParameter("controllerAction");
+		if (controllerActionFromSession == null || (controllerActionFromRequest != null && controllerActionFromSession != controllerActionFromRequest)) {
+			session.setAttribute("controllerAction", controllerActionFromRequest);
+		}
+		
+		ControllerAction controllerAction = null;
+		try {
+			controllerAction = ControllerAction.getFromDescription((String)session.getAttribute("controllerAction"));
+		}catch (Exception ex) {
+			controllerAction = ControllerAction.PRINT;
+		}
+
+		
+		return controllerAction;
+	}
+	
+	private TypeOfCar getTypeOfCarAndSaveInSession(HttpServletRequest request, HttpSession session) {
+		String typeOfCarDescriptionFromSession = (String)session.getAttribute("typeOfCar");
+		String typeOfCarDescriptionFromRequest = request.getParameter("typeOfCar");
+		if(typeOfCarDescriptionFromSession == null || (typeOfCarDescriptionFromRequest != null && typeOfCarDescriptionFromSession != typeOfCarDescriptionFromRequest)) {
+			session.setAttribute("typeOfCar", typeOfCarDescriptionFromRequest);
+		}
+		
+		TypeOfCar typeOfCar = null;
+		try {
+			typeOfCar = TypeOfCar.getTypeOfCar((String)session.getAttribute("typeOfCar"));		
+		}catch (Exception ex) {
+			typeOfCar = TypeOfCar.PASSENGER_CAR;
+		}
+		
+		
+		return typeOfCar;
+	}
+	
+	private CarComparatorType getCarComparatorTypeAndSaveInSession(HttpServletRequest request, HttpSession session) {
+		String sortDescriptionFromSession = (String)session.getAttribute("sortDescription");
+		String sortDescriptionFromRequest = request.getParameter("sortDescription");
+		if (sortDescriptionFromSession == null || (sortDescriptionFromRequest != null && sortDescriptionFromSession != sortDescriptionFromRequest)) {
+			session.setAttribute("sortDescription", sortDescriptionFromRequest);
+		}
+		
+		CarComparatorType carComparatorType = null;
+		try {
+			carComparatorType = CarComparatorType.getFromDescription((String)session.getAttribute("sortDescription"));
+		}catch (Exception ex) {
+			ex.getMessage();
+		}
+		
+		return carComparatorType;		
+	}
+	
+	
+	private List<Car> getRangeOfCars(TypeOfCar typeOfCar, int noOfPage, int numberOfRecordsPerPage, ControllerAction controllerAction, CarComparatorType carComparatorType) {
+		Stream<Car> stream = carService.readRangeOfCars(typeOfCar, noOfPage, numberOfRecordsPerPage, carComparatorType).stream();
 		switch (controllerAction) {
 		case PRINT:
 			return stream.collect(Collectors.toList());

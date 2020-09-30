@@ -9,7 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import pl.java.comparators.enums.CustomerComparatorType;
 import pl.java.controllers.enums.ControllerAction;
 import pl.java.model.Customer;
 import pl.java.services.CustomerService;
@@ -28,6 +30,7 @@ public class PrintCustomersController extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession(true);
 		int numberOfCustomersRecords = customerService.readAllCustomers().size();
 		setNumberOfRecordsPerPage(request);
 		ControllerAction controllerAction = getControllerAction(request);
@@ -37,7 +40,8 @@ public class PrintCustomersController extends HttpServlet {
 		request.setAttribute("noOfPages", noOfPages);
 		int noOfPage = getNoOfPage(request);
 		request.setAttribute("noOfPage", noOfPage);
-		List<Customer> customers = customerService.readRangeOfCustomers(noOfPage, numberOfRecordsPerPage);
+		CustomerComparatorType customerComparatorType = getComparatorTypeAndSaveInSession(request, session);
+		List<Customer> customers = customerService.readRangeOfCustomers(noOfPage, numberOfRecordsPerPage, customerComparatorType);
 		request.setAttribute("customers", customers);
 		request.getRequestDispatcher("/WEB-INF/hidden-views/print-customers.jsp").forward(request, response);		
 	}
@@ -79,5 +83,22 @@ public class PrintCustomersController extends HttpServlet {
 		}
 		
 		return noOfPage;
+	}
+	
+	private CustomerComparatorType getComparatorTypeAndSaveInSession(HttpServletRequest request, HttpSession session) {
+		String sortDescriptionFromSession = (String)session.getAttribute("sortDescription");
+		String sortDescriptionFromRequest = request.getParameter("sortDescription");
+		if (sortDescriptionFromSession == null || (sortDescriptionFromRequest != null && sortDescriptionFromSession != sortDescriptionFromRequest)) {
+			session.setAttribute("sortDescription", sortDescriptionFromRequest);
+		}
+		
+		CustomerComparatorType customerComparatorType = null;
+		try {
+			customerComparatorType = CustomerComparatorType.getFromDescription((String)session.getAttribute("sortDescription"));
+		}catch (Exception ex) {
+			ex.getMessage();
+		}
+		
+		return customerComparatorType;
 	}
 }

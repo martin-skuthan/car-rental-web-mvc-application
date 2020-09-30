@@ -17,7 +17,8 @@
 
 <!-- Content -->
 <div class="d-flex justify-content-center align-items-center container h-100">
-<div class="col-sm-8 col-md-8 my-auto">
+<div class="col-sm-10 col-md-10 my-auto">
+<div class="row">
 <c:choose>
 <c:when test="${requestScope.controllerAction == 'SELECT_CUSTOMER'}">
   <h1 class="display-2">Select customer</h1>
@@ -26,6 +27,16 @@
   <h1 class="display-2">Customers</h1>
 </c:otherwise>
 </c:choose>
+<div class="btn-group ml-auto mt-5 mr-3">
+  <button type="button" class="btn btn-secondary dropdown-toggle count-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Sort by
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="printCustomers?sortDescription=first_name">First name</a>
+    <a class="dropdown-item" href="printCustomers?sortDescription=last_name">Last name</a>
+</div>
+</div>
+</div>
 <div class="bs-callout bs-callout-default">
 <c:choose>
 <c:when test="${requestScope.numberOfCustomersRecords != 0}">
@@ -92,7 +103,7 @@
     </c:forEach>
   </ul>
 </nav>
-<div class="btn-group">
+<div class="btn-group mr-3">
   <button type="button" class="btn btn-primary dropdown-toggle count-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Count
   </button>

@@ -9,11 +9,10 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 import pl.java.comparators.CarBrandComparator;
-import pl.java.comparators.CarDriveComparator;
 import pl.java.comparators.CarModelComparator;
 import pl.java.comparators.CarStateComparator;
 import pl.java.comparators.CarTransmissionComparator;
-import pl.java.comparators.enums.CarComparator;
+import pl.java.comparators.enums.CarComparatorType;
 import pl.java.converters.DateConverter;
 import pl.java.dao.CarDao;
 import pl.java.exceptions.NoSuchActionException;
@@ -87,10 +86,10 @@ public class CarService {
 		return cars;
 	}
 	
-	public List<Car> readRangeOfCars(TypeOfCar typeOfCar, int noOfPage, int noOfRecords, String sortDescription) {
+	public List<Car> readRangeOfCars(TypeOfCar typeOfCar, int noOfPage, int noOfRecords, CarComparatorType carComparatorType) {
 		List<Car> cars = readAllCars(typeOfCar);
-		if(sortDescription != null) {
-			Comparator<Car> comparator = getComparatorFromDescription(sortDescription);
+		if (carComparatorType != null) {
+			Comparator<Car> comparator = getComparatorFromDescription(carComparatorType);
 			cars.sort(comparator);
 		}
 		
@@ -99,8 +98,9 @@ public class CarService {
 		if (lastResult > cars.size()) {
 			lastResult = cars.size();
 		}
-		List<Car> rangeCars = cars.subList(firstResult, lastResult);
-		return rangeCars;
+		
+		List<Car> rangeCar = cars.subList(firstResult, lastResult);
+		return rangeCar;
 	}
 	
 	public Car createCarFromDetails(HashMap<CarFields, String> carDetails, TypeOfCar typeOfCar) {
@@ -162,21 +162,20 @@ public class CarService {
 		}
 	}
 	
-	private Comparator<Car> getComparatorFromDescription(String description) {
-		CarComparator carComparator = CarComparator.getFromDescription(description);
+	private Comparator<Car> getComparatorFromDescription(CarComparatorType carComparatorType) {
 		
-		switch (carComparator) {
+		switch (carComparatorType) {
 		case BRAND:
 			return new CarBrandComparator();
 		case MODEL:
 			return new CarModelComparator();
 		case STATE:
 			return new CarStateComparator();
-		case TRANSMISSION:
+		case TRANSMISSION:	
 			return new CarTransmissionComparator();
 		default:
-			throw new NoSuchActionException("There is no action:" + carComparator);
+			throw new NoSuchTypeException("");
 		}
 	}
-		
+			
 }

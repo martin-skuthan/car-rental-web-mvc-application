@@ -18,6 +18,7 @@
 <!-- Content -->
 <div class="container-fluid h-100 d-flex">
 <div class="col-sm-12 col-md-12 my-auto container-fluid">
+<div class="row">
 <c:choose>
   <c:when test="${requestScope.typeOfCar == 'PASSENGER_CAR'}">
     <h1 class="display-2">Passenger cars</h1>
@@ -26,8 +27,6 @@
     <h1 class="display-2">Light commercial cars</h1>
   </c:otherwise>
 </c:choose>
-<<<<<<< Updated upstream
-=======
 <div class="btn-group ml-auto mt-5 mr-3">
   <button type="button" class="btn btn-secondary dropdown-toggle count-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Sort by
@@ -40,7 +39,6 @@
 </div>
 </div>
 </div>
->>>>>>> Stashed changes
 <div class="bs-callout bs-callout-default">
 <c:choose>
   <c:when test="${requestScope.numberOfCarRecords != 0}">
@@ -176,23 +174,23 @@
     <c:forEach begin="1" end="${requestScope.noOfPages}" varStatus="loop">
       <c:choose>
       <c:when test="${loop.index == requestScope.noOfPage}">
-        <li class="page-item active"><a class="page-link" href="printCars?page=${loop.index}&typeOfCar=${requestScope.typeOfCar}&controllerAction=${requestScope.controllerAction}"><c:out value="${loop.index}"></c:out></a></li>
+        <li class="page-item active"><a class="page-link" href="printCars?page=${loop.index}"><c:out value="${loop.index}"></c:out></a></li>
       </c:when>
       <c:otherwise>
-        <li class="page-item"><a class="page-link" href="printCars?page=${loop.index}&typeOfCar=${requestScope.typeOfCar}&controllerAction=${requestScope.controllerAction}"><c:out value="${loop.index}"></c:out></a></li>
+        <li class="page-item"><a class="page-link" href="printCars?page=${loop.index}"><c:out value="${loop.index}"></c:out></a></li>
       </c:otherwise>
       </c:choose>
     </c:forEach>
   </ul>
 </nav>
-<div class="btn-group">
+<div class="btn-group mr-3">
   <button type="button" class="btn btn-primary dropdown-toggle count-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Count
   </button>
   <div class="dropdown-menu">
-    <a class="dropdown-item" href="printCars?typeOfCar=${requestScope.typeOfCar}&count=5">5</a>
-    <a class="dropdown-item" href="printCars?typeOfCar=${requestScope.typeOfCar}&count=10">10</a>
-    <a class="dropdown-item" href="printCars?typeOfCar=${requestScope.typeOfCar}&count=15">15</a>
+    <a class="dropdown-item" href="printCars?count=5">5</a>
+    <a class="dropdown-item" href="printCars?count=10">10</a>
+    <a class="dropdown-item" href="printCars?count=15">15</a>
 </div>
 </div>
 </div>
