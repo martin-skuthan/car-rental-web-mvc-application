@@ -10,7 +10,7 @@ You can test my application under following link:
 * [Contact](#contact)
 
 ## General info
-Car rental application is a web project which has been created for educational purpose, to develop my skills in Java object oriented programming and upskill myself in technologies like Java EE, Tomcat, JPA, MySQL, Bootstrap. This is a car rental  management system, cooperating with MySQL relational database. Application permit users to add/remove/modify/rent/return cars(app handles two types of cars : Passenger and Light commercial cars) and add/remove/modify customers. The system contains also log in and registration feature based on Tomact Authentication Mechanism. 
+Car rental application is a Model-View-Controller web project which has been created for educational purpose, to develop my skills in Java object oriented programming and upskill myself in technologies like Java EE, Tomcat, JPA, MySQL, Bootstrap. This is a car rental  management system, cooperating with MySQL relational database. Application permit users to add/remove/modify/rent/return cars(app handles two types of cars : Passenger and Light commercial cars) and add/remove/modify customers. The system contains also log in and registration feature based on Tomact Authentication Mechanism. 
 
 ## Technologies
 * Java
